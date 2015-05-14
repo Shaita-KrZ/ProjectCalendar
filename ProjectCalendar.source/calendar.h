@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/*!
+ * \exception CalendarException
+ * \brief declenche une exception
+ */
 class CalendarException{
 public:
     CalendarException(const QString& message):info(message){}
@@ -13,10 +17,19 @@ private:
 };
 
 //Class duree
+/*!
+ * \class Duree
+ * \brief representer une duree
+ */
 class Duree{
 public:
     Duree(unsigned int h, unsigned int m):nb_minutes(h*60+m) {if (m>59) throw CalendarException("erreur: initialisation duree invalide");}
     Duree(unsigned int m=0):nb_minutes(m) {}
+    /*!
+     * \brief modifie la duree
+     * \param minutes : test
+     * \return Retourne rien
+     */
     void setDuree(unsigned int minutes) { nb_minutes=minutes; }
     void setDuree(unsigned int heures, unsigned int minutes) { if (heures==0 && minutes>59) throw CalendarException("erreur: initialisation duree invalide"); nb_minutes=heures*60+minutes; }
     unsigned int getDureeEnMinutes() const { return nb_minutes; } //<!Retourne la duree en minutes
