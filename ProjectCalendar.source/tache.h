@@ -8,6 +8,7 @@
  * \class Tache
  * \brief Classe abstraite representant une tache d'un projet
  */
+
 class Tache : public Evenement
 {
 private:
@@ -15,30 +16,30 @@ private:
     QDate disponibilite;
     QDate echeance;
     Projet* projetPere;
+    QString titre;
 public:
     /*!
      * \brief Constructeur d'une tache
-     * \param titre
+     * \param t
      * \param id
      * \param dispo
      * \param ech
      * \param pere
      */
-    Tache(QString titre, QString id, QDate dispo, QDate ech, Projet* pere);
-
+    Tache(QString t, QString id, QDate dispo, QDate ech, Projet* pere);
     virtual ~Tache();
 
     /*!
      * \brief getID
      * \return identifiant de la tache
      */
-    QString getID() const;
+    QString getID() const{return identificateur;}
 
     /*!
      * \brief modifie l'identificateur de la tache
      * \param id : nouvel identificateur
      */
-    void setID(const QString id);
+    void setID(const QString id){identificateur=id;}
 
     /*!
      * \brief méthode virtuelle pure qui retourne la durée de la tache
