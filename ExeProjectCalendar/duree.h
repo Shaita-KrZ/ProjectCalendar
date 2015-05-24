@@ -1,7 +1,7 @@
 #ifndef DUREE_H
 #define DUREE_H
+#include <QTextStream>
 #include "exception.h"
-using namespace std;
 
 
 //Class duree
@@ -25,8 +25,10 @@ public:
     unsigned int getMinute() const { return nb_minutes%60; }
     unsigned int getHeure() const { return nb_minutes/60; }
     void afficher(QTextStream& f) const; //<!Affiche la duree sous le format hhHmm
+    Duree& operator+=(const Duree& d);
 private:
     unsigned int nb_minutes;
+
 };
 
 QTextStream& operator<<(QTextStream& f, const Duree & d);

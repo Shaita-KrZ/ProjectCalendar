@@ -1,23 +1,24 @@
 #ifndef TACHE_H
 #define TACHE_H
-#include "duree.h"
-#include "projet.h"
-#include "exception.h"
-#include<map>
+#include <QDate>
+#include <QString>
+#include "evenement.h"
+#include <map>
+using namespace std;
+
+class Projet;
 
 /*!
  * \class Tache
  * \brief Classe abstraite representant une tache d'un projet
  */
-class Tache{
+class Tache: public Evenement{
 protected:
     QString identificateur;
     QDate disponibilite;
     QDate echeance;
-    Projet* projetPere;
-    QString titre;
+    Projet *pere;
 public:
-
     /*!
      * \brief Constructeur d'une tache
      * \param t
@@ -26,10 +27,8 @@ public:
      * \param ech
      * \param pere
      */
-    Tache(QString t, QString id, QDate dispo, QDate ech, Projet* pere);
-    Tache(){}
+    Tache(QString t, QString id, QDate dispo, QDate ech, Projet *p);
     virtual ~Tache();
-
     /*!
      * \brief getID
      * \return identifiant de la tache
@@ -56,20 +55,25 @@ public:
     QDate getEcheance(){
         return echeance;
     }
+    /*!
+     * \brief getDuree
+     * \return Duree d'une tache
+     */
+    virtual Duree getDuree() const=0;
 
     /*!
      * \brief verifie le type de la tache
      * \return true si la tache est composite, false sinon
      */
-    bool estComposite() const;
+    virtual bool estComposite() const=0;
+
 };
 
 
 class TacheComposite : public Tache
 {
 private:
-    map<QString, Tache> tachesCompo;
-
+    map<const QString, Tache*> tachesCompo;
 public:
     /*!
      * \brief Construit une tache composite vide
@@ -79,7 +83,7 @@ public:
      * \param ech
      * \param pere
      */
-    TacheComposite(const QString titre, const QString id, const QDate dispo, const QDate ech, Projet* pere);
+    TacheComposite(QString t, QString id, QDate dispo, QDate ech, Projet *p);
     virtual ~TacheComposite();
 
     /*!
@@ -89,7 +93,7 @@ public:
      * \throw CalendarException si l'échéance de t est > à l'échéance de self
      * \throw CalendarException si une tache du même identifiant existe déjà
      */
-    virtual void addTache(Tache & t);
+    virtual void addTache(Tache* t);
 
     /*!
      * \brief Supprime la tache d'identifiant t de la liste
@@ -98,6 +102,13 @@ public:
      */
     void delTache(const QString & id);
 
+    virtual bool estComposite() const;
+    virtual Duree getDuree() const;
+    /*!
+     * \brief getTaches
+     * \return liste des taches composées
+     */
+    map<const QString, Tache*> getTaches() const{return tachesCompo;}
 };
 
 
@@ -118,17 +129,19 @@ public:
      * \param preem
      * \param dur
      */
-    TacheUnitaire(const QString titre, const QString id, const QDate dispo, const QDate ech, Projet* pere,
+    TacheUnitaire(const QString titre, const QString id, const QDate dispo, const QDate ech, Projet *p,
                   const bool preem, const Duree dur);
     virtual ~TacheUnitaire();
-
+    /*!
+     * \brief verifie si la tache est preemptive
+     * \return retourne la valeur de preemptive
+     */
+    bool isPreemptive(){ return preemptive;}
     /*!
      * \brief getDuree
      * \return durée de la tache unitaire
      */
-    const Duree& getDuree() const{
-        return duree;
-    }
+    virtual Duree getDuree() const;
     /*!
      * \brief modifie la durée de la tache
      * \param d : nouvelle durée
@@ -136,7 +149,6 @@ public:
     void setDuree(Duree d){
         duree=d;
     }
-
     /*!
      * \brief rend la tache preemptive, aucun effet si elle l'est déjà
      */
@@ -146,7 +158,6 @@ public:
      * \brief rend la tache non preemptive, aucun effet si elle l'est déjà
      */
     void setNonPreemptive(){preemptive=false;}
-
 
     /*!
      * \brief place l'attribut scheduled à true, aucun effet si il l'est déjà
@@ -170,6 +181,7 @@ public:
         if(scheduled==true)return true;
         else return false;
     }
+    virtual bool estComposite() const;
 };
 
 #endif

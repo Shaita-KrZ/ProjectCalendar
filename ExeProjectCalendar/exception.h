@@ -1,7 +1,6 @@
 #ifndef EXCEPTION_H
 #define EXCEPTION_H
-#include <QtWidgets>
-#include <iostream>
+
 
 class CalendarException{
 public:

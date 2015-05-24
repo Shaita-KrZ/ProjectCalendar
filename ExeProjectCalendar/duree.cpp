@@ -28,3 +28,8 @@ QTextStream& operator>>(QTextStream& flot, Duree& duree){
     if (ok) duree=Duree(h,m);
     return flot;
 }
+
+Duree& Duree::operator+=(const Duree& d){
+    nb_minutes+=d.nb_minutes;
+    return *this;
+}
