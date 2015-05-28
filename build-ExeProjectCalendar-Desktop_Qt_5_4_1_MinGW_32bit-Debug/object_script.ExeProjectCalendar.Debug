@@ -1,0 +1,13 @@
+INPUT(
+./debug\tache.o
+./debug\main.o
+./debug\projet.o
+./debug\duree.o
+./debug\tachemanager.o
+./debug\projetmanager.o
+./debug\precedencemanager.o
+./debug\precedence.o
+./debug\evenement.o
+./debug\activitetraditionnelle.o
+./debug\programmation.o
+);

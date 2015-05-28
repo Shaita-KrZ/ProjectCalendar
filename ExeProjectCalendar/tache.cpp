@@ -5,9 +5,7 @@ using namespace std;
 //methode tache
 Tache::Tache(QString t, QString id, QDate dispo, QDate ech, Projet *p)
     :Evenement(t),identificateur(id),disponibilite(dispo),echeance(ech),pere(p){}
-
-Tache::~Tache(){}
-
+    Tache::~Tache(){}
 //methode tache unitaire
 TacheUnitaire::TacheUnitaire(const QString titre, const QString id, const QDate dispo, const QDate ech, Projet *p, const bool preem, const Duree dur):
     Tache(titre,id,dispo,ech,p),preemptive(preem),duree(dur),scheduled(false){}

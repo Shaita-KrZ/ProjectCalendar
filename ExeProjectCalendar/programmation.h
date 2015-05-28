@@ -19,7 +19,7 @@ public:
     Programmation(QDate d, QTime hd, Evenement * e):
         date(d), horaireDebut(hd), event(e){}
 
-    ~Programmation();
+    virtual ~Programmation(){delete event;}
 
     QDate getDate() const{ return date;}
 

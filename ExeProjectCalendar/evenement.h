@@ -35,6 +35,8 @@ public:
      *
      */
     void setTitre(const QString t){titre = t;}
+
+    virtual ~Evenement(){}
 };
 
 #endif // EVENEMENT_H

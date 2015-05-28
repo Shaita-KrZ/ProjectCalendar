@@ -1,0 +1,13 @@
+INPUT(
+./release\tache.o
+./release\main.o
+./release\projet.o
+./release\duree.o
+./release\tachemanager.o
+./release\projetmanager.o
+./release\precedencemanager.o
+./release\precedence.o
+./release\evenement.o
+./release\activitetraditionnelle.o
+./release\programmation.o
+);
