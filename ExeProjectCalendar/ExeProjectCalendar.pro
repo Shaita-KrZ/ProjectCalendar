@@ -11,7 +11,8 @@ HEADERS += \
     evenement.h \
     activitetraditionnelle.h \
     tachemanager.h \
-    iterator.h
+    iterator.h \
+    programmation.h
 
 SOURCES += \
     tache.cpp \
@@ -23,5 +24,6 @@ SOURCES += \
     precedencemanager.cpp \
     precedence.cpp \
     evenement.cpp \
-    activitetraditionnelle.cpp
+    activitetraditionnelle.cpp \
+    programmation.cpp
 
