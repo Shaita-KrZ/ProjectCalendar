@@ -60,13 +60,13 @@ public:
 
     /*!
      * \brief Importe un fichier XML
-     * \param f : fichier a charger
+     * \param f : chemin du fichier a charger
      */
     void load(const QString& f);
 
     /*!
      * \brief Exporte le projet dans un fichier XML
-     * \param f : fichier pour sauvegarder
+     * \param f : chemin du fichier dans lequel sauvegarder
      */
     void  save(const QString& f,const QString& titreProjet);
 };

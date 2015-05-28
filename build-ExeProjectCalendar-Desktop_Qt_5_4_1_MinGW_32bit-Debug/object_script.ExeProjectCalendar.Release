@@ -10,4 +10,5 @@ INPUT(
 ./release\evenement.o
 ./release\activitetraditionnelle.o
 ./release\programmation.o
+./release\semaine.o
 );

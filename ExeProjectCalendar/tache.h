@@ -67,6 +67,9 @@ public:
      */
     virtual bool estComposite() const=0;
 
+    virtual bool estTache() const{ return true;}
+
+    virtual bool isScheduled()const=0;
 };
 
 
@@ -109,6 +112,14 @@ public:
      * \return liste des taches composées
      */
     map<const QString, Tache*> getTaches() const{return tachesCompo;}
+
+    bool isScheduled()const{
+        for(map<const QString, Tache*>::iterator it=tachesCompo.begin(); it!=tachesCompo.end(); ++it){
+            if (!it->second->isScheduled())
+                return false;
+        }
+        return true;
+    }
 };
 
 

@@ -37,6 +37,12 @@ public:
     void setTitre(const QString t){titre = t;}
 
     virtual ~Evenement(){}
+
+    /*!
+     * \brief Verifie si l'evenement est une tache ou une activite traditionnelle
+     * \return true si l'evenement est une tache, false sinon
+     */
+    virtual bool estTache() const=0;
 };
 
 #endif // EVENEMENT_H

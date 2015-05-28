@@ -33,6 +33,7 @@ public:
      */
     ActiviteTraditionnelle(QString titre, Duree d):Evenement(titre), duree(d){}
 
+    virtual bool estTache() const{ return false;}
 };
 
 #endif // ACTIVITETRADITIONNELLE_H

@@ -10,4 +10,5 @@ INPUT(
 ./debug\evenement.o
 ./debug\activitetraditionnelle.o
 ./debug\programmation.o
+./debug\semaine.o
 );
