@@ -34,6 +34,18 @@ public:
     ActiviteTraditionnelle(QString titre, Duree d):Evenement(titre), duree(d){}
 
     virtual bool estTache() const{ return false;}
+
+    /*!
+     * \brief Renvoie faux car l'objet n'est pas une tache
+     * \return false
+     */
+    virtual bool isScheduled()const{return false;}
+
+    /*!
+     * \brief Renvoie un pointeur null puisque l'evenement n'est pas une tache
+     * \return 0
+     */
+    virtual Projet* getPere()const {return 0;}
 };
 
 #endif // ACTIVITETRADITIONNELLE_H

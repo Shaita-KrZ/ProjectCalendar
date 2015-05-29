@@ -67,9 +67,24 @@ public:
      */
     virtual bool estComposite() const=0;
 
+    /*!
+     * \brief Verifie que l'objet est une tache
+     * \return true
+     */
     virtual bool estTache() const{ return true;}
 
+    /*!
+     * \brief Verifie si la tache est programmee
+     * \return true si la tache est programmee, false sinon
+     */
     virtual bool isScheduled()const=0;
+
+    /*!
+     * \brief Permet d'acceder au projet pere de la tache
+     * \return pointeur vers le projet pere de la tache
+     */
+    virtual Projet* getPere()const {return pere;}
+
 };
 
 
@@ -114,7 +129,7 @@ public:
     map<const QString, Tache*> getTaches() const{return tachesCompo;}
 
     bool isScheduled()const{
-        for(map<const QString, Tache*>::iterator it=tachesCompo.begin(); it!=tachesCompo.end(); ++it){
+        for(map<const QString, Tache*>::const_iterator it=tachesCompo.begin(); it!=tachesCompo.end(); ++it){
             if (!it->second->isScheduled())
                 return false;
         }

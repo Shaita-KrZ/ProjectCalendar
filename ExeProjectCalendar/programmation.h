@@ -40,6 +40,8 @@ public:
      * \return date du lundi correspondant a la date de l'evenement
      */
     const QDate & getLundi() const;
+
+    bool operator==(const Programmation & p) const {return (event==p.getEvent() && date==p.getDate() && horaireDebut==p.getHoraireDebut());}
 };
 
 #endif // PROGRAMMATION_H

@@ -1,6 +1,8 @@
 #ifndef SEMAINE_H
 #define SEMAINE_H
 
+
+#include "projet.h"
 #include "programmation.h"
 #include <map>
 #include "exception.h"
@@ -13,6 +15,10 @@ class Semaine
 private:
     QDate lundi;
     multimap<const QDate,Programmation*> evenements;
+
+    // Teste si la programmation p se chevauche avec les programmations existantes
+    // Renvoie true si la programmation ne se chevauche pas, false sinon
+    bool testChevauche(Programmation *p) const;
 public:
     /*!
      * \brief Constructeur de la classe
@@ -35,6 +41,7 @@ public:
     /*!
      * \brief Supprime une programmation dans la semaine
      * \param p : Programmation a supprimer
+     * \throw CalendarException si la programmation n'existe pas
      */
     void delProgrammation(Programmation * p);
 
