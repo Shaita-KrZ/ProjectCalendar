@@ -15,6 +15,7 @@ public:
     }
     virtual void operator++(){ ++x;}
     virtual X operator*(){return **x;}
+    virtual X getCurrent(){return **x;}
     virtual bool operator==(const iterateur& it){
         return x==it.x;
     }

@@ -7,7 +7,7 @@
 /*!
  * \class Activite Traditionnelle
  * \brief Represente un evenement quelconque (qui ne fait pas partie d'un projet)
- *      Par exemple un RDV ou un repas de famille
+ *      Par exemple un RDV
  */
 class ActiviteTraditionnelle : public Evenement
 {
@@ -46,6 +46,12 @@ public:
      * \return 0
      */
     virtual Projet* getPere()const {return 0;}
+
+    /*!
+     * \brief renvoie une chaine vide car l'objet n'est pas une tache
+     * \return ""
+     */
+   virtual QString getID() const{return "";}
 };
 
 #endif // ACTIVITETRADITIONNELLE_H

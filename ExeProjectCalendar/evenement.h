@@ -64,6 +64,12 @@ public:
     virtual bool operator==(const Evenement & e) const{
         return (titre == e.titre);
     }
+
+    /*!
+     * \brief Si l'objet est de type tache renvoie son ID, sinon renvoie une chaine vide.
+     * \return identifiant de la tache
+     */
+   virtual QString getID() const=0;
 };
 
 #endif // EVENEMENT_H

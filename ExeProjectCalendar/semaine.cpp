@@ -24,6 +24,22 @@ bool Semaine::testChevauche(Programmation *p) const
     return true;
 }
 
+// Teste si la programmation respecte les conditions de précédences
+// il faut que les taches predecesseurs aient deja ete programmees
+// Renvoie true si elle les respecte, false sinon
+bool Semaine::testPrecedences(Programmation *p) const{
+    QString idProg = p->getEvent()->getID();
+    Projet * proj = p->getEvent()->getPere();
+    PrecedenceManager pm = proj->getPrecedences();
+    Tache * tProg = proj->getTaches().getTache(idProg); // CHOPER LA TACHE
+    PrecedenceManager precProg = pm.getTachesPred(tProg);
+    for (PrecedenceManager::pmIterator it = precProg.begin(); it!= precProg.end(); ++it){
+        if (!it.getCurrent().getPredecesseur()->isScheduled())
+            return false;
+    }
+    return true;
+}
+
 /*
  * \brief Ajoute une programmation dans la semaine
  * \param p : programmation a ajouter dans la semaine
@@ -43,23 +59,24 @@ void Semaine::addProgrammation(Programmation * p){
     // On essaie de rentrer une programmation qui se chevauche avec une autre deja existante
     if (!testChevauche(p))
         throw CalendarException("Erreur : la programmation rentre en conflit avec un autre evenement deja programme");
-    //COMMENT RECUPERER LA TACHE ? - COMMENT SPECIALISER L'EVENEMENT EN TACHE ?
-    //if (p->getEvent()->getPere()->getPrecedences().getTachesPred(p->getEvent()))
+    // On vérifie les compatibilités de precedences
+    if (!testPrecedences(p))
+        throw CalendarException("Erreur : les contraintes de precedences rendent impossible la programmation");
     // Si aucune de ces exceptions n'est declenchee, on peut alors inserer la programmation dans la semaine.
-    /*const QDate d = p->getDate();
-    this->evenements.insert(d,&*p);
-    WTF AVEC CES HISTOIRES DE POINTEURS
-    */
+    const QDate d = p->getDate();
+    this->evenements.insert(pair<const QDate, Programmation*>(d,p));
 }
 
 void Semaine::delProgrammation(Programmation *p)
 {
-    for (multimap<const QDate, Programmation*>::iterator it=evenements.begin(); it!=evenements.end(); ++it){
+    bool trouve = false;
+    for (multimap<const QDate, Programmation*>::iterator it=evenements.begin(); it!=evenements.end() && trouve==false; ++it){
         if(it->second == p){
             evenements.erase(it);
-            return;
+            trouve = true;
         }
     }
-    throw CalendarException("Erreur : la programmation en parametre n'existe pas dans la semaine");
+    if (!trouve)
+        throw CalendarException("Erreur : la programmation en parametre n'existe pas dans la semaine");
 }
 
