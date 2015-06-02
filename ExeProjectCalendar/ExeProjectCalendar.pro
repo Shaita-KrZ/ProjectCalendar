@@ -13,7 +13,8 @@ HEADERS += \
     tachemanager.h \
     iterator.h \
     programmation.h \
-    semaine.h
+    semaine.h \
+    agenda.h
 
 SOURCES += \
     tache.cpp \
@@ -27,5 +28,6 @@ SOURCES += \
     evenement.cpp \
     activitetraditionnelle.cpp \
     programmation.cpp \
-    semaine.cpp
+    semaine.cpp \
+    agenda.cpp
 

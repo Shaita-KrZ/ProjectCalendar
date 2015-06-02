@@ -26,6 +26,7 @@ public:
      * \param d : duree a modifier
      */
     void setDuree(Duree d) {duree = d;}
+
     /*!
      * \brief Constructeur
      * \param t : titre de l'activite
