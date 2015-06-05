@@ -2,7 +2,6 @@
 #define ITERATOR_H
 
 
-
 template<class X>
 class iterateur{
 protected:
