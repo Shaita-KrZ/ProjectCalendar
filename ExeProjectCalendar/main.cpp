@@ -5,6 +5,7 @@
 #include "activitetraditionnelle.h"
 #include "programmation.h"
 #include <QDate>
+#include "fenagenda.h"
 
 int main(int argc, char *argv[]){
     ProjetManager PM=ProjetManager::getInstance();
@@ -22,7 +23,10 @@ int main(int argc, char *argv[]){
     ActiviteTraditionnelle * act = new ActiviteTraditionnelle("titre", Duree(1,32));
     Programmation prog(QDate(2015,1,2),QTime(15,30),act);
     QPushButton button(prog.getLundi().toString());
-    button.show();
+    Semaine s(prog.getLundi());
+    //button.show();
+    FenAgenda f(s);
+    f.show();
     return app.exec();
 }
 

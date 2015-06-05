@@ -14,7 +14,8 @@ HEADERS += \
     iterator.h \
     programmation.h \
     semaine.h \
-    agenda.h
+    agenda.h \
+    fenagenda.h
 
 SOURCES += \
     tache.cpp \
@@ -29,5 +30,9 @@ SOURCES += \
     activitetraditionnelle.cpp \
     programmation.cpp \
     semaine.cpp \
-    agenda.cpp
+    agenda.cpp \
+    fenagenda.cpp
+
+FORMS += \
+    fenagenda.ui
 
