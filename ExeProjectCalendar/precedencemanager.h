@@ -44,6 +44,7 @@ public:
      * \param s tache successeur
      */
     void ajouterPrecedence(const Tache * p,const Tache * s);
+
     class pmIterator:public iterateur<Precedence>{
     private:
         friend class PrecedenceManager;
