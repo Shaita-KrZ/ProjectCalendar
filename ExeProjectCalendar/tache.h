@@ -66,7 +66,6 @@ public:
      * \return true si la tache est composite, false sinon
      */
     virtual bool estComposite() const=0;
-
 };
 
 
@@ -94,7 +93,7 @@ public:
      * \throw CalendarException si une tache du même identifiant existe déjà
      */
     virtual void addTache(Tache* t);
-
+    //a voir si il faut pas faire un addTache pour unitaire et un pour composite
     /*!
      * \brief Supprime la tache d'identifiant t de la liste
      *      aucun effet si la tache n'existe pas
