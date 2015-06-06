@@ -66,8 +66,7 @@ public:
      * \return true si la tache est composite, false sinon
      */
     virtual bool estComposite() const=0;
-<<<<<<< HEAD
-=======
+
 
     /*!
      * \brief Verifie que l'objet est une tache
@@ -87,7 +86,6 @@ public:
      */
     virtual Projet* getPere()const {return pere;}
 
->>>>>>> origin/master
 };
 
 

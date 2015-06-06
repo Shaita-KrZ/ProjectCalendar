@@ -10,7 +10,7 @@
 class TacheManager
 {
 private:
-    map<const QString, Tache*> taches;
+    map<QString, Tache*> taches;
 public:
 
     /*!
@@ -52,7 +52,7 @@ public:
      * \brief getTaches
      * \return la liste des taches de tacheManager
      */
-    map<const QString, Tache*> getTaches() const{
+    map<QString, Tache*> getTaches() const{
         return taches;
     }
 };
