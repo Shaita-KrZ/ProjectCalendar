@@ -15,8 +15,8 @@ HEADERS += \
     programmation.h \
     semaine.h \
     agenda.h \
-    gestionprojets.h
-    fenagenda.h
+    fenetrePrincipal.h \
+    fenetreGestionProjet.h
 
 SOURCES += \
     tache.cpp \
@@ -32,11 +32,9 @@ SOURCES += \
     programmation.cpp \
     semaine.cpp \
     agenda.cpp \
-    gestionprojets.cpp
-
-FORMS +=
-    fenagenda.cpp
+    fenetrePrincipal.cpp \
+    fenetreGestionProjet.cpp
 
 FORMS += \
-    fenagenda.ui
+    fenetrePrincipal.ui
 
