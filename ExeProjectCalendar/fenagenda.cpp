@@ -15,3 +15,11 @@ FenAgenda::~FenAgenda()
 {
     delete ui;
 }
+
+void FenAgenda::on_bSemaineSuiv_clicked()
+{
+    Agenda & a = Agenda::getInstance();
+    Semaine * semSuivante = a.getSemaines()[sem.getLundi().addDays(7)];
+    FenAgenda newSem(*semSuivante);
+    newSem.show();
+}

@@ -6,6 +6,10 @@
 #include "programmation.h"
 #include <QDate>
 #include "fenagenda.h"
+#include "projetmanager.h"
+#include "agenda.h"
+
+using namespace std;
 
 int main(int argc, char *argv[]){
     ProjetManager PM=ProjetManager::getInstance();
@@ -20,12 +24,20 @@ int main(int argc, char *argv[]){
     T1=T.getTache("T3");
     TacheComposite *tComposite=dynamic_cast<TacheComposite*>(T1);
     //Duree d=T.getTache("T3")->tachesCompo["T3b"]->getDuree();*/
+    Agenda & agenda = Agenda::getInstance();
+    try{
+        QDate lundiCourant = QDate::currentDate().addDays(-QDate::currentDate().dayOfWeek()+1);
+        agenda.creerSemaine(lundiCourant);
+    }
+    catch (CalendarException & e){
+    }
+
     ActiviteTraditionnelle * act = new ActiviteTraditionnelle("titre", Duree(1,32));
     Programmation prog(QDate(2015,1,2),QTime(15,30),act);
-    QPushButton button(prog.getLundi().toString());
     Semaine s(prog.getLundi());
     //button.show();
-    FenAgenda f(s);
+    Semaine premiereSemaine = agenda.getSemaines().begin()->first;
+    FenAgenda f(premiereSemaine);
     f.show();
     return app.exec();
 }

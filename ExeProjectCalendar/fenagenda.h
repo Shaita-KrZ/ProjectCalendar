@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "semaine.h"
 #include <iostream>
+#include "agenda.h"
 
 namespace Ui {
 class FenAgenda;
@@ -17,6 +18,9 @@ class FenAgenda : public QWidget
 public:
     explicit FenAgenda(Semaine s, QWidget *parent = 0);
     ~FenAgenda();
+
+private slots:
+    void on_bSemaineSuiv_clicked();
 
 private:
     Ui::FenAgenda *ui;
