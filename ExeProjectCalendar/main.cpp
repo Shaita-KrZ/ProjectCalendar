@@ -6,6 +6,7 @@
 #include "programmation.h"
 #include <QDate>
 #include "gestionprojets.h"
+#include "fenagenda.h"
 
 int main(int argc, char *argv[]){
 
@@ -34,8 +35,12 @@ int main(int argc, char *argv[]){
     QPushButton button(prog.getLundi().toString());
     button.show();*/
 
-    Gestionprojets fenetre(10);
-    fenetre.show();
+    //Gestionprojets fenetre(10);
+    //fenetre.show();
+    Semaine s(prog.getLundi());
+    //button.show();
+    FenAgenda f(s);
+    f.show();
     return app.exec();
 }
 
