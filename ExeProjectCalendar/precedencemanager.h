@@ -19,7 +19,7 @@ public:
     /*!
      * \brief Constructeur de la classe
      */
-    PrecedenceManager(unsigned int n);
+    explicit PrecedenceManager();
 
     ~PrecedenceManager();
 

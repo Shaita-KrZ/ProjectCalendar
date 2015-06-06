@@ -1,8 +1,8 @@
 #include "precedencemanager.h"
 
-PrecedenceManager::PrecedenceManager(unsigned int n=0):nb(n),nbMax(n+10),tabPrec(new Precedence*[nbMax])
+PrecedenceManager::PrecedenceManager():nb(0),nbMax(10),tabPrec(new Precedence*[nbMax])
 {
-    for(unsigned int i=0;i<nb;i++){
+    for(unsigned int i=0;i<nbMax;i++){
         tabPrec[i]=0;
     }
 }

@@ -16,6 +16,7 @@ class Gestionprojets : public QWidget
 public:
     explicit Gestionprojets(unsigned int nb,QWidget *parent = 0);
     void addBouton(QPushButton *B);
+    void supprimerBouton(unsigned int i);
 private:
     QGridLayout *couche;
     QLabel *presentation;

@@ -27,7 +27,7 @@ public:
      *      Construit un projet vide
      * \param t : titre du projet
      */
-    Projet(const QString & t,unsigned int nbPrec);
+    Projet(const QString & t);
     ~Projet();
 
     /*!

@@ -33,7 +33,7 @@ public:
      * \param t : titre du nouveau projet
      * \throw CalendarException si un projet du meme nom existe deja
      */
-    void creerProjet(const QString & t,unsigned int nbPrec);
+    void creerProjet(const QString & t);
 
     /*!
      * \brief Modifie le titre du projet

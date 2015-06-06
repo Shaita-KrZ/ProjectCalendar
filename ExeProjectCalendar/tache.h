@@ -84,13 +84,18 @@ public:
      * \return pointeur vers le projet pere de la tache
      */
     virtual Projet* getPere()const {return pere;}
+    /*!
+     * \brief verifie si la tache est preemptive
+     * \return retourne la valeur de preemptive
+     */
+    virtual bool isPreemptive()const=0;
 };
 
 
 class TacheComposite : public Tache
 {
 private:
-    map<const QString, Tache*> tachesCompo;
+    map<QString, Tache*> tachesCompo;
 public:
     /*!
      * \brief Construit une tache composite vide
@@ -125,14 +130,17 @@ public:
      * \brief getTaches
      * \return liste des taches composées
      */
-    map<const QString, Tache*> getTaches() const{return tachesCompo;}
+    map<QString, Tache*> getTaches() const{return tachesCompo;}
 
-    bool isScheduled()const{
+    virtual bool isScheduled()const{
         for(map<const QString, Tache*>::const_iterator it=tachesCompo.begin(); it!=tachesCompo.end(); ++it){
             if (!it->second->isScheduled())
                 return false;
         }
         return true;
+    }
+    virtual bool isPreemptive()const{
+        return false;
     }
 };
 
@@ -161,7 +169,7 @@ public:
      * \brief verifie si la tache est preemptive
      * \return retourne la valeur de preemptive
      */
-    bool isPreemptive(){ return preemptive;}
+    virtual bool isPreemptive()const{ return preemptive;}
     /*!
      * \brief getDuree
      * \return durée de la tache unitaire

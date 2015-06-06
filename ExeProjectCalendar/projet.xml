@@ -4,7 +4,7 @@
 	<echeance>2017-04-15</echeance>
 	<tacheManager>
 		<tache type="unit">
-			<preemptive> true </preemptive>
+			<preemptive>true</preemptive>
 			<identificateur>T1</identificateur>
 			<titre>Etablir une hiérarchie cohérente</titre>
 			<disponibilite>2015-02-28</disponibilite>
@@ -12,7 +12,7 @@
 			<duree>600</duree>
 		</tache>
 		<tache type="unit">
-			<preemptive> false </preemptive>
+			<preemptive>false</preemptive>
 			<identificateur>T2</identificateur>
 			<titre>Répartir les classes entre développeurs</titre>
 			<disponibilite>2015-02-28</disponibilite>
@@ -26,7 +26,7 @@
 			<echeance>2015-04-24</echeance>
 			<tachescompo>
 				<tache type="unit">
-					<preemptive> false </preemptive>
+					<preemptive>false</preemptive>
 					<identificateur>T3</identificateur>
 					<titre>Répartir les classes entre développeurs</titre>
 					<disponibilite>2015-02-28</disponibilite>
@@ -34,14 +34,22 @@
 					<duree>90</duree>
 				</tache>
 				<tache type="unit">
-					<preemptive> false </preemptive>
+					<preemptive>true</preemptive>
 					<identificateur>T4</identificateur>
-					<titre>Répartir les classes entre développeurs</titre>
+					<titre>Répartir les classes entre deux personnes</titre>
 					<disponibilite>2015-02-28</disponibilite>
 					<echeance>2015-04-24</echeance>
 					<duree>90</duree>
 				</tache>
 			</tachescompo>
+		</tache>
+		<tache type="unit">
+			<preemptive>false</preemptive>
+			<identificateur>T8</identificateur>
+			<titre>Répartir les classes entre développeurs</titre>
+			<disponibilite>2015-02-28</disponibilite>
+			<echeance>2015-04-24</echeance>
+			<duree>90</duree>
 		</tache>
 	</tacheManager>
 </projet>

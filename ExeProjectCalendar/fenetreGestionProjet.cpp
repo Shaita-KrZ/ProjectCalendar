@@ -33,33 +33,38 @@ void Gestionprojets::addBouton(QPushButton *B){
     listeProjets->addWidget(B);
 }
 
+void Gestionprojets::supprimerBouton(unsigned int i){
+    unsigned int j;
+    listeProjets->removeWidget(boutonProjets[i]);
+    QPushButton *temp=boutonProjets[i];
+    while(i<nbProjets-1){
+        j=i;
+        j++;
+        boutonProjets[i]=boutonProjets[j];
+        i++;
+    }
+    boutonProjets[nbProjets-1]=temp;
+    delete boutonProjets[nbProjets-1];
+    nbProjets--;
+}
+
 void Gestionprojets::supprimeProjet(){
     ProjetManager &PM=ProjetManager::getInstance();
-    unsigned int i=0,j;
+    unsigned int i=0;
     bool ok;
     QString titreProjetSupp=QInputDialog::getText(this,"Projet a supprimer","Entrez le titre du projet a supprimer",QLineEdit::Normal, QString(),&ok);
     if(ok && !titreProjetSupp.isEmpty()){
         try{
             PM.getProjet(titreProjetSupp);
         }catch(CalendarException& e){QMessageBox::critical(this, "Supprimer un projet", e.getInfo());return;}
+
         map<QString,Projet*> projets=PM.getProjets();
         map<QString,Projet*>::iterator it=projets.begin();
         while(it->first!=titreProjetSupp){
             ++it;
             i++;
         }
-        qDebug()<<QString::number(i);
-        listeProjets->removeWidget(boutonProjets[i]);
-        QPushButton *temp=boutonProjets[i];
-        while(i<nbProjets-1){
-            j=i;
-            j++;
-            boutonProjets[i]=boutonProjets[j];
-            i++;
-        }
-        boutonProjets[nbProjets-1]=temp;
-        delete boutonProjets[nbProjets-1];
-        nbProjets--;
+        supprimerBouton(i);
         PM.supprimerProjet(titreProjetSupp);
     }
     else {
@@ -96,7 +101,6 @@ void Gestionprojets::ouvrirProjet(){
     unsigned int i=0,j=0;
      //On recherche dans la liste des boutons le bouton sur lequel on a appuyé
      while(boutonProjets[i]!=emetteurCasted)i++;
-
      ProjetManager &PM=ProjetManager::getInstance();
      map<QString,Projet*> projets=PM.getProjets();
      map<QString,Projet*>::iterator iter=projets.begin();
@@ -116,20 +120,43 @@ void Gestionprojets::ouvrirProjet(){
      grid->addWidget(modifierProjet,2,0,1,1);
      QLabel **identificateurTache=new QLabel*[T.getTaches().size()];
      QLabel **caracteristiqueTache=new QLabel*[T.getTaches().size()];
-
-     int k=0;
+     QLabel **caracteristiqueTacheUnitaireComposee;
+     unsigned int k=0,nbTu=0;
+     j=0;
      map<QString, Tache*> taches=T.getTaches();
      map<QString, Tache*>::iterator it;
      for(it=taches.begin();it!=taches.end();++it){
-         identificateurTache[k]=new QLabel("Identificateur Tache "+QString::number(k)+" : "+it->first);
+         identificateurTache[k]=new QLabel("Identificateur Tache "+QString::number(k+1)+" : "+it->first);
+         grid->addWidget(identificateurTache[k],2+10*j,1,2,3);
          Tache *t=it->second;
-         caracteristiqueTache[k]=new QLabel("     Titre : "+t->getTitre()+"\n     "+"Echeance : "+t->getDisponibilite().toString()+
-                                           "\n     "+"Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
+         if(t->estComposite()){
+             TacheComposite *tCompo=dynamic_cast<TacheComposite*>(t);
+             map<QString,Tache*>taches=tCompo->getTaches();
+             map<QString,Tache*>::const_iterator it;
+             caracteristiqueTache[k]=new QLabel("     Titre : "+t->getTitre()+"\n     "+"Disponibilite : "+t->getDisponibilite().toString()+"\n     "+
+                                                "Echenace : "+t->getEcheance().toString()+"Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
+             grid->addWidget(caracteristiqueTache[k],4+10*j,2,6,6);
+             caracteristiqueTacheUnitaireComposee=new QLabel*[taches.size()];
+             for(it=taches.begin();it!=taches.end();++it){
+                QString preemptive=(it->second->isPreemptive() == true? "true" : "false");
+                caracteristiqueTacheUnitaireComposee[nbTu]=new QLabel("     Identificateur : "+it->first+"\n     "+"Preemptive : "+preemptive+"\n     "+"Titre : "+it->second->getTitre()+
+                                                                "\n     "+"Disponibilite : "+it->second->getDisponibilite().toString()+"\n     "+
+                                                                 "Echenace : "+it->second->getEcheance().toString()+"Duree :"+QString::number(it->second->getDuree().getDureeEnMinutes())+" minutes");
+
+                j++;
+                grid->addWidget(caracteristiqueTacheUnitaireComposee[nbTu],2+10*j,4,6,6);
+                nbTu++;
+             }
+         }
+         else{
+            QString preemptive=(t->isPreemptive() == true? "true" : "false");
+            caracteristiqueTache[k]=new QLabel("     Preemptive : "+ preemptive +"\n     "+"Titre : "+t->getTitre()+"\n     "+"Disponibilite : "+t->getDisponibilite().toString()+"\n     "+
+                                            "Echenace : "+t->getEcheance().toString()+"Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
+
+            grid->addWidget(caracteristiqueTache[k],4+10*j,2,6,6);
+         }
+         j++;
          k++;
-     }
-     for(k=0;k<T.getTaches().size();k++){
-         grid->addWidget(identificateurTache[k],2+10*k,1,2,3);
-         grid->addWidget(caracteristiqueTache[k],4+10*k,2,6,6);
      }
      Fenetreprojet->show();
 }

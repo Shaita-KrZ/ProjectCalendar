@@ -6,7 +6,7 @@ Projet::~Projet()
 
 }
 
-Projet::Projet(const QString &t,unsigned int nbPrec):titre(t),precedences(nbPrec){
+Projet::Projet(const QString &t):titre(t){
 
 }
 

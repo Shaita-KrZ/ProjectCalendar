@@ -18,8 +18,8 @@ void ProjetManager::libererInstance(){
     instance=0;
 }
 
-void ProjetManager::creerProjet(const QString & t,unsigned int nbPrec){
-    Projet *P=new Projet(t,nbPrec);
+void ProjetManager::creerProjet(const QString & t){
+    Projet *P=new Projet(t);
     projets[t]=P;
 }
 
@@ -59,7 +59,6 @@ void ProjetManager::load(const QString& f){
         throw CalendarException("Erreur ouverture fichier tâches");
     }
     QXmlStreamReader xml(&fin);
-    unsigned int nbPrec=10;
     QString identificateurCompo;
     QString titreProjet;
     Projet *pere;
@@ -95,7 +94,7 @@ void ProjetManager::load(const QString& f){
                     }
                     xml.readNext();
                 }
-                pere=new Projet(titreProjet,nbPrec);
+                pere=new Projet(titreProjet);
                 pere->setEcheance(echeanceProjet);
                 if(projets.find(titreProjet)!=projets.end())
                     throw CalendarException("Le projet existe déjà");
@@ -122,6 +121,7 @@ void ProjetManager::load(const QString& f){
                             QString val;
                             xml.readNext(); val=xml.text().toString();
                             preemptive=(val == "true" ? true : false);
+
                            }
                         // We've found identificteur.
                         if(xml.name() == "identificateur") {
@@ -256,8 +256,8 @@ void  ProjetManager::save(const QString& f,const QString &titreProjet){
             stream.writeTextElement("disponibilite",tComposite->getDisponibilite().toString(Qt::ISODate));
             stream.writeTextElement("echeance",tComposite->getEcheance().toString(Qt::ISODate));
             stream.writeStartElement("tachescompo");
-            map<const QString, Tache*>::const_iterator itCompo;
-            map<const QString, Tache*>lTachesCompo=tComposite->getTaches();
+            map<QString, Tache*>::const_iterator itCompo;
+            map<QString, Tache*>lTachesCompo=tComposite->getTaches();
             for(itCompo=lTachesCompo.begin();itCompo!=lTachesCompo.end();++itCompo){
                 TacheUnitaire *tUnitaire=dynamic_cast<TacheUnitaire*>(itCompo->second);
                 stream.writeStartElement("tache");
