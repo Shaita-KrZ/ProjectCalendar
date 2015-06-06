@@ -69,6 +69,7 @@ public:
      * \param f : chemin du fichier dans lequel sauvegarder
      */
     void  save(const QString& f,const QString& titreProjet);
+    map<QString,Projet*> getProjets() const { return projets;}
 };
 
 #endif // PROJETMANAGER_H

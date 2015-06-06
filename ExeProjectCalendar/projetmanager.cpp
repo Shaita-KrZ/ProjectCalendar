@@ -39,6 +39,7 @@ void ProjetManager::supprimerProjet(const QString & t){
 }
 
 Projet & ProjetManager::getProjet(const QString& t){
+
     if(projets.find(t)!=projets.end()){
         map<QString, Projet*>::const_iterator it;
         it=projets.find(t);
@@ -96,7 +97,9 @@ void ProjetManager::load(const QString& f){
                 }
                 pere=new Projet(titreProjet,nbPrec);
                 pere->setEcheance(echeanceProjet);
-                projets[titreProjet]=pere;
+                if(projets.find(titreProjet)!=projets.end())
+                    throw CalendarException("Le projet existe déjà");
+                else projets[titreProjet]=pere;
             }
 
             //Sortie de la bouche xml.name() == tacheManager
@@ -148,7 +151,9 @@ void ProjetManager::load(const QString& f){
                     // ...and next...
                     xml.readNext();
                 }
+
                 projets[titreProjet]->taches.addTache(identificateur,titre,disponibilite,echeance,pere,duree,preemptive);
+
             }
             if(!typeTache){
                 while(!(xml.tokenType()==QXmlStreamReader::EndElement && xml.name()=="tachescompo")){
@@ -239,8 +244,8 @@ void  ProjetManager::save(const QString& f,const QString &titreProjet){
     stream.writeTextElement("echeance",P.getEcheance().toString(Qt::ISODate));
     stream.writeStartElement("tacheManager");
     TacheManager tManager=P.getTaches();
-    map<const QString, Tache*>lTaches=tManager.getTaches();
-    map<const QString, Tache*>::const_iterator it;
+    map<QString, Tache*>lTaches=tManager.getTaches();
+    map<QString, Tache*>::const_iterator it;
     for(it=lTaches.begin();it!=lTaches.end();++it){
         if(it->second->estComposite()){
             TacheComposite *tComposite=dynamic_cast<TacheComposite*>(it->second);

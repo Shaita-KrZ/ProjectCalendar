@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projet>	
-	<titre>Projet 1</titre>
+	<titre>Projet 2</titre>
 	<echeance>2017-04-15</echeance>
 	<tacheManager>
 		<tache type="unit">

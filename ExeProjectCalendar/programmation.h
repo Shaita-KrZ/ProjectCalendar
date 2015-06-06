@@ -1,6 +1,5 @@
 #ifndef PROGRAMMATION_H
 #define PROGRAMMATION_H
-
 #include "tache.h"
 
 /*!
@@ -39,7 +38,7 @@ public:
      * \brief recupere la date du lundi de la semaine correspondant a la programmation
      * \return date du lundi correspondant a la date de l'evenement
      */
-    const QDate & getLundi() const;
+    QDate getLundi() const;
 
     bool operator==(const Programmation & p) const {return (event==p.getEvent() && date==p.getDate() && horaireDebut==p.getHoraireDebut());}
 };
