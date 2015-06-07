@@ -19,12 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_FenAgenda_t {
-    QByteArrayData data[3];
-<<<<<<< HEAD:build-ExeProjectCalendar-Desktop_Qt_5_4_2_MSVC2013_64bit-Debug/debug/moc_fenagenda.cpp
-    char stringdata[35];
-=======
-    char stringdata[25];
->>>>>>> 543cfc947dbf20a565a62b34c33e3a36c141b4ac:build-ExeProjectCalendar-Desktop_Qt_5_4_1_MSVC2013_64bit-Release/release/moc_fenetrePrincipal.cpp
+    QByteArrayData data[4];
+    char stringdata[49];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,19 +30,13 @@ struct qt_meta_stringdata_FenAgenda_t {
 static const qt_meta_stringdata_FenAgenda_t qt_meta_stringdata_FenAgenda = {
     {
 QT_MOC_LITERAL(0, 0, 9), // "FenAgenda"
-<<<<<<< HEAD:build-ExeProjectCalendar-Desktop_Qt_5_4_2_MSVC2013_64bit-Debug/debug/moc_fenagenda.cpp
 QT_MOC_LITERAL(1, 10, 23), // "on_bSemaineSuiv_clicked"
-QT_MOC_LITERAL(2, 34, 0) // ""
+QT_MOC_LITERAL(2, 34, 0), // ""
+QT_MOC_LITERAL(3, 35, 13) // "gestionProjet"
 
     },
-    "FenAgenda\0on_bSemaineSuiv_clicked\0"
-=======
-QT_MOC_LITERAL(1, 10, 13), // "gestionProjet"
-QT_MOC_LITERAL(2, 24, 0) // ""
-
-    },
-    "FenAgenda\0gestionProjet\0"
->>>>>>> 543cfc947dbf20a565a62b34c33e3a36c141b4ac:build-ExeProjectCalendar-Desktop_Qt_5_4_1_MSVC2013_64bit-Release/release/moc_fenetrePrincipal.cpp
+    "FenAgenda\0on_bSemaineSuiv_clicked\0\0"
+    "gestionProjet"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +46,7 @@ static const uint qt_meta_data_FenAgenda[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,13 +54,11 @@ static const uint qt_meta_data_FenAgenda[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-<<<<<<< HEAD:build-ExeProjectCalendar-Desktop_Qt_5_4_2_MSVC2013_64bit-Debug/debug/moc_fenagenda.cpp
-       1,    0,   19,    2, 0x08 /* Private */,
-=======
-       1,    0,   19,    2, 0x0a /* Public */,
->>>>>>> 543cfc947dbf20a565a62b34c33e3a36c141b4ac:build-ExeProjectCalendar-Desktop_Qt_5_4_1_MSVC2013_64bit-Release/release/moc_fenetrePrincipal.cpp
+       1,    0,   24,    2, 0x08 /* Private */,
+       3,    0,   25,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -81,11 +69,8 @@ void FenAgenda::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
     if (_c == QMetaObject::InvokeMetaMethod) {
         FenAgenda *_t = static_cast<FenAgenda *>(_o);
         switch (_id) {
-<<<<<<< HEAD:build-ExeProjectCalendar-Desktop_Qt_5_4_2_MSVC2013_64bit-Debug/debug/moc_fenagenda.cpp
         case 0: _t->on_bSemaineSuiv_clicked(); break;
-=======
-        case 0: _t->gestionProjet(); break;
->>>>>>> 543cfc947dbf20a565a62b34c33e3a36c141b4ac:build-ExeProjectCalendar-Desktop_Qt_5_4_1_MSVC2013_64bit-Release/release/moc_fenetrePrincipal.cpp
+        case 1: _t->gestionProjet(); break;
         default: ;
         }
     }
@@ -117,13 +102,13 @@ int FenAgenda::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 2)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

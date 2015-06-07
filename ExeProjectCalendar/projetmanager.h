@@ -33,7 +33,7 @@ public:
      * \param t : titre du nouveau projet
      * \throw CalendarException si un projet du meme nom existe deja
      */
-    void creerProjet(const QString & t);
+    void creerProjet(const QString & t,const QDate& echeance);
 
     /*!
      * \brief Modifie le titre du projet
@@ -70,6 +70,7 @@ public:
      */
     void  save(const QString& f,const QString& titreProjet);
     map<QString,Projet*> getProjets() const { return projets;}
+    void projetExistdeja(const QString& t) const;
 };
 
 #endif // PROJETMANAGER_H
