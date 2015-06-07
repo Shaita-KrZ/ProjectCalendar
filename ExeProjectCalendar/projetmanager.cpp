@@ -51,7 +51,6 @@ Projet & ProjetManager::getProjet(const QString& t){
 
 
 void ProjetManager::load(const QString& f){
-    qDebug()<<"debut load\n";
     file=f;
     QFile fin(file);
     //On test si on peut ouvrir le fichier

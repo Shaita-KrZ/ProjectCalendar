@@ -14,15 +14,19 @@ class FenAgenda;
 class FenAgenda : public QWidget
 {
     Q_OBJECT
-    Semaine sem;
+    Semaine * sem;
     Gestionprojets gestionproj;
 
 public:
-    explicit FenAgenda(Semaine s, QWidget *parent = 0);
+    explicit FenAgenda(Semaine *s, QWidget *parent = 0);
+    void actualiserItems();
+    void goSemaine(const QDate & dateLundi);
     ~FenAgenda();
 
 private slots:
     void on_bSemaineSuiv_clicked();
+
+    void on_bSemainePrec_clicked();
 
 private:
     Ui::FenAgenda *ui;

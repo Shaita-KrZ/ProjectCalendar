@@ -30,6 +30,8 @@ public:
      */
     Semaine(QDate l):lundi(l){}
 
+
+
     virtual ~Semaine(){}
 
     /*!
@@ -54,6 +56,20 @@ public:
      * \return lundi
      */
     const QDate getLundi() const{return lundi;}
+
+    /*!
+     * \brief Genere une chaine de caracteres correspondant aux programmations pour le jour en entree
+     *      La chaine est compose des activites du jour en parametre dans leur ordre chronologique
+     * \param jour : lundi à dimanche - 1 à 7
+     * \return QString correspondant aux programmations du jour en parametre
+     */
+    QString jourToString(int jour) const;
+
+    /*!
+     * \brief Donne le nombre de programmations de semaines
+     * \return
+     */
+    size_t nombreEvent() const {return evenements.size();}
 };
 
 #endif // SEMAINE_H

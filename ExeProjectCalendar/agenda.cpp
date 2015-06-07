@@ -17,9 +17,9 @@ void Agenda::libererInstance(){
 }
 
 /*
- * \brief Cree et ajoute une semaine dans l'agenda
+ * \brief Cree et ajoute une semaine dans l'agenda; aucun effet si la semaine existe deja
  * \param lundi
- * \throw CalendarException si la semaine existe deja ou si la date en parametre ne correspond pas a un lundi
+ * \throw CalendarException si la date en parametre ne correspond pas a un lundi
  */
 void Agenda::creerSemaine(const QDate &lundi)
 {
@@ -27,8 +27,20 @@ void Agenda::creerSemaine(const QDate &lundi)
         throw CalendarException("Erreur : La date en parametre ne correspond pas a un lundi");
     Semaine *s = new Semaine(lundi);
     pair<map<const QDate, Semaine*>::iterator,bool> ret = semaines.insert(pair<const QDate, Semaine*>(lundi, s));
-    if (ret.second==false)
-        throw CalendarException("Erreur : la semaine existe deja");
+}
+
+void Agenda::addProgrammation(Programmation *p)
+{
+    Semaine * sem = new Semaine(p->getLundi());
+    pair<map<const QDate, Semaine*>::iterator,bool> ret = semaines.insert(pair<const QDate, Semaine*>(sem->getLundi(), sem));
+    Semaine * semaineProg = this->getSemaines().find(p->getLundi())->second;
+    try{
+        semaineProg->addProgrammation(p);
+    }
+    catch(CalendarException &e){
+        throw e;
+    }
+
 }
 
 Agenda::~Agenda(){

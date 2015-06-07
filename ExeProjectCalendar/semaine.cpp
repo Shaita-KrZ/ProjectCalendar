@@ -1,5 +1,6 @@
 #include "semaine.h"
 #include <iostream>
+#include <list>
 
 using namespace std;
 
@@ -28,7 +29,7 @@ bool Semaine::testChevauche(Programmation *p) const
 // il faut que les taches predecesseurs aient deja ete programmees
 // Renvoie true si elle les respecte, false sinon
 bool Semaine::testPrecedences(Programmation *p) const{
-    QString idProg = p->getEvent()->getID();
+    /*QString idProg = p->getEvent()->getID();
     Projet * proj = p->getEvent()->getPere();
     PrecedenceManager pm = proj->getPrecedences();
     Tache * tProg = proj->getTaches().getTache(idProg); // CHOPER LA TACHE
@@ -36,7 +37,7 @@ bool Semaine::testPrecedences(Programmation *p) const{
     for (PrecedenceManager::pmIterator it = precProg.begin(); it!= precProg.end(); ++it){
         if (!it.getCurrent().getPredecesseur()->isScheduled())
             return false;
-    }
+    }*/
     return true;
 }
 
@@ -60,7 +61,7 @@ void Semaine::addProgrammation(Programmation * p){
     if (!testChevauche(p))
         throw CalendarException("Erreur : la programmation rentre en conflit avec un autre evenement deja programme");
     // On vérifie les compatibilités de precedences
-    if (!testPrecedences(p))
+    if (p->getEvent()->estTache() && !testPrecedences(p))
         throw CalendarException("Erreur : les contraintes de precedences rendent impossible la programmation");
     // Si aucune de ces exceptions n'est declenchee, on peut alors inserer la programmation dans la semaine.
     const QDate d = p->getDate();
@@ -80,3 +81,23 @@ void Semaine::delProgrammation(Programmation *p)
         throw CalendarException("Erreur : la programmation en parametre n'existe pas dans la semaine");
 }
 
+QString Semaine::jourToString(int jour) const
+{
+    QDate dateJour = getLundi().addDays(jour-1);
+    list<Programmation*> lProgs;
+    for(multimap<const QDate, Programmation*>::const_iterator it=evenements.begin(); it!=evenements.end(); ++it){
+        if (it->first == dateJour)
+            lProgs.push_back(it->second);
+    }
+    QString str;
+    lProgs.sort(compareProg);
+    Programmation * prog;
+    for (list<Programmation*>::iterator it=lProgs.begin(); it != lProgs.end(); ++it){
+        str += "[";
+        prog = *it;
+        str +=prog->toString();
+        str += "] ";
+    }
+    //str =
+    return str;
+}
