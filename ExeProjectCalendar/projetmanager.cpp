@@ -155,9 +155,7 @@ void ProjetManager::load(const QString& f){
                     // ...and next...
                     xml.readNext();
                 }
-
                 projets[titreProjet]->taches.addTache(identificateur,titre,disponibilite,echeance,pere,duree,preemptive);
-
             }
             if(!typeTache){
                 while(!(xml.tokenType()==QXmlStreamReader::EndElement && xml.name()=="tachescompo")){

@@ -51,7 +51,7 @@ public:
      * \brief getTaches
      * \return la liste de taches sous forme de TacheManager
      */
-    const TacheManager& getTaches()const{return taches;}
+    TacheManager& getTaches(){return taches;}
 
     /*!
      * \brief getPrecedences

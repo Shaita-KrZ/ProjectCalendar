@@ -135,7 +135,7 @@ public:
      * \brief getTaches
      * \return liste des taches composées
      */
-    map<QString, Tache*> getTaches() const{return tachesCompo;}
+    map<QString, Tache*>& getTaches(){return tachesCompo;}
 
     virtual bool isScheduled()const{
         for(map<const QString, Tache*>::const_iterator it=tachesCompo.begin(); it!=tachesCompo.end(); ++it){
