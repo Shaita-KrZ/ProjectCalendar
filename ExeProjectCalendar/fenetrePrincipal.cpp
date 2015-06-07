@@ -4,8 +4,7 @@
 FenAgenda::FenAgenda(Semaine * s, QWidget *parent) :
     sem(s),
     QWidget(parent),
-    ui(new Ui::FenAgenda),
-    gestionproj(10)
+    ui(new Ui::FenAgenda)
 {
     ui->setupUi(this);
     //QObject::connect(ui->bSemaineSuiv,SIGNAL(clicked()),this,SLOT(on_bSemaineSuiv_clicked()));
@@ -56,6 +55,7 @@ void FenAgenda::on_bSemaineSuiv_clicked()
 }
 //ouvrir l'interface de mon projet
 void FenAgenda::gestionProjet(){
+    this->close();
     gestionproj.show();
 }
 

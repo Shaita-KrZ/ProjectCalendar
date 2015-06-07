@@ -18,8 +18,9 @@ void ProjetManager::libererInstance(){
     instance=0;
 }
 
-void ProjetManager::creerProjet(const QString & t){
+void ProjetManager::creerProjet(const QString & t,const QDate& echeance){
     Projet *P=new Projet(t);
+    P->setEcheance(echeance);
     projets[t]=P;
 }
 
@@ -28,7 +29,10 @@ void ProjetManager::modifierNomProjet(QString & projet, const QString & nouveauT
     if(projets.find(nouveauT)!=projets.end()){
         throw CalendarException("Le titre est deja pris par un autre projet");
     }
-    projets[projet]->setTitre(nouveauT);
+    Projet *P=projets[projet];
+    P->setTitre(nouveauT);
+    projets.erase(projet);
+    projets[nouveauT]=P;
 }
 
 void ProjetManager::supprimerProjet(const QString & t){
@@ -150,9 +154,7 @@ void ProjetManager::load(const QString& f){
                     // ...and next...
                     xml.readNext();
                 }
-
                 projets[titreProjet]->taches.addTache(identificateur,titre,disponibilite,echeance,pere,duree,preemptive);
-
             }
             if(!typeTache){
                 while(!(xml.tokenType()==QXmlStreamReader::EndElement && xml.name()=="tachescompo")){
@@ -295,3 +297,8 @@ void  ProjetManager::save(const QString& f,const QString &titreProjet){
     newfile.close();
 }
 
+void ProjetManager::projetExistdeja(const QString &t)const{
+    if(projets.find(t)!=projets.end()){
+        throw CalendarException("Le projet existe déjà");
+    }
+}

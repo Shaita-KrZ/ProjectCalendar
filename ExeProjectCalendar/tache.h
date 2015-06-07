@@ -41,6 +41,8 @@ public:
      */
     void setID(const QString id){identificateur=id;}
 
+    void setDispo(const QDate& d){disponibilite=d;}
+
     /*!
      * \brief getDisponibilite
      * \return disponibilite de la tache
@@ -48,6 +50,8 @@ public:
     QDate getDisponibilite(){
         return disponibilite;
     }
+
+    void setEche(const QDate& e){echeance=e;}
     /*!
      * \brief getEcheance
      * \return echeance de la tache
@@ -60,6 +64,7 @@ public:
      * \return Duree d'une tache
      */
     virtual Duree getDuree() const=0;
+
 
     /*!
      * \brief verifie le type de la tache
@@ -130,7 +135,7 @@ public:
      * \brief getTaches
      * \return liste des taches composées
      */
-    map<QString, Tache*> getTaches() const{return tachesCompo;}
+    map<QString, Tache*>& getTaches(){return tachesCompo;}
 
     virtual bool isScheduled()const{
         for(map<const QString, Tache*>::const_iterator it=tachesCompo.begin(); it!=tachesCompo.end(); ++it){
@@ -215,6 +220,7 @@ public:
         else return false;
     }
     virtual bool estComposite() const;
+
 };
 
 #endif
