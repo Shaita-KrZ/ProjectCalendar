@@ -98,7 +98,7 @@ Suivante</string>
     </widget>
    </item>
    <item row="3" column="4" colspan="2">
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="bProgrammer">
      <property name="text">
       <string>Programmer un évènement</string>
      </property>

@@ -28,10 +28,13 @@ private slots:
 
     void on_bSemainePrec_clicked();
 
+    void on_bProgrammer_clicked();
+
 private:
     Ui::FenAgenda *ui;
 public slots:
     void gestionProjet();
+    void programmerEvenement();
 };
 
 #endif // FENAGENDA_H

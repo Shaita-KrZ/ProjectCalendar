@@ -8,6 +8,7 @@
 #include "fenetrePrincipal.h"
 #include "projetmanager.h"
 #include "agenda.h"
+#include "fenetreprogrammer.h"
 
 using namespace std;
 #include "fenetreGestionProjet.h"
@@ -33,7 +34,8 @@ int main(int argc, char *argv[]){
     T1=T.getTache("T3");
     TacheComposite *tComposite=dynamic_cast<TacheComposite*>(T1);
     //Duree d=T.getTache("T3")->tachesCompo["T3b"]->getDuree();*/
-    Agenda & agenda = Agenda::getInstance();QDate lundiCourant = QDate::currentDate().addDays(-QDate::currentDate().dayOfWeek()+1);
+    Agenda & agenda = Agenda::getInstance();
+    QDate lundiCourant = QDate::currentDate().addDays(-QDate::currentDate().dayOfWeek()+1);
     agenda.creerSemaine(lundiCourant);
     ActiviteTraditionnelle * act1 = new ActiviteTraditionnelle("RDV Médecin", Duree(1,32));
     ActiviteTraditionnelle * act2 = new ActiviteTraditionnelle("Courses a faire", Duree(6,0));
@@ -65,10 +67,8 @@ int main(int argc, char *argv[]){
     TacheUnitaire * t = new TacheUnitaire("TacheUnitaire", "id1", QDate(2015,06,02), QDate(2015,06,22),0,true,Duree(2,15));
     Programmation * tProg = new Programmation(QDate(2015,06,02),QTime(8,0),t);
     agenda.addProgrammation(tProg);
-    Semaine * premiereSemaine = agenda.getSemaines().begin()->second;
-    //agenda.getSemaines().insert(pair<const QDate, Programmation*>(prog->getLundi(),prog));//   at(prog->getLundi())->addProgrammation(prog);
-
-    FenAgenda f(premiereSemaine);
+    Semaine * semaineCourante = agenda.getSemaines().at(lundiCourant);
+    FenAgenda f(semaineCourante);
     f.show();
     return app.exec();
 }

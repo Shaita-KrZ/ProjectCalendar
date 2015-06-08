@@ -14,7 +14,6 @@ class ActiviteTraditionnelle : public Evenement
 private:
     Duree duree;
 public:
-
     /*!
      * \brief
      * \return duree de l'activite

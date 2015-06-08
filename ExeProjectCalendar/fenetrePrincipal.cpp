@@ -1,5 +1,6 @@
 #include "fenetrePrincipal.h"
 #include "ui_fenetrePrincipal.h"
+#include "fenetreprogrammer.h"
 
 FenAgenda::FenAgenda(Semaine * s, QWidget *parent) :
     sem(s),
@@ -7,7 +8,6 @@ FenAgenda::FenAgenda(Semaine * s, QWidget *parent) :
     ui(new Ui::FenAgenda)
 {
     ui->setupUi(this);
-    //QObject::connect(ui->bSemaineSuiv,SIGNAL(clicked()),this,SLOT(on_bSemaineSuiv_clicked()));
     QObject::connect(ui->bGoProjets,SIGNAL(clicked()),this,SLOT(gestionProjet()));
     this->actualiserItems();
 }
@@ -59,10 +59,22 @@ void FenAgenda::gestionProjet(){
     gestionproj.show();
 }
 
+void FenAgenda::programmerEvenement()
+{
+    FenetreProgrammer * f = new FenetreProgrammer();
+    f->show();
+}
+
 
 void FenAgenda::on_bSemainePrec_clicked()
 {
     QDate dateNewSem = sem->getLundi().addDays(-7);
     this->goSemaine(dateNewSem);
     this->actualiserItems();
+}
+
+
+void FenAgenda::on_bProgrammer_clicked()
+{
+    programmerEvenement();
 }
