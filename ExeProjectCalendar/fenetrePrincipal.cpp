@@ -61,7 +61,7 @@ void FenAgenda::gestionProjet(){
 
 void FenAgenda::programmerEvenement()
 {
-    FenetreProgrammer * f = new FenetreProgrammer();
+    FenetreProgrammer * f = new FenetreProgrammer(this);
     f->show();
 }
 

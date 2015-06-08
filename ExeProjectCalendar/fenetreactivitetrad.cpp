@@ -1,13 +1,11 @@
 #include "fenetreactivitetrad.h"
 #include "ui_fenetreactivitetrad.h"
-#include "duree.h"
-#include "programmation.h"
-#include "activitetraditionnelle.h"
-#include "fenetrePrincipal.h"
 
-FenetreActiviteTrad::FenetreActiviteTrad(QWidget *parent) :
+
+FenetreActiviteTrad::FenetreActiviteTrad(FenAgenda *f, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::FenetreActiviteTrad)
+    ui(new Ui::FenetreActiviteTrad),
+    fenAg(f)
 {
     ui->setupUi(this);
 }
@@ -27,5 +25,12 @@ void FenetreActiviteTrad::on_bOKcancel_accepted()
     QTime timProg = this->ui->inDateTimeProg->time();
     Programmation * prog = new Programmation(datProg, timProg, at);
     Agenda & a = Agenda::getInstance();
-    a.addProgrammation(prog);
+    try{
+        a.addProgrammation(prog);
+    }
+    catch(CalendarException &e){
+        QMessageBox::critical(this,"Ajout Activite",e.getInfo());
+        this->close();
+    }
+    fenAg->actualiserItems();
 }

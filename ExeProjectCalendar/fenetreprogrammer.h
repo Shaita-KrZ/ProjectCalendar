@@ -2,6 +2,7 @@
 #define FENETREPROGRAMMER_H
 
 #include <QWidget>
+#include "fenetrePrincipal.h"
 
 namespace Ui {
 class FenetreProgrammer;
@@ -10,9 +11,10 @@ class FenetreProgrammer;
 class FenetreProgrammer : public QWidget
 {
     Q_OBJECT
+    FenAgenda * fenAg;
 
 public:
-    explicit FenetreProgrammer(QWidget *parent = 0);
+    explicit FenetreProgrammer(FenAgenda * f, QWidget *parent = 0);
     ~FenetreProgrammer();
 
 private slots:

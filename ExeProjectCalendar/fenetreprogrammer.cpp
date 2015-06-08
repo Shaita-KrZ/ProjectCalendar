@@ -2,9 +2,10 @@
 #include "ui_fenetreprogrammer.h"
 #include "fenetreactivitetrad.h"
 
-FenetreProgrammer::FenetreProgrammer(QWidget *parent) :
+FenetreProgrammer::FenetreProgrammer(FenAgenda *f, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::FenetreProgrammer)
+    ui(new Ui::FenetreProgrammer),
+    fenAg(f)
 {
     ui->setupUi(this);
 }
@@ -21,7 +22,7 @@ void FenetreProgrammer::on_bOKCancel_rejected()
 
 void FenetreProgrammer::on_bActiviteTraditionnelle_clicked()
 {
-    FenetreActiviteTrad * fAT = new FenetreActiviteTrad();
+    FenetreActiviteTrad * fAT = new FenetreActiviteTrad(fenAg);
     fAT->show();
     this->close();
 }
