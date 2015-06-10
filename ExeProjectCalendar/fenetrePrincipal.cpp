@@ -26,6 +26,7 @@ void FenAgenda::actualiserItems()
     ui->tSemaine->setItem(1,4,new QTableWidgetItem(this->sem->jourToString(6)));
     ui->tSemaine->setItem(1,5,new QTableWidgetItem(this->sem->jourToString(7)));
     ui->tSemaine->resizeColumnsToContents();
+    ui->tSemaine->setEditTriggers(QAbstractItemView::EditTriggers(0));
 }
 
 void FenAgenda::goSemaine(const QDate &dateLundi)

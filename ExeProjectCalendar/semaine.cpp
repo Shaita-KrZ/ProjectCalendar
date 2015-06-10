@@ -12,15 +12,33 @@ bool Semaine::testChevauche(Programmation *p) const
     QDate dateProg = p->getDate();
     QTime heureDebutProg = p->getHoraireDebut();
     QTime heureFinProg = heureDebutProg.addSecs(p->getEvent()->getDuree().getDureeEnMinutes()*60);
-    /*pair <multimap<const QDate,Programmation*>::const_iterator, multimap<const QDate,Programmation*>::const_iterator> ret;
-    ret = evenements.equal_range(p->getDate());
-    for (multimap<const QDate,Programmation*>::iterator it=ret.first; it!=ret.second; ++it){*/
+    bool jourSuivantP; int testJourP;
+    int testJourProg = heureDebutProg.hour() + p->getEvent()->getDuree().getDureeEnHeures();
+    bool jourSuivantProg = testJourProg>24;
     for(multimap<const QDate, Programmation*>::const_iterator it=evenements.begin(); it!=evenements.end(); ++it){
         dateP = it->second->getDate();
         heureDebutP = it->second->getHoraireDebut();
         heureFinP = heureDebutP.addSecs(it->second->getEvent()->getDuree().getDureeEnMinutes()*60);
-        if((dateP == dateProg) && (((heureDebutProg > heureDebutP) && (heureDebutProg < heureFinP)) || ((heureFinProg > heureDebutP) && (heureFinProg < heureFinP))))
-            return false;
+        testJourP = heureDebutP.hour() + it->second->getEvent()->getDuree().getDureeEnHeures();
+        jourSuivantP = (testJourP > 24);
+
+        if (dateP == dateProg)
+        {
+            if (!jourSuivantProg){
+                if(((heureDebutProg > heureDebutP) && (heureDebutProg < heureFinP)) || ((heureFinProg > heureDebutP) && (heureFinProg < heureFinP)))
+                    return false;
+            }
+            else{
+                if(jourSuivantP){
+                    if(((heureDebutProg > heureDebutP) && (heureDebutProg < heureFinP)) || ((heureFinProg > heureDebutP) && (heureFinProg < heureFinP)))
+                        return false;
+                }
+                else{
+                    if((heureDebutProg > heureDebutP) && (heureDebutProg < heureFinP))
+                        return false;
+                }
+            }
+        }
     }
     return true;
 }

@@ -22,6 +22,8 @@ private slots:
 
     void on_bActiviteTraditionnelle_clicked();
 
+    void on_bTache_clicked();
+
 private:
     Ui::FenetreProgrammer *ui;
 };

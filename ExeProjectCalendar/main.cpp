@@ -37,6 +37,8 @@ int main(int argc, char *argv[]){
     Agenda & agenda = Agenda::getInstance();
     QDate lundiCourant = QDate::currentDate().addDays(-QDate::currentDate().dayOfWeek()+1);
     agenda.creerSemaine(lundiCourant);
+    ProjetManager & pm = ProjetManager::getInstance();
+    pm.load("C:/Users/Alex/Dropbox/Cours/UTC/LO21/Projet Calendar/ProjetCalendar UML/exempleProjetSansPrecedence.xml");
     ActiviteTraditionnelle * act1 = new ActiviteTraditionnelle("RDV Médecin", Duree(1,32));
     ActiviteTraditionnelle * act2 = new ActiviteTraditionnelle("Courses a faire", Duree(6,0));
     ActiviteTraditionnelle * act3 = new ActiviteTraditionnelle("Chercher les enfants à l'escalade", Duree(0,20));

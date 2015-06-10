@@ -92,6 +92,7 @@ void Gestionprojets::chargerProjet(){
             //load va lire le projet et l'ajouter dans le ProjetManager
             PM.load(chemin);
         }catch(CalendarException &e){ QMessageBox::critical(this,"Projet",e.getInfo());return;}
+        qDebug()<<chemin;
         //On crée un nouveau bouton pour le nouveau projet
         QPushButton *boutonProj=new QPushButton();
         map<QString,Projet *> projets=PM.getProjets();
@@ -101,7 +102,7 @@ void Gestionprojets::chargerProjet(){
         //On ajoute le bouton a la liste des boutons
         ajouterBouton(P->getTitre());
         //On connecte le bouton à l'ouverture du projet
-        QMessageBox::information(this,"Projet","Vous avez bien ajouter le projet : "+P->getTitre());
+        QMessageBox::information(this,"Projet","Vous avez bien ajouté le projet : "+P->getTitre());
     }
     else{
         QMessageBox::information(this,"Projet","Le projet n'a pas été chargé");
@@ -268,7 +269,7 @@ void Gestionprojets::annulerCreationProjet(){
 
 /* ********************* FIN CREER UN PROJET ********************** */
 
-/* ********************* MODIFIER CREER UN PROJET ********************** */
+/* ********************* MODIFIER UN PROJET ********************** */
 
 void Gestionprojets::modifierTitreProjet(){
     ProjetManager &PM=ProjetManager::getInstance();
@@ -280,7 +281,7 @@ void Gestionprojets::modifierTitreProjet(){
         }catch(CalendarException &e){ QMessageBox::critical(this, "Modifier le titre du projet", e.getInfo());return;}
         //m_titreProj dans ouvrirProjet va récupérer le titre du projet que l'on veut modifier
         PM.modifierNomProjet(m_titreProj,nouveauTitreProjet);
-        QMessageBox::information(this,"Creation projet","Le titre du projet a bien été ajouté été ajouté");
+        QMessageBox::information(this,"Creation projet","Le titre du projet a bien été modifié");
         //On change la valeur du label m_titreProjet dans ouvrirProjet
         m_titreProjet->setText(nouveauTitreProjet);
         //On supprime l'ancien bouton avec l'ancien titre

@@ -18,7 +18,8 @@ HEADERS += \
     fenetreGestionProjet.h \
     fenetreprogrammer.h \
     fenetrePrincipal.h \
-    fenetreactivitetrad.h
+    fenetreactivitetrad.h \
+    fenetreprogrammertache.h
 
 SOURCES += \
     tache.cpp \
@@ -37,10 +38,12 @@ SOURCES += \
     fenetreGestionProjet.cpp \
     fenetreprogrammer.cpp \
     fenetrePrincipal.cpp \
-    fenetreactivitetrad.cpp
+    fenetreactivitetrad.cpp \
+    fenetreprogrammertache.cpp
 
 FORMS += \
     fenetreprogrammer.ui \
     fenetrePrincipal.ui \
-    fenetreactivitetrad.ui
+    fenetreactivitetrad.ui \
+    fenetreprogrammertache.ui
 
