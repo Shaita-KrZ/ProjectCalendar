@@ -1,7 +1,7 @@
 #ifndef TACHEMANAGER_H
 #define TACHEMANAGER_H
 #include <tache.h>
-
+#include <qDebug>
 
 /*!
  * \class TacheManager

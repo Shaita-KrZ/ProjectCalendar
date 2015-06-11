@@ -19,6 +19,9 @@ void ProjetManager::libererInstance(){
 }
 
 void ProjetManager::creerProjet(const QString & t,const QDate& echeance){
+    if(t==""){
+        throw CalendarException("Le titre du projet ne doit pas être vide");
+    }
     Projet *P=new Projet(t);
     P->setEcheance(echeance);
     projets[t]=P;
@@ -54,7 +57,7 @@ Projet & ProjetManager::getProjet(const QString& t){
 }
 
 
-void ProjetManager::load(const QString& f){
+QString ProjetManager::load(const QString& f){
     qDebug()<<"debut load\n";
     file=f;
     QFile fin(file);
@@ -74,6 +77,8 @@ void ProjetManager::load(const QString& f){
     bool preemptive;
     bool typeTache=true;
     QDate echeanceProjet;
+    QString idpred;
+    QString idsucc;
     //On commence a lire le fichier xml
     while(!xml.atEnd() && !xml.hasError()) {
         // Read next element.
@@ -83,8 +88,6 @@ void ProjetManager::load(const QString& f){
         if(token == QXmlStreamReader::StartDocument) continue;
         // If token is StartElement, we'll see if we can read it.
         if(token == QXmlStreamReader::StartElement){
-            //Le premier token=projet
-            // Si le token type est projet alors
             if(xml.name() == "projet"){
                 while(!(xml.tokenType()==QXmlStreamReader::StartElement && xml.name()=="tacheManager")){
                     if(xml.tokenType() == QXmlStreamReader::StartElement){
@@ -104,8 +107,6 @@ void ProjetManager::load(const QString& f){
                     throw CalendarException("Le projet existe déjà");
                 else projets[titreProjet]=pere;
             }
-
-            //Sortie de la bouche xml.name() == tacheManager
             if(xml.name()=="tacheManager") continue;
             if(xml.name()=="tache" && typeTache==true){
                 QXmlStreamAttributes attributes = xml.attributes();
@@ -113,51 +114,50 @@ void ProjetManager::load(const QString& f){
                 if(attributes.hasAttribute("type")){
                     QString val =attributes.value("type").toString();
                     typeTache=(val == "unit" ? true : false);
-                    //qDebug()<<"type Tache="<<val<<"\n";
                 }
             }
             //We're going to loop over the things because the order might change.
             //We'll continue the loop until we hit an EndElement named tache.
-            if(typeTache){
-            while(!(xml.tokenType()==QXmlStreamReader::EndElement && xml.name()=="tache")){
-                 if(xml.tokenType() == QXmlStreamReader::StartElement){
-                      if(xml.name() == "preemptive") {
-                            QString val;
-                            xml.readNext(); val=xml.text().toString();
-                            preemptive=(val == "true" ? true : false);
+            if(typeTache && xml.name()!="precedenceManager" && xml.name()!="precedence"){
+                while(!(xml.tokenType()==QXmlStreamReader::EndElement && xml.name()=="tache")){
+                     if(xml.tokenType() == QXmlStreamReader::StartElement){
+                          if(xml.name() == "preemptive") {
+                                QString val;
+                                xml.readNext(); val=xml.text().toString();
+                                preemptive=(val == "true" ? true : false);
 
-                           }
-                        // We've found identificteur.
-                        if(xml.name() == "identificateur") {
-                            xml.readNext(); identificateur=xml.text().toString();
-                           }
+                               }
+                            // We've found identificteur.
+                            if(xml.name() == "identificateur") {
+                                xml.readNext(); identificateur=xml.text().toString();
+                               }
 
-                        // We've found titre.
-                        if(xml.name() == "titre") {
-                            xml.readNext(); titre=xml.text().toString();
+                            // We've found titre.
+                            if(xml.name() == "titre") {
+                                xml.readNext(); titre=xml.text().toString();
+                            }
+                            // We've found disponibilite
+                            if(xml.name() == "disponibilite") {
+                                xml.readNext();
+                                disponibilite=QDate::fromString(xml.text().toString(),Qt::ISODate);
+                            }
+                            // We've found echeance
+                            if(xml.name() == "echeance") {
+                                xml.readNext();
+                                echeance=QDate::fromString(xml.text().toString(),Qt::ISODate);
+                            }
+                            // We've found duree
+                            if(xml.name() == "duree") {
+                                xml.readNext();
+                                duree.setDuree(xml.text().toString().toUInt());
+                            }
                         }
-                        // We've found disponibilite
-                        if(xml.name() == "disponibilite") {
-                            xml.readNext();
-                            disponibilite=QDate::fromString(xml.text().toString(),Qt::ISODate);
-                        }
-                        // We've found echeance
-                        if(xml.name() == "echeance") {
-                            xml.readNext();
-                            echeance=QDate::fromString(xml.text().toString(),Qt::ISODate);
-                        }
-                        // We've found duree
-                        if(xml.name() == "duree") {
-                            xml.readNext();
-                            duree.setDuree(xml.text().toString().toUInt());
-                        }
+                        // ...and next...
+                        xml.readNext();
                     }
-                    // ...and next...
-                    xml.readNext();
+                    projets[titreProjet]->taches.addTache(identificateur,titre,disponibilite,echeance,pere,duree,preemptive);
                 }
-                projets[titreProjet]->taches.addTache(identificateur,titre,disponibilite,echeance,pere,duree,preemptive);
-            }
-            if(!typeTache){
+            if(!typeTache && xml.name()!="precedenceManager" && xml.name()!="precedence"){
                 while(!(xml.tokenType()==QXmlStreamReader::EndElement && xml.name()=="tachescompo")){
                     while(!((xml.tokenType()==QXmlStreamReader::EndElement && xml.name()=="tache") ||
                           (xml.tokenType()==QXmlStreamReader::StartElement && xml.name()=="tachescompo") ||
@@ -199,7 +199,7 @@ void ProjetManager::load(const QString& f){
                             }
                         }
                   // ...and next...
-                  xml.readNext();
+                    xml.readNext();
                     }
                     if(xml.name()=="tachescompo" && xml.tokenType()==QXmlStreamReader::StartElement){
                         identificateurCompo=identificateur;
@@ -216,6 +216,36 @@ void ProjetManager::load(const QString& f){
                         xml.readNext();
                     }
                 }
+
+            }
+            if(xml.name() == "precedenceManager") continue;
+            if(xml.name() == "precedence"){
+                while(!(xml.tokenType()==QXmlStreamReader::EndElement && xml.name()=="precedence")){
+                    if(xml.tokenType() == QXmlStreamReader::StartElement){
+                        if(xml.name() == "pred") {
+                            xml.readNext(); idpred=xml.text().toString();
+                        }
+                        if(xml.name() == "succ") {
+                            xml.readNext(); idsucc=xml.text().toString();
+                        }
+                    }
+                    xml.readNext();
+                }
+                Projet *P=projets[titreProjet];
+                TacheManager &TM=P->getTaches();
+                PrecedenceManager &PM=P->getPrecedences();
+                map<QString,Tache*> taches=TM.getTaches();
+                if(taches.find(idpred)==taches.end() && taches.find(idsucc)==taches.end()){
+                    projets.erase(titreProjet);
+                    throw CalendarException("La tache successeur ou predecesseur n'existe pas");
+                }
+                Tache *pred=taches[idpred];
+                Tache *succ=taches[idsucc];
+                if(succ->getEcheance()<pred->getEcheance()){
+                    projets.erase(titreProjet);
+                    throw CalendarException("La tache successeur ou predecesseur n'existe pas");
+                }
+                PM.ajouterPrecedence(pred,succ);
             }
         }
     }
@@ -226,15 +256,24 @@ void ProjetManager::load(const QString& f){
     // Removes any device() or data from the reader * and resets its internal state to the initial state.
     xml.clear();
     //qDebug()<<"fin load\n";
+    return pere->getTitre();
 }
 
 
-void  ProjetManager::save(const QString& f,const QString &titreProjet){
+
+void ProjetManager::projetExistdeja(const QString &t)const{
+    if(projets.find(t)!=projets.end()){
+        throw CalendarException("Le projet existe déjà");
+    }
+}
+
+
+
+void ProjetManager::save(const QString& f,const QString &titreProjet){
     file=f;
-    QFile newfile( file);
+    QFile newfile(file);
     qDebug()<<"debut save";
     if (!newfile.open(QIODevice::WriteOnly | QIODevice::Text)){
-        qDebug()<<"test";
         throw CalendarException(QString("erreur sauvegarde tâches : ouverture fichier xml"));
     }
     QXmlStreamWriter stream(&newfile);
@@ -246,6 +285,7 @@ void  ProjetManager::save(const QString& f,const QString &titreProjet){
     stream.writeTextElement("echeance",P.getEcheance().toString(Qt::ISODate));
     stream.writeStartElement("tacheManager");
     TacheManager tManager=P.getTaches();
+    PrecedenceManager pManager=P.getPrecedences();
     map<QString, Tache*>lTaches=tManager.getTaches();
     map<QString, Tache*>::const_iterator it;
     for(it=lTaches.begin();it!=lTaches.end();++it){
@@ -293,13 +333,18 @@ void  ProjetManager::save(const QString& f,const QString &titreProjet){
         }
     }
     stream.writeEndElement();
+    stream.writeStartElement("precedenceManager");
+    for(PrecedenceManager::pmIterator it=pManager.begin();it!=pManager.end();++it){
+        stream.writeStartElement("precedence");
+        Precedence *prec=it.getCurrent();
+        stream.writeTextElement("pred",prec->getPredecesseur()->getID());
+        stream.writeTextElement("succ",prec->getSuccesseur()->getID());
+        stream.writeEndElement();
+    }
+    stream.writeEndElement();
     stream.writeEndElement();
     stream.writeEndDocument();
     newfile.close();
-}
-
-void ProjetManager::projetExistdeja(const QString &t)const{
-    if(projets.find(t)!=projets.end()){
-        throw CalendarException("Le projet existe déjà");
-    }
+    qDebug()<<"test25";
+    return;
 }

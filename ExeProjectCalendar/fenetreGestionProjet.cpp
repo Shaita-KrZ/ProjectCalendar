@@ -4,13 +4,12 @@
 
 /* ********************* CONSTRUCTEUR ************************* */
 
-Gestionprojets::Gestionprojets(QWidget *parent):QWidget(parent)
-{
+
+Gestionprojets::Gestionprojets(QWidget *parent):QWidget(parent){
     m_bool=false;
-
+    m_titreProj="";
     m_couche=new QVBoxLayout(this);
-
-
+    m_fenetreProjet=new QWidget();
     /* *********** COUCHE 1 ******************* */
     m_presentation=new QLabel("Bienvenue sur l'interface de gestion de projets.");
     m_creeProjet=new QPushButton("Créer un projet vide");
@@ -67,6 +66,7 @@ void Gestionprojets::supprimeProjet(){
         try{
             PM.getProjet(titreProjetSupp);
         }catch(CalendarException& e){QMessageBox::critical(this, "Supprimer un projet", e.getInfo());return;}
+        if(m_titreProj==titreProjetSupp)m_fenetreProjet->close();
         //On supprime le bouton
         supprimerBouton(titreProjetSupp);
         //On supprime le projet
@@ -85,18 +85,21 @@ void Gestionprojets::chargerProjet(){
     //On ouvre un une fenetre pour ouvrir le fichier xml à charger
     QString chemin = QFileDialog::getOpenFileName(this, "Charger un projet", QString(), "Fichiers (*.xml)");
     ProjetManager &PM=ProjetManager::getInstance();
+    QString titre;
     if(!chemin.isEmpty()){
         //On charge le projet
         try{
             //load va envoyer un throw pour indiquer si le projet exiset déjà ou si y'a un probleme de lecture du fichier xml
             //load va lire le projet et l'ajouter dans le ProjetManager
-            PM.load(chemin);
+            titre=PM.load(chemin);
         }catch(CalendarException &e){ QMessageBox::critical(this,"Projet",e.getInfo());return;}
         //On crée un nouveau bouton pour le nouveau projet
         QPushButton *boutonProj=new QPushButton();
         map<QString,Projet *> projets=PM.getProjets();
         //On récupère le titre du projet pour l'affecter au bouton
-        Projet *P=projets.rbegin()->second;
+        map<QString,Projet*>::iterator it=projets.begin();
+        while(it->first!=titre)++it;
+        Projet *P=it->second;
         boutonProj->setText(P->getTitre());
         //On ajoute le bouton a la liste des boutons
         ajouterBouton(P->getTitre());
@@ -119,12 +122,12 @@ void Gestionprojets::chargerProjet(){
 //La liste des boutons permettant d'ouvrir un projet : m_boutonProjets
 
 void Gestionprojets::ouvrirProjet(){
+    m_fenetreProjet->close();
     unsigned int j=0,k=0,nbTu=0;
     //j va servir pour l'affichage dynamique des informations
     //k va servir à incrémenter les widgets dynamiquement
     //nbTu va servir pour l'affichage dynamique des taches d'une tache Composte
     QString titreP;
-
     //sender() permet de récuperer le bouton sur lequel on a appuyer
     QObject *emetteur =sender();
     QPushButton *emetteurCasted=qobject_cast<QPushButton*>(emetteur);
@@ -144,10 +147,25 @@ void Gestionprojets::ouvrirProjet(){
      // On récupère le projet correspondant
      Projet *P=iter->second;
      TacheManager T=P->getTaches();
-
-     // On crée une nouvelle fenetre
+     QPushButton *ajoutPrecedence=new QPushButton("Ajouter une precedence");
+     QPushButton *sauvegarderProjet=new QPushButton("Sauevgarder le projet");
+     QObject::connect(sauvegarderProjet,SIGNAL(clicked()),this,SLOT(sauvegarderProjet()));
+     QLabel *listePrecedence=new QLabel("Liste des precedences :");
+     QObject::connect(ajoutPrecedence,SIGNAL(clicked()),this,SLOT(ajouterPrecedence()));
+     QLabel **precedence=new QLabel*[T.getTaches().size()];
      m_fenetreProjet= new QWidget();
      QGridLayout *grid=new QGridLayout(m_fenetreProjet);
+     PrecedenceManager &precedenceM=P->getPrecedences();
+     unsigned int iP=0;
+     for(PrecedenceManager::pmIterator itP=precedenceM.begin();itP!=precedenceM.end();++itP){
+        Precedence *prec=itP.getCurrent();
+         const Tache *succ=prec->getSuccesseur();
+         const Tache *pred=prec->getPredecesseur();
+
+         precedence[iP]=new QLabel("La tache "+pred->getID()+" précède la tache "+succ->getID());
+         grid->addWidget(precedence[iP],8+iP,0,1,1);
+         iP++;
+     }
 
      m_titreProj=P->getTitre(); //titreProj va permet de récupérer le titre du projet pour le modifier
      m_titreProjet=new QLabel(P->getTitre());
@@ -160,14 +178,16 @@ void Gestionprojets::ouvrirProjet(){
      grid->addWidget(echeanceProjet,1,0,1,1);
      grid->addWidget(modifierProjet,2,0,1,1);
      grid->addWidget(ajouterTache,3,0,1,1);
+     grid->addWidget(sauvegarderProjet,4,0,1,1);
+     grid->addWidget(ajoutPrecedence,5,0,1,1);
+     grid->addWidget(listePrecedence,6,0,1,1);
      QLabel **identificateurTache=new QLabel*[T.getTaches().size()];
      QLabel **caracteristiqueTache=new QLabel*[T.getTaches().size()];
      QLabel **caracteristiqueTacheUnitaireComposee;
-
      //On récupere les taches du projet
      map<QString, Tache*> taches=T.getTaches();
      map<QString, Tache*>::iterator it;
-     //On parcourt les taches pour les afficher au fur et a mesure
+
      for(it=taches.begin();it!=taches.end();++it){
          //On crée un bouton pour modifier la tache
          QPushButton *B=new QPushButton("Modifier la tache : "+it->first);
@@ -179,6 +199,7 @@ void Gestionprojets::ouvrirProjet(){
          //On récupère la tache
          Tache *t=it->second;
          if(t->estComposite()){
+
              TacheComposite *tCompo=dynamic_cast<TacheComposite*>(t);
              map<QString,Tache*>taches=tCompo->getTaches();
              map<QString,Tache*>::const_iterator it;
@@ -192,23 +213,24 @@ void Gestionprojets::ouvrirProjet(){
                 caracteristiqueTacheUnitaireComposee[nbTu]=new QLabel("     Identificateur : "+it->first+"\n     "+"Preemptive : "+preemptive+"\n     "+"Titre : "+it->second->getTitre()+
                                                                 "\n     "+"Disponibilite : "+it->second->getDisponibilite().toString()+"\n     "+
                                                                  "Echenace : "+it->second->getEcheance().toString()+"     Duree :"+QString::number(it->second->getDuree().getDureeEnMinutes())+" minutes");
-
                 j++;
                 grid->addWidget(caracteristiqueTacheUnitaireComposee[nbTu],2+10*j,4,6,6);
                 nbTu++;
              }
+
          }
          else{
             QString preemptive=(t->isPreemptive() == true? "true" : "false");
+
             caracteristiqueTache[k]=new QLabel("     Preemptive : "+ preemptive +"\n     "+"Titre : "+t->getTitre()+"\n     "+"Disponibilite : "+t->getDisponibilite().toString()+"\n     "+
                                             "Echenace : "+t->getEcheance().toString()+"Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
 
             grid->addWidget(caracteristiqueTache[k],4+10*j,2,6,6);
+
          }
          j++;
          k++;
      }
-     //On affiche la fenêtre
      m_fenetreProjet->show();
 }
 
@@ -252,9 +274,8 @@ void Gestionprojets::validerCreationProjet(){
     try{
         //Si le projet exist déjà on envoi un message d'erreur
         PM.projetExistdeja(titreProjet);
+        PM.creerProjet(titreProjet,echeanceProjet);
     }catch(CalendarException &e){ QMessageBox::critical(this, "Creation d'un' projet", e.getInfo()); return;}
-    //On crée le projet
-    PM.creerProjet(titreProjet,echeanceProjet);
     //On ajoute un bouton avec le nouveau projet
     ajouterBouton(titreProjet);
     m_fenetreCreeProjet->close();
@@ -280,6 +301,7 @@ void Gestionprojets::modifierTitreProjet(){
         }catch(CalendarException &e){ QMessageBox::critical(this, "Modifier le titre du projet", e.getInfo());return;}
         //m_titreProj dans ouvrirProjet va récupérer le titre du projet que l'on veut modifier
         PM.modifierNomProjet(m_titreProj,nouveauTitreProjet);
+        m_fenetreProjet->close();
         QMessageBox::information(this,"Creation projet","Le titre du projet a bien été ajouté été ajouté");
         //On change la valeur du label m_titreProjet dans ouvrirProjet
         m_titreProjet->setText(nouveauTitreProjet);
@@ -320,15 +342,16 @@ void Gestionprojets::modifierTache(){
      //On crée le formulaire pour modifier la tache
      QHBoxLayout *couche0=new QHBoxLayout();
      QLabel *idTache=new QLabel("Modifier la tache : "+m_tacheModif->getID());
+
      couche0->addWidget(idTache);
      couche->addLayout(couche0);
      QHBoxLayout *couche1=new QHBoxLayout();
      QLabel *titreTacheLabel=new QLabel("Titre : ");
      m_titreTacheLine=new QLineEdit(m_tacheModif->getTitre());
-     m_preempTache=new QCheckBox("Preemptive");
+
      couche1->addWidget(titreTacheLabel);
      couche1->addWidget(m_titreTacheLine);
-     couche1->addWidget(m_preempTache);
+
      couche->addLayout(couche1);
 
      QHBoxLayout *couche2=new QHBoxLayout();
@@ -428,6 +451,8 @@ void Gestionprojets::modifierTache(){
             couche3->addWidget(dureeTacheLabel);
             couche3->addWidget(m_dureeTacheLine);
             couche->addLayout(couche3);
+            m_preempTache=new QCheckBox("Preemptive");
+            couche1->addWidget(m_preempTache);
      }
      QHBoxLayout *couche4=new QHBoxLayout();
      QPushButton *valider=new QPushButton("OK");
@@ -576,15 +601,17 @@ void Gestionprojets::validerajoutTache(){
     unsigned int duree=m_dureeTacheLine->value();
     Duree dureeTache(duree);
     bool preemp=m_preempTache->isChecked();
-    if(m_bool==true){
-        TM.addTache(m_idTacheLine->text(),m_titreTacheLine->text(),m_dateDispoTacheLine->date(),m_dateEcheTacheLine->date(),m_projetModif);
-    }
-    else{
-        TM.addTache(m_idTacheLine->text(),m_titreTacheLine->text(),m_dateDispoTacheLine->date(),m_dateEcheTacheLine->date(),m_projetModif,
-                dureeTache,preemp);
-    }
+    try{
+        if(m_bool==true){
+            TM.addTache(m_idTacheLine->text(),m_titreTacheLine->text(),m_dateDispoTacheLine->date(),m_dateEcheTacheLine->date(),m_projetModif);
+        }
+        else{
+            TM.addTache(m_idTacheLine->text(),m_titreTacheLine->text(),m_dateDispoTacheLine->date(),m_dateEcheTacheLine->date(),m_projetModif,
+            dureeTache,preemp);
+        }
+    }catch(CalendarException e){QMessageBox::critical(this, "Ajouter une tache",e.getInfo());m_fenetreAjoutTache->close();m_bool=false;return;}
+    m_bool=false;
     m_fenetreAjoutTache->close();
-    m_fenetreProjet->show();
     QMessageBox::information(this,"Ajout Tache","La tache a bien été ajouté");
 }
 
@@ -654,11 +681,14 @@ void Gestionprojets::ajouterTacheCompo(){
 }
 
 void Gestionprojets::validerajoutTacheCompo(){
-    qDebug()<<"test";
     unsigned int duree=m_dureeTacheLine->value();
     Duree dureeTache(duree);
     bool preemp=m_preempTache->isChecked();
-    qDebug()<<m_titreTacheLine->text();
+    if(m_idTacheLine->text()==""){
+        m_fenetreModifTacheCompo->close();
+        QMessageBox::critical(this, "Modifier une tache", "Vous n'avez pas entré d'identifiant");
+        return;
+    }
     TacheUnitaire *Tu=new TacheUnitaire(m_titreTacheLine->text(),m_idTacheLine->text(),m_dateDispoTacheLine->date(),
                                         m_dateEcheTacheLine->date(),m_projetModif,preemp,dureeTache);
     TacheComposite *Tc=dynamic_cast<TacheComposite*>(m_tacheModif);
@@ -672,12 +702,58 @@ void Gestionprojets::annulerajoutTacheCompo(){
     m_fenetreModifTacheCompo->close();
     m_fenetreProjet->show();
     QMessageBox::critical(this, "Modifier une tache", "La tache n'a pas été modifié");
-
 }
 
-//RESTE A FAIRE PLUS TARD
-/*
-Lire les precedences dans load
-Gérer les précédences
-ExportSemaine
-*/
+void Gestionprojets::ajouterPrecedence(){
+    m_fenetrePrecedence=new QWidget();
+    QVBoxLayout *couche=new QVBoxLayout(m_fenetrePrecedence);
+    QLabel *ajoutPrec=new QLabel("Indiquer la tache precedence");
+    QLabel *ajoutSucc=new QLabel("Indiquer la tache suivante");
+    couche->addWidget(ajoutPrec);
+    m_ajouterPrecLine=new QLineEdit();
+    couche->addWidget(m_ajouterPrecLine);
+    m_ajouterSuccLine=new QLineEdit();
+    couche->addWidget(ajoutSucc);
+    couche->addWidget(m_ajouterSuccLine);
+    QHBoxLayout *couche1=new QHBoxLayout();
+    QPushButton *valider=new QPushButton("OK");
+    QPushButton *annuler=new QPushButton("Annuler");
+    QObject::connect(valider,SIGNAL(clicked()),this,SLOT(validerajouterPrec()));
+    QObject::connect(annuler,SIGNAL(clicked()),this,SLOT(annulerajouterPrec()));
+    couche1->addWidget(valider);
+    couche1->addWidget(annuler);
+    couche->addLayout(couche1);
+    m_fenetrePrecedence->show();
+    m_fenetreProjet->close();
+}
+
+void Gestionprojets::validerajouterPrec(){
+    ProjetManager& PM=ProjetManager::getInstance();
+    //comment faire pour que getProjet ne soit pas une référence tout en modiifant le projet?
+    Projet &P=PM.getProjet(m_titreProj);
+    PrecedenceManager& precM=P.getPrecedences();
+    TacheManager &tacheM=P.getTaches();
+    try{
+        const Tache *T1=tacheM.getTache(m_ajouterPrecLine->text());
+        const Tache *T2=tacheM.getTache(m_ajouterSuccLine->text());
+        precM.ajouterPrecedence(T1,T2);
+    }catch(CalendarException &e){ QMessageBox::critical(this,"Ajouter une precedence",e.getInfo());return;}
+    QMessageBox::information(this,"Ajouter une precedence","La tache a bien été ajouté");
+    m_fenetrePrecedence->close();
+}
+
+void Gestionprojets::annulerajouterPrec(){
+    m_fenetrePrecedence->close();
+    QMessageBox::critical(this, "Ajouter une precedence", "Vous n'avez pas ajouté de precedence");
+}
+
+void Gestionprojets::sauvegarderProjet(){
+    ProjetManager& PM=ProjetManager::getInstance();
+    QString chemin = QFileDialog::getOpenFileName(m_fenetreProjet, "Sauvegarder un projet", QString(), "Fichiers (*.xml)");
+    try{
+        qDebug()<<m_titreProj;
+        PM.save(chemin,m_titreProj);
+        qDebug()<<"test";
+    }catch(CalendarException &e){QMessageBox::critical(this,"Ajouter une precedence",e.getInfo());return;}
+    QMessageBox::information(this,"Sauevgarder un projet","Le projet a bien été ajouté");
+}

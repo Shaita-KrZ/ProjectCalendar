@@ -11,8 +11,7 @@
 #include <QDateTimeEdit>
 #include <QSpinBox>
 #include <QCheckBox>
-
-
+#include <QScrollArea>
 
 class Gestionprojets : public QWidget
 {
@@ -32,6 +31,7 @@ private:
     QPushButton *m_creeProjet;
     QPushButton *m_importerProjet;
     QLabel *m_listeProj;
+    QPushButton *m_boutonSemaine;
     /* ****** FIN WIDGET Constructeur ******* */
 
     /* ****** WIDGET OUVRIR PROJET ******* */
@@ -72,6 +72,14 @@ private:
     QCheckBox *m_isTacheCompo;
     QWidget *m_fenetreModifTacheCompo;
     /* ***** FIN WIDGET  AJOUTER UNE TACHE ***** */
+
+    /* ***** WIDGET AJOUTER UNE PRECEDENCE ***** */
+    QWidget *m_fenetrePrecedence;
+    QLineEdit *m_ajouterPrecLine;
+    QLineEdit *m_ajouterSuccLine;
+    /* ***** FIN WIDGET AJOUTER UNE PRECEDENCE ***** */
+
+
 public slots:
     void chargerProjet();
     void ouvrirProjet();
@@ -79,9 +87,10 @@ public slots:
     void creationProjet();
     void validerCreationProjet();
     void annulerCreationProjet();
-
+    void validerajouterPrec();
+    void annulerajouterPrec();
     void modifierTitreProjet();
-
+    void ajouterPrecedence();
     void modifierTache();
     void validermodifTache();
     void annulermodifTache();
@@ -92,6 +101,7 @@ public slots:
     void ajouterTacheCompo();
     void validerajoutTacheCompo();
     void annulerajoutTacheCompo();
+    void sauvegarderProjet();
 };
 
 

@@ -14,10 +14,10 @@ PrecedenceManager::~PrecedenceManager()
 
 bool PrecedenceManager::isPrecedence(Tache *prec, Tache *succ) const{
     pmIterator it=begin();
-    Precedence p=*it;
-    while(it!=end() && (prec!=p.getPredecesseur() || succ!=p.getSuccesseur())){
+    Precedence* p=it.getCurrent();
+    while(it!=end() && (prec!=p->getPredecesseur() || succ!=p->getSuccesseur())){
         ++it;
-        p=*it;
+        p=it.getCurrent();
     }
     if(it==end()){
         return false;
@@ -28,14 +28,14 @@ bool PrecedenceManager::isPrecedence(Tache *prec, Tache *succ) const{
 PrecedenceManager & PrecedenceManager::getTachesPred (const Tache *succ) const{
     PrecedenceManager *PM=new PrecedenceManager;
     pmIterator it=begin();
-    Precedence p=*it;
+    Precedence* p=it.getCurrent();
     while(it!=end()){
-        while(it!=end() && succ!=p.getSuccesseur()){
+        while(it!=end() && succ!=p->getSuccesseur()){
             ++it;
-            p=*it;
+            p=it.getCurrent();
         }
         if(it!=end()){
-            PM->ajouterPrecedence(p.getPredecesseur(),succ);
+            PM->ajouterPrecedence(p->getPredecesseur(),succ);
         }
     }
     return *PM;

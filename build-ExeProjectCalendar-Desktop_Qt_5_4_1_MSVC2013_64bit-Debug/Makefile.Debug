@@ -342,6 +342,7 @@ debug\moc_fenetreGestionProjet.cpp: C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidg
 		..\ExeProjectCalendar\duree.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QTextStream \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qDebug \
 		..\ExeProjectCalendar\precedencemanager.h \
 		..\ExeProjectCalendar\precedence.h \
 		..\ExeProjectCalendar\iterator.h \
@@ -365,6 +366,18 @@ debug\moc_fenetreGestionProjet.cpp: C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidg
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextformat.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qpen.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextoption.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QDateTimeEdit \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qdatetimeedit.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qvalidator.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QSpinBox \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qspinbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QCheckBox \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qcheckbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QScrollArea \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qscrollarea.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
 		..\ExeProjectCalendar\fenetreGestionProjet.h
 	C:\Qt\Qt5.4.1\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/mkspecs/win32-msvc2013 -IC:/Users/SHAITA/Documents/Github/ProjectCalendar/ExeProjectCalendar -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/include -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/include/QtGui -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/include/QtCore -I. ..\ExeProjectCalendar\fenetreGestionProjet.h -o debug\moc_fenetreGestionProjet.cpp
 
@@ -481,6 +494,7 @@ debug\moc_fenetrePrincipal.cpp: C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\
 		..\ExeProjectCalendar\duree.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QTextStream \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qDebug \
 		..\ExeProjectCalendar\precedencemanager.h \
 		..\ExeProjectCalendar\precedence.h \
 		..\ExeProjectCalendar\iterator.h \
@@ -521,6 +535,18 @@ debug\moc_fenetrePrincipal.cpp: C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextformat.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qpen.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextoption.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QDateTimeEdit \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qdatetimeedit.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qvalidator.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QSpinBox \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qspinbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QCheckBox \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qcheckbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QScrollArea \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qscrollarea.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
 		..\ExeProjectCalendar\fenetrePrincipal.h
 	C:\Qt\Qt5.4.1\5.4\msvc2013_64\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -D_WIN64 -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/mkspecs/win32-msvc2013 -IC:/Users/SHAITA/Documents/Github/ProjectCalendar/ExeProjectCalendar -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/include -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/include/QtWidgets -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/include/QtGui -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/include/QtANGLE -IC:/Qt/Qt5.4.1/5.4/msvc2013_64/include/QtCore -I. ..\ExeProjectCalendar\fenetrePrincipal.h -o debug\moc_fenetrePrincipal.cpp
 
@@ -742,6 +768,7 @@ debug\main.obj: ..\ExeProjectCalendar\main.cpp C:\Qt\Qt5.4.1\5.4\msvc2013_64\inc
 		..\ExeProjectCalendar\evenement.h \
 		..\ExeProjectCalendar\duree.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QTextStream \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qDebug \
 		..\ExeProjectCalendar\precedencemanager.h \
 		..\ExeProjectCalendar\precedence.h \
 		..\ExeProjectCalendar\iterator.h \
@@ -780,7 +807,19 @@ debug\main.obj: ..\ExeProjectCalendar\main.cpp C:\Qt\Qt5.4.1\5.4\msvc2013_64\inc
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextcursor.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextformat.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qpen.h \
-		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextoption.h
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextoption.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QDateTimeEdit \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qdatetimeedit.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qvalidator.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QSpinBox \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qspinbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QCheckBox \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qcheckbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QScrollArea \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qscrollarea.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h
 
 debug\projet.obj: ..\ExeProjectCalendar\projet.cpp ..\ExeProjectCalendar\projet.h \
 		..\ExeProjectCalendar\tachemanager.h \
@@ -858,6 +897,7 @@ debug\projet.obj: ..\ExeProjectCalendar\projet.cpp ..\ExeProjectCalendar\projet.
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregexp.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qstringmatcher.h \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qDebug \
 		..\ExeProjectCalendar\precedencemanager.h \
 		..\ExeProjectCalendar\precedence.h \
 		..\ExeProjectCalendar\iterator.h \
@@ -1050,7 +1090,8 @@ debug\tachemanager.obj: ..\ExeProjectCalendar\tachemanager.cpp ..\ExeProjectCale
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qdatastream.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregexp.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qstringmatcher.h \
-		..\ExeProjectCalendar\exception.h
+		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qDebug
 
 debug\projetmanager.obj: ..\ExeProjectCalendar\projetmanager.cpp ..\ExeProjectCalendar\projetmanager.h \
 		..\ExeProjectCalendar\projet.h \
@@ -1129,6 +1170,7 @@ debug\projetmanager.obj: ..\ExeProjectCalendar\projetmanager.cpp ..\ExeProjectCa
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregexp.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qstringmatcher.h \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qDebug \
 		..\ExeProjectCalendar\precedencemanager.h \
 		..\ExeProjectCalendar\precedence.h \
 		..\ExeProjectCalendar\iterator.h \
@@ -1628,6 +1670,7 @@ debug\semaine.obj: ..\ExeProjectCalendar\semaine.cpp ..\ExeProjectCalendar\semai
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregexp.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qstringmatcher.h \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qDebug \
 		..\ExeProjectCalendar\precedencemanager.h \
 		..\ExeProjectCalendar\precedence.h \
 		..\ExeProjectCalendar\iterator.h \
@@ -1755,6 +1798,7 @@ debug\agenda.obj: ..\ExeProjectCalendar\agenda.cpp ..\ExeProjectCalendar\agenda.
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregexp.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qstringmatcher.h \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qDebug \
 		..\ExeProjectCalendar\precedencemanager.h \
 		..\ExeProjectCalendar\precedence.h \
 		..\ExeProjectCalendar\iterator.h \
@@ -1918,6 +1962,7 @@ debug\fenetrePrincipal.obj: ..\ExeProjectCalendar\fenetrePrincipal.cpp ..\ExePro
 		..\ExeProjectCalendar\duree.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QTextStream \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qDebug \
 		..\ExeProjectCalendar\precedencemanager.h \
 		..\ExeProjectCalendar\precedence.h \
 		..\ExeProjectCalendar\iterator.h \
@@ -1958,6 +2003,18 @@ debug\fenetrePrincipal.obj: ..\ExeProjectCalendar\fenetrePrincipal.cpp ..\ExePro
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextformat.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qpen.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextoption.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QDateTimeEdit \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qdatetimeedit.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qvalidator.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QSpinBox \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qspinbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QCheckBox \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qcheckbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QScrollArea \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qscrollarea.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h \
 		ui_fenetrePrincipal.h
 
 debug\fenetreGestionProjet.obj: ..\ExeProjectCalendar\fenetreGestionProjet.cpp ..\ExeProjectCalendar\fenetreGestionProjet.h \
@@ -2087,6 +2144,7 @@ debug\fenetreGestionProjet.obj: ..\ExeProjectCalendar\fenetreGestionProjet.cpp .
 		..\ExeProjectCalendar\duree.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QTextStream \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qDebug \
 		..\ExeProjectCalendar\precedencemanager.h \
 		..\ExeProjectCalendar\precedence.h \
 		..\ExeProjectCalendar\iterator.h \
@@ -2109,7 +2167,19 @@ debug\fenetreGestionProjet.obj: ..\ExeProjectCalendar\fenetreGestionProjet.cpp .
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextcursor.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextformat.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qpen.h \
-		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextoption.h
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qtextoption.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QDateTimeEdit \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qdatetimeedit.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qvalidator.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregularexpression.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QSpinBox \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qspinbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QCheckBox \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qcheckbox.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QScrollArea \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qscrollarea.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractscrollarea.h
 
 debug\moc_fenetreGestionProjet.obj: debug\moc_fenetreGestionProjet.cpp 
 

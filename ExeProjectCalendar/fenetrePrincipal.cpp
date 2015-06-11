@@ -7,7 +7,6 @@ FenAgenda::FenAgenda(Semaine s, QWidget *parent) :
     ui(new Ui::FenAgenda)
 {
     ui->setupUi(this);
-
     QObject::connect(ui->bGoProjets,SIGNAL(clicked()),this,SLOT(gestionProjet()));
     ui->labelSemaine->setText("Semaine du " + sem.getLundi().toString("dd/MM/yyyy") + " au " + sem.getLundi().addDays(6).toString("dd/MM/yyyy"));
 }
@@ -27,6 +26,5 @@ void FenAgenda::on_bSemaineSuiv_clicked()
 }
 //ouvrir l'interface de mon projet
 void FenAgenda::gestionProjet(){
-    this->close();
     gestionproj.show();
 }

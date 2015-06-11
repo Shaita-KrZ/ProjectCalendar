@@ -62,14 +62,35 @@ public:
      * \brief Importe un fichier XML
      * \param f : chemin du fichier a charger
      */
-    void load(const QString& f);
+    QString load(const QString& f);
 
     /*!
      * \brief Exporte le projet dans un fichier XML
      * \param f : chemin du fichier dans lequel sauvegarder
      */
-    void  save(const QString& f,const QString& titreProjet);
+    void save(const QString& f,const QString& titreProjet);
+
+    /*!
+     * \brief getProjets()
+     * \return retourne les projets
+     */
+
     map<QString,Projet*> getProjets() const { return projets;}
+
+    /*
+    class projetManager_iterator:public map<QString,Projet*>::iterator{
+    public:
+        projetManager_iterator():map<QString,Projet*>::iterator(){}
+        projetManager_iterator(map<QString,Projet*>::iterator it):map<QString,Projet*>::iterator(it){}
+    };
+    projetManager_iterator begin_projet() const{projets.begin();}
+    projetManager_iterator end_projet() const{projets.end();}*/
+
+    /*!
+     * \brief Indique si le projet existe déjà
+     * \return retourne une exception si le projet existe déjà
+     * \param t : titre du projet
+     */
     void projetExistdeja(const QString& t) const;
 };
 

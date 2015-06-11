@@ -57,7 +57,7 @@ public:
      * \brief getPrecedences
      * \return la liste de precedences sous forme de PrecedenceManager
      */
-    PrecedenceManager getPrecedences()const{return precedences;}
+    PrecedenceManager& getPrecedences(){return precedences;}
 };
 
 #endif // PROJET_H

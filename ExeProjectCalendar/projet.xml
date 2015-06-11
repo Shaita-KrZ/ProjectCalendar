@@ -27,7 +27,7 @@
 			<tachescompo>
 				<tache type="unit">
 					<preemptive>false</preemptive>
-					<identificateur>T3</identificateur>
+					<identificateur>T4</identificateur>
 					<titre>Répartir les classes entre développeurs</titre>
 					<disponibilite>2015-02-28</disponibilite>
 					<echeance>2015-04-24</echeance>
@@ -35,7 +35,7 @@
 				</tache>
 				<tache type="unit">
 					<preemptive>true</preemptive>
-					<identificateur>T4</identificateur>
+					<identificateur>T5</identificateur>
 					<titre>Répartir les classes entre deux personnes</titre>
 					<disponibilite>2015-02-28</disponibilite>
 					<echeance>2015-04-24</echeance>
@@ -52,4 +52,14 @@
 			<duree>90</duree>
 		</tache>
 	</tacheManager>
+	<precedenceManager>
+		<precedence>
+			<pred>T1</pred>
+			<succ>T2</succ>
+		</precedence>
+		<precedence>
+			<pred>T3</pred>
+			<succ>T8</succ>
+		</precedence>
+	</precedenceManager>
 </projet>

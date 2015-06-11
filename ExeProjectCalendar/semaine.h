@@ -15,6 +15,7 @@ class Semaine
 private:
     QDate lundi;
     multimap<const QDate,Programmation*> evenements;
+    QString file;
 
     // Teste si la programmation p se chevauche avec les programmations existantes
     // Renvoie true si la programmation ne se chevauche pas, false sinon
@@ -54,6 +55,12 @@ public:
      * \return lundi
      */
     const QDate getLundi() const{return lundi;}
+
+    /*!
+     * \brief Exporte la semaine dans un fichier XML
+     * \param f : chemin du fichier dans lequel sauvegarder
+     */
+    void save(const QString& f);
 };
 
 #endif // SEMAINE_H

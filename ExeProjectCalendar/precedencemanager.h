@@ -45,7 +45,8 @@ public:
      */
     void ajouterPrecedence(const Tache * p,const Tache * s);
 
-    class pmIterator:public iterateur<Precedence>{
+    class pmIterator:public iterateur<Precedence>
+    {
     private:
         friend class PrecedenceManager;
         pmIterator(Precedence **c):iterateur(c){}
