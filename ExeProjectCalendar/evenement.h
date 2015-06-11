@@ -70,6 +70,18 @@ public:
      * \return identifiant de la tache
      */
    virtual QString getID() const=0;
+
+    /*!
+     * \brief place l'attribut scheduled à true, aucun effet si il l'est déjà
+     * \throw CalendarException si self n'est pas une tache unitaire
+     */
+    virtual void setScheduled()=0;
+
+    /*!
+     * \brief place l'attribut scheduled à false, aucun effet si il l'est déjà
+     * \throw CalendarException si self n'est pas une tache unitaire
+     */
+    virtual void setNonScheduled()=0;
 };
 
 #endif // EVENEMENT_H

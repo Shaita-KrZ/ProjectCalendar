@@ -40,7 +40,35 @@ public:
      */
     QDate getLundi() const;
 
+    /*!
+     * \brief Compare deux programmations
+     * \param p : Programmation a comparer avec self
+     * \return true si les programmations sont les memes, false sinon
+     */
     bool operator==(const Programmation & p) const {return (event==p.getEvent() && date==p.getDate() && horaireDebut==p.getHoraireDebut());}
+
+    /*!
+     * \brief Retourne une chaine contenant le titre de l'envenement, son horaire debut et son horaire de fin.
+     * \return
+     */
+    QString toString() const;
 };
+
+/*!
+ * \brief compare les dates des deux programmations
+ * \param p1
+ * \param p2
+ * \return true si p1 se passe avant p2
+ */
+bool operator<(Programmation const & p1, Programmation const & p2);
+
+/*!
+ * \brief compare les dates des deux programmations (pointeur)
+ * \param p1
+ * \param p2
+ * \return true si p1 se passe avant p2
+ */
+bool compareProg(const Programmation * const &p1, const Programmation * const &p2);
+
 
 #endif // PROGRAMMATION_H

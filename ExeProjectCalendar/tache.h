@@ -89,11 +89,31 @@ public:
      * \return pointeur vers le projet pere de la tache
      */
     virtual Projet* getPere()const {return pere;}
+
     /*!
      * \brief verifie si la tache est preemptive
      * \return retourne la valeur de preemptive
      */
     virtual bool isPreemptive()const=0;
+
+    /*!
+     * \brief accède à la liste des taches composantes si self est composite
+     * \return map des taches composantes
+     * \throw CalendarException si la tache n'est pas composite
+     */
+    virtual map<QString, Tache*> getTaches() const = 0;
+
+    /*!
+     * \brief place l'attribut scheduled à true, aucun effet si il l'est déjà
+     * \throw CalendarException si la tache n'est pas unitaire
+     */
+    virtual void setScheduled()=0;
+
+    /*!
+     * \brief place l'attribut scheduled à false, aucun effet si il l'est déjà
+     * \throw CalendarException si la tache n'est pas unitaire
+     */
+    virtual void setNonScheduled()=0;
 };
 
 
@@ -121,7 +141,7 @@ public:
      * \throw CalendarException si une tache du même identifiant existe déjà
      */
     virtual void addTache(Tache* t);
-    //a voir si il faut pas faire un addTache pour unitaire et un pour composite
+
     /*!
      * \brief Supprime la tache d'identifiant t de la liste
      *      aucun effet si la tache n'existe pas
@@ -129,14 +149,28 @@ public:
      */
     void delTache(const QString & id);
 
+    /*!
+     * \brief vérifie si la tache est composite
+     * \return true
+     */
     virtual bool estComposite() const;
+
+    /*!
+     * \brief Somme des durees tes taches qui la compose
+     * \return duree totale de la tache composite
+     */
     virtual Duree getDuree() const;
+
     /*!
      * \brief getTaches
      * \return liste des taches composées
      */
-    map<QString, Tache*>& getTaches(){return tachesCompo;}
+    virtual map<QString, Tache*> getTaches() const{return tachesCompo;}
 
+    /*!
+     * \brief Verifie si la tache a ete programmee
+     * \return true si toutes les taches composantes sont programmees, false sinon
+     */
     virtual bool isScheduled()const{
         for(map<const QString, Tache*>::const_iterator it=tachesCompo.begin(); it!=tachesCompo.end(); ++it){
             if (!it->second->isScheduled())
@@ -144,8 +178,29 @@ public:
         }
         return true;
     }
+
+    /*!
+     * \brief verifie si la tache est preemptive
+     * \return false
+     */
     virtual bool isPreemptive()const{
         return false;
+    }
+
+    /*!
+     * \brief place l'attribut scheduled à true, aucun effet si il l'est déjà
+     * \throw CalendarException si la tache n'est pas unitaire
+     */
+    virtual void setScheduled(){
+        throw CalendarException("Erreur : la tache n'est pas unitaire");
+    }
+
+    /*!
+     * \brief place l'attribut scheduled à false, aucun effet si il l'est déjà
+     * \throw CalendarException si la tache n'est pas unitaire
+     */
+    virtual void setNonScheduled(){
+        throw CalendarException("Erreur : la tache n'est pas unitaire");
     }
 };
 
@@ -200,7 +255,7 @@ public:
     /*!
      * \brief place l'attribut scheduled à true, aucun effet si il l'est déjà
      */
-    void setScheduled(){
+    virtual void setScheduled(){
         if(scheduled!=true)
             scheduled=true;
     }
@@ -208,7 +263,7 @@ public:
     /*!
      * \brief place l'attribut scheduled à false, aucun effet si il l'est déjà
      */
-    void setNonScheduled(){
+    virtual void setNonScheduled(){
         if(scheduled!=false)
             scheduled=false;
     }
@@ -219,7 +274,19 @@ public:
         if(scheduled==true)return true;
         else return false;
     }
+
+    /*!
+     * \brief Verifie si la tache est compos
+     * \return
+     */
     virtual bool estComposite() const;
+
+    /*!
+     * \brief accède à la liste des taches composantes si self est composite
+     * \return map des taches composantes
+     * \throw CalendarException si la tache n'est pas composite
+     */
+    virtual map<QString, Tache*> getTaches() const{throw CalendarException("Erreur : La tache n'est pas composite");}
 
 };
 

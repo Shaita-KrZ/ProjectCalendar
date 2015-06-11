@@ -14,7 +14,6 @@ class ActiviteTraditionnelle : public Evenement
 private:
     Duree duree;
 public:
-
     /*!
      * \brief
      * \return duree de l'activite
@@ -53,6 +52,14 @@ public:
      * \return ""
      */
    virtual QString getID() const{return "";}
+
+    virtual void setScheduled(){
+        throw CalendarException("Erreur : l'evenement n'est pas une tache unitaire");
+    }
+
+    virtual void setNonScheduled(){
+        throw CalendarException("Erreur : l'evenement n'est pas une tache unitaire");
+    }
 };
 
 #endif // ACTIVITETRADITIONNELLE_H

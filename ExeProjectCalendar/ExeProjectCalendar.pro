@@ -16,7 +16,10 @@ HEADERS += \
     semaine.h \
     agenda.h \
     fenetreGestionProjet.h \
-    fenetrePrincipal.h
+    fenetreprogrammer.h \
+    fenetrePrincipal.h \
+    fenetreactivitetrad.h \
+    fenetreprogrammertache.h
 
 SOURCES += \
     tache.cpp \
@@ -32,9 +35,15 @@ SOURCES += \
     programmation.cpp \
     semaine.cpp \
     agenda.cpp \
+    fenetreGestionProjet.cpp \
+    fenetreprogrammer.cpp \
     fenetrePrincipal.cpp \
-    fenetreGestionProjet.cpp
+    fenetreactivitetrad.cpp \
+    fenetreprogrammertache.cpp
 
 FORMS += \
-    fenetrePrincipal.ui
+    fenetreprogrammer.ui \
+    fenetrePrincipal.ui \
+    fenetreactivitetrad.ui \
+    fenetreprogrammertache.ui
 

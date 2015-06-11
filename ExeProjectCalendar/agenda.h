@@ -26,9 +26,9 @@ public:
     static void libererInstance();
 
     /*!
-     * \brief Cree et ajoute une semaine dans l'agenda
+     * \brief Cree et ajoute une semaine dans l'agenda; aucun effet si la semaine existe deja
      * \param lundi
-     * \throw CalendarException si la semaine existe deja ou si la date en parametre ne correspond pas a un lundi
+     * \throw CalendarException si la date en parametre ne correspond pas a un lundi
      */
     void creerSemaine(const QDate & lundi);
 
@@ -37,6 +37,13 @@ public:
      * \return semaines
      */
     map<const QDate, Semaine*> getSemaines(){return semaines;}
+
+    /*!
+     * \brief Ajoute la programmation p dans la semaine correspondante de l'agenda
+     * \param p : programmation a ajouter
+     * \throw CalendarException si la programmation ne peut pas être ajoutee
+     */
+    void addProgrammation(Programmation * p);
 
 };
 
