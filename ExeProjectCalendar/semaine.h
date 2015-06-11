@@ -31,10 +31,13 @@ public:
      */
     Semaine(QDate l):lundi(l){}
 
+
+
     virtual ~Semaine(){}
 
     /*!
      * \brief Ajoute une programmation dans la semaine
+     *      si l'evenement est une tache, la rend programmée
      * \param p : programmation a ajouter dans la semaine
      * \throw CalendarException si la programmation existe deja dans la semaine,
      *      si la tache est deja programme,
@@ -57,10 +60,25 @@ public:
     const QDate getLundi() const{return lundi;}
 
     /*!
+<<<<<<< HEAD
      * \brief Exporte la semaine dans un fichier XML
      * \param f : chemin du fichier dans lequel sauvegarder
      */
     void save(const QString& f);
+=======
+     * \brief Genere une chaine de caracteres correspondant aux programmations pour le jour en entree
+     *      La chaine est compose des activites du jour en parametre dans leur ordre chronologique
+     * \param jour : lundi à dimanche - 1 à 7
+     * \return QString correspondant aux programmations du jour en parametre
+     */
+    QString jourToString(int jour) const;
+
+    /*!
+     * \brief Donne le nombre de programmations de semaines
+     * \return
+     */
+    size_t nombreEvent() const {return evenements.size();}
+>>>>>>> origin/master
 };
 
 #endif // SEMAINE_H

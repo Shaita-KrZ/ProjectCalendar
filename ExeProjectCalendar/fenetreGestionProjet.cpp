@@ -73,7 +73,7 @@ void Gestionprojets::supprimeProjet(){
         PM.supprimerProjet(titreProjetSupp);
     }
     else {
-        QMessageBox::critical(this, "Supprimer un projet", "Vous n'avez pas entré un projet");
+        QMessageBox::critical(this, "Supprimer un projet", "Vous n'avez pas entré de projet");
     }
 }
 
@@ -93,6 +93,7 @@ void Gestionprojets::chargerProjet(){
             //load va lire le projet et l'ajouter dans le ProjetManager
             titre=PM.load(chemin);
         }catch(CalendarException &e){ QMessageBox::critical(this,"Projet",e.getInfo());return;}
+        qDebug()<<chemin;
         //On crée un nouveau bouton pour le nouveau projet
         QPushButton *boutonProj=new QPushButton();
         map<QString,Projet *> projets=PM.getProjets();
@@ -104,7 +105,7 @@ void Gestionprojets::chargerProjet(){
         //On ajoute le bouton a la liste des boutons
         ajouterBouton(P->getTitre());
         //On connecte le bouton à l'ouverture du projet
-        QMessageBox::information(this,"Projet","Vous avez bien ajouter le projet : "+P->getTitre());
+        QMessageBox::information(this,"Projet","Vous avez bien ajouté le projet : "+P->getTitre());
     }
     else{
         QMessageBox::information(this,"Projet","Le projet n'a pas été chargé");
@@ -245,11 +246,11 @@ void Gestionprojets::creationProjet(){
     m_titreProjetLine=new QLineEdit();
     QVBoxLayout *couche1=new QVBoxLayout(m_fenetreCreeProjet);
     QLabel *titreProjetLabel=new QLabel("Entrez le titre du projet");
-    QLabel *echeanceProjetLabel=new QLabel("Entrez la date d'échenace du projet");
+    QLabel *echeanceProjetLabel=new QLabel("Entrez la date d'échéance du projet");
     m_echeanceProjetLine=new QDateTimeEdit(QDate::currentDate());
     m_echeanceProjetLine->setMinimumDate(QDate::currentDate().addDays(-365));
     m_echeanceProjetLine->setMaximumDate(QDate::currentDate().addDays(365));
-    m_echeanceProjetLine->setDisplayFormat("dd.mm.yyyy");
+    m_echeanceProjetLine->setDisplayFormat("dd.MM.yyyy");
     QPushButton *valider=new QPushButton("OK");
     QPushButton *annuler=new QPushButton("Annuler");
     QHBoxLayout *couche2=new QHBoxLayout();
@@ -276,6 +277,9 @@ void Gestionprojets::validerCreationProjet(){
         PM.projetExistdeja(titreProjet);
         PM.creerProjet(titreProjet,echeanceProjet);
     }catch(CalendarException &e){ QMessageBox::critical(this, "Creation d'un' projet", e.getInfo()); return;}
+
+    //On crée le projet
+    PM.creerProjet(titreProjet,echeanceProjet);
     //On ajoute un bouton avec le nouveau projet
     ajouterBouton(titreProjet);
     m_fenetreCreeProjet->close();
@@ -289,7 +293,7 @@ void Gestionprojets::annulerCreationProjet(){
 
 /* ********************* FIN CREER UN PROJET ********************** */
 
-/* ********************* MODIFIER CREER UN PROJET ********************** */
+/* ********************* MODIFIER UN PROJET ********************** */
 
 void Gestionprojets::modifierTitreProjet(){
     ProjetManager &PM=ProjetManager::getInstance();
@@ -302,7 +306,7 @@ void Gestionprojets::modifierTitreProjet(){
         //m_titreProj dans ouvrirProjet va récupérer le titre du projet que l'on veut modifier
         PM.modifierNomProjet(m_titreProj,nouveauTitreProjet);
         m_fenetreProjet->close();
-        QMessageBox::information(this,"Creation projet","Le titre du projet a bien été ajouté été ajouté");
+        QMessageBox::information(this,"Creation projet","Le titre du projet a bien été modifié");
         //On change la valeur du label m_titreProjet dans ouvrirProjet
         m_titreProjet->setText(nouveauTitreProjet);
         //On supprime l'ancien bouton avec l'ancien titre
@@ -359,12 +363,12 @@ void Gestionprojets::modifierTache(){
      m_dateDispoTacheLine=new QDateTimeEdit(m_tacheModif->getDisponibilite());
      m_dateDispoTacheLine->setMinimumDate(QDate::currentDate().addDays(-365));
      m_dateDispoTacheLine->setMaximumDate(QDate::currentDate().addDays(365));
-     m_dateDispoTacheLine->setDisplayFormat("dd.mm.yyyy");
+     m_dateDispoTacheLine->setDisplayFormat("dd.MM.yyyy");
      QLabel *dateEcheTacheLabel=new QLabel("Echeance :");
      m_dateEcheTacheLine=new QDateTimeEdit(m_tacheModif->getEcheance());
      m_dateEcheTacheLine->setMinimumDate(QDate::currentDate().addDays(-365));
      m_dateEcheTacheLine->setMaximumDate(QDate::currentDate().addDays(365));
-     m_dateEcheTacheLine->setDisplayFormat("dd.mm.yyyy");
+     m_dateEcheTacheLine->setDisplayFormat("dd.MM.yyyy");
      couche2->addWidget(dateDispoTacheLabel);
      couche2->addWidget(m_dateDispoTacheLine);
      couche2->addWidget(dateEcheTacheLabel);
@@ -413,12 +417,12 @@ void Gestionprojets::modifierTache(){
                 m_dateDispoTacheCompoLine[i]=new QDateTimeEdit(it->second->getDisponibilite());
                 m_dateDispoTacheCompoLine[i]->setMinimumDate(QDate::currentDate().addDays(-365));
                 m_dateDispoTacheCompoLine[i]->setMaximumDate(QDate::currentDate().addDays(365));
-                m_dateDispoTacheCompoLine[i]->setDisplayFormat("dd.mm.yyyy");
+                m_dateDispoTacheCompoLine[i]->setDisplayFormat("dd.MM.yyyy");
                 dateEcheTacheCompoLabel[i]=new QLabel("Echeance :");
                 m_dateEcheTacheCompoLine[i]=new QDateTimeEdit(it->second->getEcheance());
                 m_dateEcheTacheCompoLine[i]->setMinimumDate(QDate::currentDate().addDays(-365));
                 m_dateEcheTacheCompoLine[i]->setMaximumDate(QDate::currentDate().addDays(365));
-                m_dateEcheTacheCompoLine[i]->setDisplayFormat("dd.mm.yyyy");
+                m_dateEcheTacheCompoLine[i]->setDisplayFormat("dd.MM.yyyy");
                 coucheCompo2[i]=new QHBoxLayout();
                 coucheCompo2[i]->addWidget(dateDispoTacheCompoLabel[i]);
                 coucheCompo2[i]->addWidget(m_dateDispoTacheCompoLine[i]);
@@ -549,12 +553,12 @@ void Gestionprojets::ajouterTache(){
     m_dateDispoTacheLine=new QDateTimeEdit(QDate::currentDate());
     m_dateDispoTacheLine->setMinimumDate(QDate::currentDate().addDays(-365));
     m_dateDispoTacheLine->setMaximumDate(QDate::currentDate().addDays(365));
-    m_dateDispoTacheLine->setDisplayFormat("dd.mm.yyyy");
+    m_dateDispoTacheLine->setDisplayFormat("dd.MM.yyyy");
     QLabel *dateEcheTacheLabel=new QLabel("Echeance :");
     m_dateEcheTacheLine=new QDateTimeEdit(QDate::currentDate());
     m_dateEcheTacheLine->setMinimumDate(QDate::currentDate().addDays(-365));
     m_dateEcheTacheLine->setMaximumDate(QDate::currentDate().addDays(365));
-    m_dateEcheTacheLine->setDisplayFormat("dd.mm.yyyy");
+    m_dateEcheTacheLine->setDisplayFormat("dd.MM.yyyy");
     couche2->addWidget(dateDispoTacheLabel);
     couche2->addWidget(m_dateDispoTacheLine);
     couche2->addWidget(dateEcheTacheLabel);
@@ -647,12 +651,12 @@ void Gestionprojets::ajouterTacheCompo(){
     m_dateDispoTacheLine=new QDateTimeEdit(QDate::currentDate());
     m_dateDispoTacheLine->setMinimumDate(QDate::currentDate().addDays(-365));
     m_dateDispoTacheLine->setMaximumDate(QDate::currentDate().addDays(365));
-    m_dateDispoTacheLine->setDisplayFormat("dd.mm.yyyy");
+    m_dateDispoTacheLine->setDisplayFormat("dd.MM.yyyy");
     QLabel *dateEcheTacheLabel=new QLabel("Echeance :");
     m_dateEcheTacheLine=new QDateTimeEdit(QDate::currentDate());
     m_dateEcheTacheLine->setMinimumDate(QDate::currentDate().addDays(-365));
     m_dateEcheTacheLine->setMaximumDate(QDate::currentDate().addDays(365));
-    m_dateEcheTacheLine->setDisplayFormat("dd.mm.yyyy");
+    m_dateEcheTacheLine->setDisplayFormat("dd.MM.yyyy");
     couche2->addWidget(dateDispoTacheLabel);
     couche2->addWidget(m_dateDispoTacheLine);
     couche2->addWidget(dateEcheTacheLabel);
