@@ -100,8 +100,6 @@ public:
      * \param t : titre du projet
      */
     void projetExistdeja(const QString& t) const;
-
-
 };
 
 #endif // PROJETMANAGER_H

@@ -136,8 +136,8 @@ void Semaine::save(const QString& f){
     newfile.close();
 }
 
-QString Semaine::jourToString(int jour) const
-{
+
+QString Semaine::jourToString(int jour) const{
     QDate dateJour = getLundi().addDays(jour-1);
     list<Programmation*> lProgs;
     for(multimap<const QDate, Programmation*>::const_iterator it=evenements.begin(); it!=evenements.end(); ++it){

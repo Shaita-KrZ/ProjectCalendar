@@ -64,12 +64,14 @@ public:
      * \param f : chemin du fichier dans lequel sauvegarder
      */
     void save(const QString& f);
+
     /*!
      * \brief Genere une chaine de caracteres correspondant aux programmations pour le jour en entree
-     *      La chaine est compose des activites du jour en parametre dans leur ordre chronologique
+        La chaine est compose des activites du jour en parametre dans leur ordre chronologique
      * \param jour : lundi à dimanche - 1 à 7
      * \return QString correspondant aux programmations du jour en parametre
      */
+
     QString jourToString(int jour) const;
 
     /*!
