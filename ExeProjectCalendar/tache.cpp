@@ -34,7 +34,7 @@ void TacheComposite::addTache(Tache* t){
             throw CalendarException("L\'echeance de la tache ne peut pas être superieur a sa tache composite");
         }
     if(tachesCompo.find(t->getID())!=tachesCompo.end()){
-            throw CalendarException("La tache existe deja");
+            throw CalendarException("La tache"+t->getID()+"existe deja");
     }
     tachesCompo[t->getID()]=t;
 }

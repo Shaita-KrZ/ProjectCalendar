@@ -158,16 +158,15 @@ void Gestionprojets::ouvrirProjet(){
      QGridLayout *grid=new QGridLayout(m_fenetreProjet);
      PrecedenceManager &precedenceM=P->getPrecedences();
      unsigned int iP=0;
+
      for(PrecedenceManager::pmIterator itP=precedenceM.begin();itP!=precedenceM.end();++itP){
         Precedence *prec=itP.getCurrent();
          const Tache *succ=prec->getSuccesseur();
          const Tache *pred=prec->getPredecesseur();
-
          precedence[iP]=new QLabel("La tache "+pred->getID()+" précède la tache "+succ->getID());
          grid->addWidget(precedence[iP],8+iP,0,1,1);
          iP++;
      }
-
      m_titreProj=P->getTitre(); //titreProj va permet de récupérer le titre du projet pour le modifier
      m_titreProjet=new QLabel(P->getTitre());
      QLabel *echeanceProjet=new QLabel(P->getEcheance().toString());
@@ -195,18 +194,17 @@ void Gestionprojets::ouvrirProjet(){
          identificateurTache[k]=new QLabel("Identificateur Tache "+QString::number(k+1)+" : "+it->first);
          m_boutonModifTache[it->first]=B;
          QObject::connect(m_boutonModifTache[it->first],SIGNAL(clicked()),this,SLOT(modifierTache()));
-         grid->addWidget(identificateurTache[k],2+10*j,1,2,3);
-         grid->addWidget(B,2+10*j,4,2,3);
+         grid->addWidget(identificateurTache[k],6+10*j,1,1,1);
+         grid->addWidget(B,6+10*j,2,1,1);
          //On récupère la tache
          Tache *t=it->second;
          if(t->estComposite()){
-
              TacheComposite *tCompo=dynamic_cast<TacheComposite*>(t);
              map<QString,Tache*>taches=tCompo->getTaches();
              map<QString,Tache*>::const_iterator it;
              caracteristiqueTache[k]=new QLabel("     Titre : "+t->getTitre()+"\n     "+"Disponibilite : "+t->getDisponibilite().toString()+"\n     "+
                                                 "Echenace : "+t->getEcheance().toString()+"     Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
-             grid->addWidget(caracteristiqueTache[k],4+10*j,2,6,6);
+             grid->addWidget(caracteristiqueTache[k],8+10*j,2,4,1);
              caracteristiqueTacheUnitaireComposee=new QLabel*[taches.size()];
              //On affiche les taches de la tache composite
              for(it=taches.begin();it!=taches.end();++it){
@@ -215,18 +213,17 @@ void Gestionprojets::ouvrirProjet(){
                                                                 "\n     "+"Disponibilite : "+it->second->getDisponibilite().toString()+"\n     "+
                                                                  "Echenace : "+it->second->getEcheance().toString()+"     Duree :"+QString::number(it->second->getDuree().getDureeEnMinutes())+" minutes");
                 j++;
-                grid->addWidget(caracteristiqueTacheUnitaireComposee[nbTu],2+10*j,4,6,6);
+                grid->addWidget(caracteristiqueTacheUnitaireComposee[nbTu],2+10*j,2,4,1);
                 nbTu++;
              }
-
          }
          else{
             QString preemptive=(t->isPreemptive() == true? "true" : "false");
 
             caracteristiqueTache[k]=new QLabel("     Preemptive : "+ preemptive +"\n     "+"Titre : "+t->getTitre()+"\n     "+"Disponibilite : "+t->getDisponibilite().toString()+"\n     "+
-                                            "Echenace : "+t->getEcheance().toString()+"Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
+                                            "Echenace : "+t->getEcheance().toString()+"     Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
 
-            grid->addWidget(caracteristiqueTache[k],4+10*j,2,6,6);
+            grid->addWidget(caracteristiqueTache[k],8+10*j,2,4,1);
 
          }
          j++;
@@ -507,7 +504,7 @@ void Gestionprojets::validermodifTache(){
     //On ajoute la tache modifié
     taches[m_tacheModif->getID()]=m_tacheModif;
     m_fenetreModifTache->close();
-    QMessageBox::information(this,"Creation projet","Le titre du projet a bien été ajouté été ajouté");
+    QMessageBox::information(this,"Creation projet","Le tache a bien été modifié");
 }
 
 void Gestionprojets::annulermodifTache(){
@@ -699,13 +696,13 @@ void Gestionprojets::validerajoutTacheCompo(){
     map<QString,Tache*>&taches=Tc->getTaches();
     taches[m_idTacheLine->text()]=Tu;
     m_fenetreModifTacheCompo->close();
-    QMessageBox::information(this,"Creation projet","Le titre du projet a bien été ajouté été ajouté");
+    QMessageBox::information(this,"Creation projet","La tache composite a bien été ajouté");
 }
 
 void Gestionprojets::annulerajoutTacheCompo(){
     m_fenetreModifTacheCompo->close();
     m_fenetreProjet->show();
-    QMessageBox::critical(this, "Modifier une tache", "La tache n'a pas été modifié");
+    QMessageBox::critical(this, "Modifier une tache", "La tache composite n'a pas été ajouté");
 }
 
 void Gestionprojets::ajouterPrecedence(){
@@ -738,11 +735,15 @@ void Gestionprojets::validerajouterPrec(){
     PrecedenceManager& precM=P.getPrecedences();
     TacheManager &tacheM=P.getTaches();
     try{
-        const Tache *T1=tacheM.getTache(m_ajouterPrecLine->text());
-        const Tache *T2=tacheM.getTache(m_ajouterSuccLine->text());
+        Tache *T1=tacheM.getTache(m_ajouterPrecLine->text());
+        Tache *T2=tacheM.getTache(m_ajouterSuccLine->text());
+        if(precM.isPrecedence(T1,T2)){
+            QMessageBox::critical(this,"Ajouter une precedence","La precedence existe déjà");
+            return;
+        }
         precM.ajouterPrecedence(T1,T2);
     }catch(CalendarException &e){ QMessageBox::critical(this,"Ajouter une precedence",e.getInfo());return;}
-    QMessageBox::information(this,"Ajouter une precedence","La tache a bien été ajouté");
+    QMessageBox::information(this,"Ajouter une precedence","La précédence a bien été ajouté");
     m_fenetrePrecedence->close();
 }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projet>
+    <titre>SITE WEB</titre>
+    <echeance>2015-07-16</echeance>
+    <tacheManager>
+        <tache type="unit">
+            <preemptive>true</preemptive>
+            <identificateur>T1</identificateur>
+            <titre>Etablir le background du site</titre>
+            <disponibilite>2015-06-01</disponibilite>
+            <echeance>2015-06-30</echeance>
+            <duree>1000</duree>
+        </tache>
+        <tache type="unit">
+            <preemptive>true</preemptive>
+            <identificateur>T2</identificateur>
+            <titre>Etablir le frontend du site</titre>
+            <disponibilite>2015-06-30</disponibilite>
+            <echeance>2015-07-15</echeance>
+            <duree>300</duree>
+        </tache>
+    </tacheManager>
+    <precedenceManager/>
+</projet>

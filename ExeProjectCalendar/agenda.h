@@ -11,6 +11,7 @@ class Agenda
 private:
     static Agenda* instance;
     map<const QDate, Semaine*> semaines;
+    QString file;
     Agenda(){}
     ~Agenda();
 public:
@@ -45,6 +46,11 @@ public:
      */
     void addProgrammation(Programmation * p);
 
+    /*!
+     * \brief Exporte la semaine dans un fichier XML
+     * \param f : chemin du fichier dans lequel sauvegarder
+     */
+    void save(const QString& f,const QDate lundi);
 };
 
 #endif // AGENDA_H

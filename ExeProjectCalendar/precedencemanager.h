@@ -32,18 +32,11 @@ public:
     bool isPrecedence(Tache* prec, Tache *succ) const;
 
     /*!
-     * \brief Recupere toutes les taches d'un meme successeur
-     * \param succ la tache dont on cherche les predecesseurs
-     * \return les taches ainsi recuperres dans un autre Precedence Manager
-     */
-    PrecedenceManager & getTachesPred (const Tache * succ) const;
-
-    /*!
      * \brief Crée une precedence et l'ajoute dans sa propre liste de precedences
      * \param p tache predecesseur
      * \param s tache successeur
      */
-    void ajouterPrecedence(const Tache * p,const Tache * s);
+    void ajouterPrecedence(Tache * p,Tache * s);
 
     class pmIterator:public iterateur<Precedence>
     {
@@ -54,12 +47,7 @@ public:
     };
     pmIterator begin() const{return pmIterator(tabPrec);}
     pmIterator end() const{return pmIterator(tabPrec+nb);}
-    /*
-     PrecedenceManager PM;
-     for(PM::pmIterator it=PM.begin();it!=PM.end();++it){
-            cout << *it.getSucc().getId(); <<endl;
-        }
-     */
+
 };
 
 #endif // PRECEDENCEMANAGER_H

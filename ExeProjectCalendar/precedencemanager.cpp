@@ -25,23 +25,13 @@ bool PrecedenceManager::isPrecedence(Tache *prec, Tache *succ) const{
     else return true;
 }
 
-PrecedenceManager & PrecedenceManager::getTachesPred (const Tache *succ) const{
-    PrecedenceManager *PM=new PrecedenceManager;
-    pmIterator it=begin();
-    Precedence* p=it.getCurrent();
-    while(it!=end()){
-        while(it!=end() && succ!=p->getSuccesseur()){
-            ++it;
-            p=it.getCurrent();
-        }
-        if(it!=end()){
-            PM->ajouterPrecedence(p->getPredecesseur(),succ);
-        }
-    }
-    return *PM;
-}
 
-void PrecedenceManager::ajouterPrecedence(const Tache * p,const Tache * s){
+
+void PrecedenceManager::ajouterPrecedence(Tache * p,Tache * s){
+
+    if(p->getEcheance()>s->getEcheance()){
+        throw CalendarException("La tache qui précède se termine après la tache qui succède");
+    }
     Precedence *P=new Precedence(p,s);
     if(nb==nbMax){
         Precedence **newtab=new Precedence*[nb+10];

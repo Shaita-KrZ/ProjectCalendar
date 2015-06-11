@@ -103,39 +103,6 @@ void Semaine::delProgrammation(Programmation *p)
 }
 
 
-void Semaine::save(const QString& f){
-    file=f;
-    QFile newfile( file);
-    qDebug()<<"debut save";
-    if (!newfile.open(QIODevice::WriteOnly | QIODevice::Text)){
-        qDebug()<<"test";
-        throw CalendarException(QString("erreur sauvegarde tâches : ouverture fichier xml"));
-    }
-    QXmlStreamWriter stream(&newfile);
-    stream.setAutoFormatting(true);
-    stream.writeStartDocument();
-    stream.writeStartElement("semaine");
-    stream.writeTextElement("dateLundi",lundi.toString(Qt::ISODate));
-    stream.writeStartElement("evenement");
-    multimap<const QDate,Programmation*>::iterator it;
-    for(it=evenements.begin();it!=evenements.end();++it){
-            Programmation *P=it->second;
-            stream.writeStartElement("programmation");
-            stream.writeTextElement("date",P->getDate().toString(Qt::ISODate));
-            stream.writeTextElement("horaireDebut",P->getHoraireDebut().toString());
-            Evenement *E=P->getEvent();
-            stream.writeTextElement("titre",E->getTitre());
-            QString str;
-            str.setNum(E->getDuree().getDureeEnMinutes());
-            stream.writeTextElement("duree",str);
-            stream.writeEndElement();
-        }
-    stream.writeEndElement();
-    stream.writeEndElement();
-    stream.writeEndDocument();
-    newfile.close();
-}
-
 QString Semaine::jourToString(int jour) const{
     QDate dateJour = getLundi().addDays(jour-1);
     list<Programmation*> lProgs;

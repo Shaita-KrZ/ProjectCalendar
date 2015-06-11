@@ -69,7 +69,9 @@ Projet *ProjetManager::getProjetPoint(const QString &t)
 
 
 
+
 QString ProjetManager::load(const QString& f){
+    qDebug()<<"debut load\n";
     file=f;
     QFile fin(file);
     //On test si on peut ouvrir le fichier
@@ -107,7 +109,6 @@ QString ProjetManager::load(const QString& f){
                         }
                         if(xml.name() == "echeance") {
                             xml.readNext(); echeanceProjet=QDate::fromString(xml.text().toString(),Qt::ISODate);
-                            //qDebug()<<"echeanceProjet="<<echeanceProjet.toString()<<"\n";
                         }
                     }
                     xml.readNext();
@@ -166,6 +167,12 @@ QString ProjetManager::load(const QString& f){
                         // ...and next...
                         xml.readNext();
                     }
+                    if(projets[titreProjet]->getEcheance()<echeance){
+                        throw CalendarException("La tache "+identificateur+" ne peut pas avoir une echeance superieur à celle du projet");
+                    }
+                    if(projets[titreProjet]->getEcheance()<disponibilite){
+                        throw CalendarException("La tache "+identificateur+" ne peut pas avoir une disponibilite superieur à l'échéance du projet");
+                    }
                     projets[titreProjet]->taches.addTache(identificateur,titre,disponibilite,echeance,pere,duree,preemptive);
                 }
             if(!typeTache && xml.name()!="precedenceManager" && xml.name()!="precedence"){
@@ -219,7 +226,6 @@ QString ProjetManager::load(const QString& f){
                         xml.readNext();
                     }
                     else if(xml.name()=="tache"){
-                        //Ajout d'une tache UNITAIRE sur une tacheComposite
                         TacheUnitaire *tUnitaire=new TacheUnitaire(titre,identificateur,disponibilite,echeance,pere,preemptive,duree);
                         Tache* T=pere->taches.getTache(identificateurCompo);
                         TacheComposite *tComposite=dynamic_cast<TacheComposite*>(T);
@@ -227,7 +233,6 @@ QString ProjetManager::load(const QString& f){
                         xml.readNext();
                     }
                 }
-
             }
             if(xml.name() == "precedenceManager") continue;
             if(xml.name() == "precedence"){

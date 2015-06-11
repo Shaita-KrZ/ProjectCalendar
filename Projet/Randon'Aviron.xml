@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projet>	
+	<titre>Randon 'Aviron</titre>
+	<echeance>2015-06-15</echeance>
+	<tacheManager>
+		<tache type="unit">
+			<preemptive>true</preemptive>
+			<identificateur>T1</identificateur>
+			<titre>Etablir la note de clarification</titre>
+			<disponibilite>2015-03-01</disponibilite>
+			<echeance>2015-03-15</echeance>
+			<duree>150</duree>
+		</tache>
+		<tache type="unit">
+			<preemptive>false</preemptive>
+			<identificateur>T2</identificateur>
+			<titre>Etablir une analyse de risques</titre>
+			<disponibilite>2015-03-14</disponibilite>
+			<echeance>2015-03-30</echeance>
+			<duree>300</duree>
+		</tache>
+		<tache type="compo">
+			<identificateur>T3</identificateur>
+			<titre>Etablir une étude de faisabilite</titre>
+			<disponibilite>2015-04-01</disponibilite>
+			<echeance>2015-04-30</echeance>
+			<tachescompo>
+				<tache type="unit">
+					<preemptive>false</preemptive>
+					<identificateur>T4</identificateur>
+					<titre>Etablir une etude de faisabilite technique</titre>
+					<disponibilite>2015-04-01</disponibilite>
+					<echeance>2015-04-10</echeance>
+					<duree>150</duree>
+				</tache>
+				<tache type="unit">
+					<preemptive>true</preemptive>
+					<identificateur>T5</identificateur>
+					<titre>Etablir une etude de faisabilite economique</titre>
+					<disponibilite>2015-04-05</disponibilite>
+					<echeance>2015-04-28</echeance>
+					<duree>300</duree>
+				</tache>
+			</tachescompo>
+		</tache>
+		<tache type="unit">
+			<preemptive>false</preemptive>
+			<identificateur>T6</identificateur>
+			<titre>Etablir le business plan</titre>
+			<disponibilite>2015-05-01</disponibilite>
+			<echeance>2015-05-20</echeance>
+			<duree>600</duree>
+		</tache>
+	</tacheManager>
+	<precedenceManager>
+		<precedence>
+			<pred>T1</pred>
+			<succ>T2</succ>
+		</precedence>
+		<precedence>
+			<pred>T3</pred>
+			<succ>T6</succ>
+		</precedence>
+	</precedenceManager>
+</projet>

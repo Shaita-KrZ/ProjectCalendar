@@ -20,8 +20,6 @@ private:
     QDate echeance;
     friend class ProjetManager;
 public:
-    // Modifie la date d'echeance du projet avec le parametre e
-    void setEcheance(const QDate & e);
     /*!
      * \brief Constructeur de la classe
      *      Construit un projet vide
@@ -29,6 +27,19 @@ public:
      */
     Projet(const QString & t);
     ~Projet();
+
+    /*!
+     * \brief modifie l'echeance du projet
+     * \param e : nouvel echeance
+     */
+    void setEcheance(const QDate & e);
+
+    /*!
+     * \brief getEcheance
+     * \return echeance du projet
+     */
+    QDate getEcheance() const{return echeance;}
+
 
     /*!
      * \brief getTitre
@@ -42,11 +53,7 @@ public:
      */
     void setTitre(const QString & t){titre=t;}
 
-    /*!
-     * \brief getEcheance
-     * \return echeance du projet
-     */
-    QDate getEcheance() const{return echeance;}
+
     /*!
      * \brief getTaches
      * \return la liste de taches sous forme de TacheManager

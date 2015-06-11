@@ -41,7 +41,7 @@ public:
      */
     void setID(const QString id){identificateur=id;}
 
-    void setDispo(const QDate& d){disponibilite=d;}
+
 
     /*!
      * \brief getDisponibilite
@@ -51,7 +51,13 @@ public:
         return disponibilite;
     }
 
-    void setEche(const QDate& e){echeance=e;}
+    /*!
+     * \brief modifie la disponibilite de la tache
+     * \param d : nouvel disponibilite
+     */
+    void setDispo(const QDate& d){disponibilite=d;}
+
+
     /*!
      * \brief getEcheance
      * \return echeance de la tache
@@ -59,6 +65,12 @@ public:
     QDate getEcheance(){
         return echeance;
     }
+    /*!
+     * \brief modifie l'écheance du projet
+     * \param e : nouvel echeance du projet
+     */
+    void setEche(const QDate& e){echeance=e;}
+
     /*!
      * \brief getDuree
      * \return Duree d'une tache

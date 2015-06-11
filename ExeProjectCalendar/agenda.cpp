@@ -48,3 +48,36 @@ Agenda::~Agenda(){
         delete it->second;
     }
 }
+
+void Agenda::save(const QString& f,const QDate lundi){
+    file=f;
+    Semaine *s=semaines[lundi];
+    QFile newfile( file);
+    qDebug()<<"debut save";
+    if (!newfile.open(QIODevice::WriteOnly | QIODevice::Text)){
+        throw CalendarException(QString("erreur sauvegarde tâches : ouverture fichier xml"));
+    }
+    QXmlStreamWriter stream(&newfile);
+    stream.setAutoFormatting(true);
+    stream.writeStartDocument();
+    stream.writeStartElement("semaine");
+    stream.writeTextElement("dateLundi",s->getLundi().toString(Qt::ISODate));
+    stream.writeStartElement("evenement");
+    multimap<const QDate,Programmation*>::iterator it;
+    for(it=s->getEvenements().begin();it!=s->getEvenements().end();++it){
+            Programmation *P=it->second;
+            stream.writeStartElement("programmation");
+            stream.writeTextElement("date",P->getDate().toString(Qt::ISODate));
+            stream.writeTextElement("horaireDebut",P->getHoraireDebut().toString());
+            Evenement *E=P->getEvent();
+            stream.writeTextElement("titre",E->getTitre());
+            QString str;
+            str.setNum(E->getDuree().getDureeEnMinutes());
+            stream.writeTextElement("duree",str);
+            stream.writeEndElement();
+        }
+    stream.writeEndElement();
+    stream.writeEndElement();
+    stream.writeEndDocument();
+    newfile.close();
+}

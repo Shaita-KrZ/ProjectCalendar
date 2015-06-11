@@ -1,7 +1,6 @@
 #include "fenetreactivitetrad.h"
 #include "ui_fenetreactivitetrad.h"
 
-
 FenetreActiviteTrad::FenetreActiviteTrad(FenAgenda *f, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FenetreActiviteTrad),
