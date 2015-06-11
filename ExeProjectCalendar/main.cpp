@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
     Semaine s(prog.getLundi());
 
     Semaine premiereSemaine = agenda.getSemaines().begin()->first;
-    FenAgenda f(premiereSemaine);
+
     Agenda & agenda = Agenda::getInstance();
     QDate lundiCourant = QDate::currentDate().addDays(-QDate::currentDate().dayOfWeek()+1);
     agenda.creerSemaine(lundiCourant);
@@ -42,27 +42,11 @@ int main(int argc, char *argv[]){
     ActiviteTraditionnelle * act1 = new ActiviteTraditionnelle("RDV Médecin", Duree(1,32));
     ActiviteTraditionnelle * act2 = new ActiviteTraditionnelle("Courses a faire", Duree(6,0));
     ActiviteTraditionnelle * act3 = new ActiviteTraditionnelle("Chercher les enfants à l'escalade", Duree(0,20));
-    //Programmation prog(QDate(2015,1,2),QTime(15,30),act);
 
-
-   /* ActiviteTraditionnelle * act = new ActiviteTraditionnelle("titre", Duree(1,32));
-    Programmation prog(QDate(2015,1,2),QTime(15,30),act);
-    //QPushButton button(prog.getLundi().toString());
-    //button.show();*/
     Programmation * prog1 = new Programmation(lundiCourant,QTime(15,30),act1);
     Programmation * prog2 = new Programmation(lundiCourant,QTime(8,00),act2);
     Programmation * prog3 = new Programmation(lundiCourant,QTime(18,30),act3);
-    //Gestionprojets fenetre(10);
-    //fenetre.show();
-    //Semaine s(prog.getLundi());
-    //Semaine s(QDate(2015,06,01));
-    //button.show();
-    /*try{
-        agenda.getSemaines().at(prog->getLundi())->addProgrammation(prog);
-    }
-    catch(CalendarException &e){
-        QMessageBox::warning(0,"Erreur",e.getInfo());
-    }*/
+
     agenda.addProgrammation(prog1);
     agenda.addProgrammation(prog2);
     agenda.addProgrammation(prog3);

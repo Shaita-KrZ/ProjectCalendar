@@ -102,7 +102,6 @@ void Semaine::delProgrammation(Programmation *p)
         throw CalendarException("Erreur : la programmation en parametre n'existe pas dans la semaine");
 }
 
-<<<<<<< HEAD
 
 void Semaine::save(const QString& f){
     file=f;
@@ -135,9 +134,9 @@ void Semaine::save(const QString& f){
     stream.writeEndElement();
     stream.writeEndDocument();
     newfile.close();
-=======
-QString Semaine::jourToString(int jour) const
-{
+}
+
+QString Semaine::jourToString(int jour) const{
     QDate dateJour = getLundi().addDays(jour-1);
     list<Programmation*> lProgs;
     for(multimap<const QDate, Programmation*>::const_iterator it=evenements.begin(); it!=evenements.end(); ++it){
@@ -155,5 +154,4 @@ QString Semaine::jourToString(int jour) const
     }
     //str =
     return str;
->>>>>>> origin/master
 }

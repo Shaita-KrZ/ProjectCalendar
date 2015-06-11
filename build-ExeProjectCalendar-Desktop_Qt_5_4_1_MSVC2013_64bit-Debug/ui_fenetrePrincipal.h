@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
@@ -24,33 +25,40 @@ QT_BEGIN_NAMESPACE
 class Ui_FenAgenda
 {
 public:
+    QGridLayout *gridLayout_2;
+    QGridLayout *gridLayout;
     QLabel *labelSemaine;
     QPushButton *bSemaineSuiv;
-    QPushButton *bSemainePrec;
-    QPushButton *bGoProjets;
     QTableWidget *tSemaine;
+    QPushButton *bProgrammer;
+    QPushButton *bGoProjets;
     QPushButton *bImport;
     QPushButton *bExport;
-    QPushButton *pushButton;
+    QPushButton *bSemainePrec;
 
     void setupUi(QWidget *FenAgenda)
     {
         if (FenAgenda->objectName().isEmpty())
             FenAgenda->setObjectName(QStringLiteral("FenAgenda"));
-        FenAgenda->resize(591, 428);
+        FenAgenda->resize(876, 347);
+        gridLayout_2 = new QGridLayout(FenAgenda);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+
+        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
+
         labelSemaine = new QLabel(FenAgenda);
         labelSemaine->setObjectName(QStringLiteral("labelSemaine"));
-        labelSemaine->setGeometry(QRect(270, 20, 221, 31));
         labelSemaine->setAlignment(Qt::AlignCenter);
+
+        gridLayout_2->addWidget(labelSemaine, 1, 4, 1, 1);
+
         bSemaineSuiv = new QPushButton(FenAgenda);
         bSemaineSuiv->setObjectName(QStringLiteral("bSemaineSuiv"));
-        bSemaineSuiv->setGeometry(QRect(510, 20, 71, 31));
-        bSemainePrec = new QPushButton(FenAgenda);
-        bSemainePrec->setObjectName(QStringLiteral("bSemainePrec"));
-        bSemainePrec->setGeometry(QRect(180, 20, 71, 31));
-        bGoProjets = new QPushButton(FenAgenda);
-        bGoProjets->setObjectName(QStringLiteral("bGoProjets"));
-        bGoProjets->setGeometry(QRect(10, 10, 101, 71));
+
+        gridLayout_2->addWidget(bSemaineSuiv, 1, 5, 1, 1);
+
         tSemaine = new QTableWidget(FenAgenda);
         if (tSemaine->columnCount() < 1)
             tSemaine->setColumnCount(1);
@@ -73,17 +81,39 @@ public:
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
         tSemaine->setVerticalHeaderItem(6, __qtablewidgetitem7);
         tSemaine->setObjectName(QStringLiteral("tSemaine"));
-        tSemaine->setGeometry(QRect(0, 100, 581, 241));
+        tSemaine->setMinimumSize(QSize(0, 241));
         tSemaine->setAutoFillBackground(true);
+        tSemaine->setDragEnabled(true);
+        tSemaine->setAlternatingRowColors(true);
+        tSemaine->setShowGrid(true);
+
+        gridLayout_2->addWidget(tSemaine, 2, 0, 1, 6);
+
+        bProgrammer = new QPushButton(FenAgenda);
+        bProgrammer->setObjectName(QStringLiteral("bProgrammer"));
+
+        gridLayout_2->addWidget(bProgrammer, 3, 4, 1, 2);
+
+        bGoProjets = new QPushButton(FenAgenda);
+        bGoProjets->setObjectName(QStringLiteral("bGoProjets"));
+
+        gridLayout_2->addWidget(bGoProjets, 1, 0, 1, 1);
+
         bImport = new QPushButton(FenAgenda);
         bImport->setObjectName(QStringLiteral("bImport"));
-        bImport->setGeometry(QRect(10, 370, 81, 31));
+
+        gridLayout_2->addWidget(bImport, 3, 0, 1, 1);
+
         bExport = new QPushButton(FenAgenda);
         bExport->setObjectName(QStringLiteral("bExport"));
-        bExport->setGeometry(QRect(100, 370, 81, 31));
-        pushButton = new QPushButton(FenAgenda);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(410, 370, 151, 31));
+
+        gridLayout_2->addWidget(bExport, 3, 1, 1, 1);
+
+        bSemainePrec = new QPushButton(FenAgenda);
+        bSemainePrec->setObjectName(QStringLiteral("bSemainePrec"));
+
+        gridLayout_2->addWidget(bSemainePrec, 1, 3, 1, 1);
+
 
         retranslateUi(FenAgenda);
 
@@ -96,10 +126,6 @@ public:
         labelSemaine->setText(QApplication::translate("FenAgenda", "TextLabel", 0));
         bSemaineSuiv->setText(QApplication::translate("FenAgenda", "Semaine\n"
 "Suivante", 0));
-        bSemainePrec->setText(QApplication::translate("FenAgenda", "Semaine\n"
-"Precedante", 0));
-        bGoProjets->setText(QApplication::translate("FenAgenda", "Passer en\n"
-" vision Projets", 0));
         QTableWidgetItem *___qtablewidgetitem = tSemaine->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("FenAgenda", "Planing", 0));
         QTableWidgetItem *___qtablewidgetitem1 = tSemaine->verticalHeaderItem(0);
@@ -116,11 +142,15 @@ public:
         ___qtablewidgetitem6->setText(QApplication::translate("FenAgenda", "Samedi", 0));
         QTableWidgetItem *___qtablewidgetitem7 = tSemaine->verticalHeaderItem(6);
         ___qtablewidgetitem7->setText(QApplication::translate("FenAgenda", "Dimanche", 0));
+        bProgrammer->setText(QApplication::translate("FenAgenda", "Programmer un \303\251v\303\250nement", 0));
+        bGoProjets->setText(QApplication::translate("FenAgenda", "Passer en\n"
+" vision Projets", 0));
         bImport->setText(QApplication::translate("FenAgenda", "Importer\n"
 "Semaine", 0));
         bExport->setText(QApplication::translate("FenAgenda", "Exporter\n"
 "Semaine", 0));
-        pushButton->setText(QApplication::translate("FenAgenda", "Programmer un \303\251v\303\250nement", 0));
+        bSemainePrec->setText(QApplication::translate("FenAgenda", "Semaine\n"
+"Precedante", 0));
     } // retranslateUi
 
 };

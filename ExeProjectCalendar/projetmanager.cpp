@@ -69,12 +69,7 @@ Projet *ProjetManager::getProjetPoint(const QString &t)
 
 
 
-<<<<<<< HEAD
 QString ProjetManager::load(const QString& f){
-    qDebug()<<"debut load\n";
-=======
-void ProjetManager::load(const QString& f){
->>>>>>> origin/master
     file=f;
     QFile fin(file);
     //On test si on peut ouvrir le fichier
