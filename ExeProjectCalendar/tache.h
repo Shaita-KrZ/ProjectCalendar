@@ -102,6 +102,18 @@ public:
      * \throw CalendarException si la tache n'est pas composite
      */
     virtual map<QString, Tache*> getTaches() const = 0;
+
+    /*!
+     * \brief place l'attribut scheduled à true, aucun effet si il l'est déjà
+     * \throw CalendarException si la tache n'est pas unitaire
+     */
+    virtual void setScheduled()=0;
+
+    /*!
+     * \brief place l'attribut scheduled à false, aucun effet si il l'est déjà
+     * \throw CalendarException si la tache n'est pas unitaire
+     */
+    virtual void setNonScheduled()=0;
 };
 
 
@@ -174,6 +186,22 @@ public:
     virtual bool isPreemptive()const{
         return false;
     }
+
+    /*!
+     * \brief place l'attribut scheduled à true, aucun effet si il l'est déjà
+     * \throw CalendarException si la tache n'est pas unitaire
+     */
+    virtual void setScheduled(){
+        throw CalendarException("Erreur : la tache n'est pas unitaire");
+    }
+
+    /*!
+     * \brief place l'attribut scheduled à false, aucun effet si il l'est déjà
+     * \throw CalendarException si la tache n'est pas unitaire
+     */
+    virtual void setNonScheduled(){
+        throw CalendarException("Erreur : la tache n'est pas unitaire");
+    }
 };
 
 
@@ -227,7 +255,7 @@ public:
     /*!
      * \brief place l'attribut scheduled à true, aucun effet si il l'est déjà
      */
-    void setScheduled(){
+    virtual void setScheduled(){
         if(scheduled!=true)
             scheduled=true;
     }
@@ -235,7 +263,7 @@ public:
     /*!
      * \brief place l'attribut scheduled à false, aucun effet si il l'est déjà
      */
-    void setNonScheduled(){
+    virtual void setNonScheduled(){
         if(scheduled!=false)
             scheduled=false;
     }

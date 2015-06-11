@@ -84,6 +84,9 @@ void Semaine::addProgrammation(Programmation * p){
     // Si aucune de ces exceptions n'est declenchee, on peut alors inserer la programmation dans la semaine.
     const QDate d = p->getDate();
     this->evenements.insert(pair<const QDate, Programmation*>(d,p));
+    if (p->getEvent()->estTache()){
+        p->getEvent()->setScheduled();
+    }
 }
 
 void Semaine::delProgrammation(Programmation *p)

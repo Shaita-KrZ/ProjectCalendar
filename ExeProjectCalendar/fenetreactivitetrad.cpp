@@ -32,5 +32,6 @@ void FenetreActiviteTrad::on_bOKcancel_accepted()
         QMessageBox::critical(this,"Ajout Activite",e.getInfo());
         this->close();
     }
+    QMessageBox::information(this, "Programmation tache", "Ajout de l'activite' : \n " + prog->toString() + "\n le " + prog->getDate().toString("dd/MM/yyyy"));
     fenAg->actualiserItems();
 }

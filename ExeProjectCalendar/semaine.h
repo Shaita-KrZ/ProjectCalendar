@@ -36,6 +36,7 @@ public:
 
     /*!
      * \brief Ajoute une programmation dans la semaine
+     *      si l'evenement est une tache, la rend programmée
      * \param p : programmation a ajouter dans la semaine
      * \throw CalendarException si la programmation existe deja dans la semaine,
      *      si la tache est deja programme,

@@ -78,7 +78,14 @@ void FenetreProgrammerTache::on_bOK_accepted()
     QDate d = ui->inDateHeure->date();
     QTime hd = ui->inDateHeure->time();
     Programmation * p = new Programmation(d, hd, t2);
-    a.addProgrammation(p);
+    try{
+        a.addProgrammation(p);
+    }
+    catch(CalendarException &e){
+        QMessageBox::critical(this,"Programmation tache",e.getInfo());
+        this->close();
+    }
+    QMessageBox::information(this, "Programmation tache", "Ajout de la tache : \n " + p->toString() + "\n le " + p->getDate().toString("dd/MM/yyyy"));
     fenAg->actualiserItems();
     // Gestion des précédences & Preemptive?
     this->close();
