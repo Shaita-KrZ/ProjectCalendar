@@ -53,6 +53,18 @@ Projet & ProjetManager::getProjet(const QString& t){
     else throw CalendarException("Le projet n\'existe pas");
 }
 
+Projet *ProjetManager::getProjetPoint(const QString &t)
+{
+    if(projets.find(t)!=projets.end()){
+        map<QString, Projet*>::const_iterator it;
+        it=projets.find(t);
+        Projet *P=it->second;
+        return P;
+    }
+    else throw CalendarException("Le projet n\'existe pas");
+}
+
+
 
 void ProjetManager::load(const QString& f){
     file=f;

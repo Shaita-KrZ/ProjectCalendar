@@ -59,6 +59,14 @@ public:
     Projet & getProjet(const QString& t);
 
     /*!
+     * \brief Recupere un pointeur vers un projet
+     * \param t : titre du projet a recuperer
+     * \return reference vers le projet
+     * \throw CalendarException si le projet n'existe pas
+     */
+    Projet *getProjetPoint(const QString& t);
+
+    /*!
      * \brief Importe un fichier XML
      * \param f : chemin du fichier a charger
      */

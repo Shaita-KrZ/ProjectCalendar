@@ -39,6 +39,9 @@ int main(int argc, char *argv[]){
     agenda.creerSemaine(lundiCourant);
     ProjetManager & pm = ProjetManager::getInstance();
     pm.load("C:/Users/Alex/Dropbox/Cours/UTC/LO21/Projet Calendar/ProjetCalendar UML/exempleProjetSansPrecedence.xml");
+    pm.load("D:/Alex/Bureau/othersp/ExeProjectCalendar/projet3.xml");
+    pm.load("D:/Alex/Bureau/othersp/ExeProjectCalendar/projet.xml");
+    pm.load("D:/Alex/Bureau/othersp/ExeProjectCalendar/projet2.xml");
     ActiviteTraditionnelle * act1 = new ActiviteTraditionnelle("RDV Médecin", Duree(1,32));
     ActiviteTraditionnelle * act2 = new ActiviteTraditionnelle("Courses a faire", Duree(6,0));
     ActiviteTraditionnelle * act3 = new ActiviteTraditionnelle("Chercher les enfants à l'escalade", Duree(0,20));

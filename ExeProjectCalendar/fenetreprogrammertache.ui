@@ -28,13 +28,13 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
-    <widget class="QDialogButtonBox" name="bOKcancel">
+   <item row="6" column="1">
+    <widget class="QDialogButtonBox" name="bCancel">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel</set>
      </property>
     </widget>
    </item>
@@ -57,12 +57,19 @@
      </property>
     </widget>
    </item>
+   <item row="5" column="1">
+    <widget class="QDialogButtonBox" name="bOK">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>bOKcancel</sender>
+   <sender>bCancel</sender>
    <signal>accepted()</signal>
    <receiver>FenetreProgrammerTache</receiver>
    <slot>accept()</slot>
@@ -78,7 +85,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>bOKcancel</sender>
+   <sender>bCancel</sender>
    <signal>rejected()</signal>
    <receiver>FenetreProgrammerTache</receiver>
    <slot>reject()</slot>
