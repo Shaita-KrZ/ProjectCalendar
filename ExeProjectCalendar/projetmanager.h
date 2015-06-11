@@ -76,7 +76,6 @@ public:
      * \brief Exporte le projet dans un fichier XML
      * \param f : chemin du fichier dans lequel sauvegarder
      */
-<<<<<<< HEAD
     void save(const QString& f,const QString& titreProjet);
 
     /*!
@@ -100,13 +99,9 @@ public:
      * \return retourne une exception si le projet existe déjà
      * \param t : titre du projet
      */
-=======
-    void  save(const QString& f,const QString& titreProjet);
-
-    map<QString,Projet*> getProjets() const { return projets;}
-
->>>>>>> origin/master
     void projetExistdeja(const QString& t) const;
+
+
 };
 
 #endif // PROJETMANAGER_H
