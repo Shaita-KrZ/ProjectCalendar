@@ -78,3 +78,17 @@ void FenAgenda::on_bProgrammer_clicked()
 {
     programmerEvenement();
 }
+
+void FenAgenda::on_bExport_clicked()
+{
+    QString chemin = QFileDialog::getSaveFileName(this, "Exporter une semaine", QString(), "Fichiers (*.xml)");
+    Agenda & a = Agenda::getInstance();
+    if(!chemin.isEmpty()){
+        //On sauvegarde la semaine
+        try{
+            a.save(chemin, this->sem->getLundi());
+        }
+        catch(CalendarException &e){ QMessageBox::critical(this,"Projet",e.getInfo());return;}
+
+    }
+}

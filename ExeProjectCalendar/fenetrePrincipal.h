@@ -31,6 +31,8 @@ private slots:
 
     void on_bProgrammer_clicked();
 
+    void on_bExport_clicked();
+
 private:
     Ui::FenAgenda *ui;
 public slots:

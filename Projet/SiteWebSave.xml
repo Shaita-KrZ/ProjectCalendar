@@ -20,5 +20,10 @@
             <duree>300</duree>
         </tache>
     </tacheManager>
-    <precedenceManager/>
+    <precedenceManager>
+        <precedence>
+            <pred>T1</pred>
+            <succ>T2</succ>
+        </precedence>
+    </precedenceManager>
 </projet>
