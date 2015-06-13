@@ -29,6 +29,7 @@ public:
      */
     Tache(QString t, QString id, QDate dispo, QDate ech, Projet *p);
     virtual ~Tache();
+
     /*!
      * \brief getID
      * \return identifiant de la tache
@@ -40,8 +41,6 @@ public:
      * \param id : nouvel identificateur
      */
     void setID(const QString id){identificateur=id;}
-
-
 
     /*!
      * \brief getDisponibilite
@@ -57,7 +56,6 @@ public:
      */
     void setDispo(const QDate& d){disponibilite=d;}
 
-
     /*!
      * \brief getEcheance
      * \return echeance de la tache
@@ -65,6 +63,7 @@ public:
     QDate getEcheance(){
         return echeance;
     }
+
     /*!
      * \brief modifie l'écheance du projet
      * \param e : nouvel echeance du projet
@@ -76,7 +75,6 @@ public:
      * \return Duree d'une tache
      */
     virtual Duree getDuree() const=0;
-
 
     /*!
      * \brief verifie le type de la tache

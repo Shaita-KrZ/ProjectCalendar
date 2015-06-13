@@ -74,6 +74,10 @@ public:
      */
     size_t nombreEvent() const {return evenements.size();}
 
+    /*!
+     * \brief Accede aux evenements de la semaine
+     * \return map des programmations de la semaine
+     */
     multimap<const QDate,Programmation*> getEvenements()const{ return evenements;}
 };
 

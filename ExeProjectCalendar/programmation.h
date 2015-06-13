@@ -20,6 +20,10 @@ public:
 
     virtual ~Programmation(){delete event;}
 
+    /*!
+     * \brief Accede a la date de la programmation
+     * \return date
+     */
     QDate getDate() const{ return date;}
 
     /*!

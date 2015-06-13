@@ -15,7 +15,7 @@ public:
     Duree(unsigned int m=0):nb_minutes(m) {}
     /*!
      * \brief modifie la duree
-     * \param minutes : test
+     * \param minutes
      * \return Retourne rien
      */
     void setDuree(unsigned int minutes) { nb_minutes=minutes; }

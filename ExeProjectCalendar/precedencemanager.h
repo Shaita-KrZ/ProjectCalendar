@@ -45,7 +45,17 @@ public:
         pmIterator(Precedence **c):iterateur(c){}
     public:
     };
+
+    /*!
+     * \brief Recupere le premier element de self
+     * \return iterateur sur la premiere Precedence de self
+     */
     pmIterator begin() const{return pmIterator(tabPrec);}
+
+    /*!
+     * \brief Recupere le dernier element de self
+     * \return iterateur sur la derniere Precedence de self
+     */
     pmIterator end() const{return pmIterator(tabPrec+nb);}
 
 };
