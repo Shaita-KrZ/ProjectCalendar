@@ -361,6 +361,6 @@ void ProjetManager::save(const QString& f,const QString &titreProjet){
     stream.writeEndElement();
     stream.writeEndDocument();
     newfile.close();
-    qDebug()<<"test25";
+    qDebug()<<"test1";
     return;
 }

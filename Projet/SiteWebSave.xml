@@ -1,22 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projet>
-    <titre>SITE WEB</titre>
-    <echeance>2015-07-16</echeance>
+    <titre>Projet LO21</titre>
+    <echeance>2015-06-15</echeance>
     <tacheManager>
         <tache type="unit">
             <preemptive>true</preemptive>
             <identificateur>T1</identificateur>
-            <titre>Etablir le background du site</titre>
-            <disponibilite>2015-06-01</disponibilite>
-            <echeance>2015-06-30</echeance>
-            <duree>1000</duree>
+            <titre>Etablir la conception du projet</titre>
+            <disponibilite>2015-04-15</disponibilite>
+            <echeance>2015-05-15</echeance>
+            <duree>600</duree>
         </tache>
         <tache type="unit">
-            <preemptive>true</preemptive>
+            <preemptive>false</preemptive>
             <identificateur>T2</identificateur>
-            <titre>Etablir le frontend du site</titre>
-            <disponibilite>2015-06-30</disponibilite>
-            <echeance>2015-07-15</echeance>
+            <titre>Implémenter les specifications</titre>
+            <disponibilite>2015-05-15</disponibilite>
+            <echeance>2015-05-20</echeance>
+            <duree>150</duree>
+        </tache>
+        <tache type="compo">
+            <identificateur>T4</identificateur>
+            <titre>Implémentation du projet</titre>
+            <disponibilite>2015-05-20</disponibilite>
+            <echeance>2015-06-10</echeance>
+            <tachescompo>
+                <tache type="unit">
+                    <preemptive>true</preemptive>
+                    <identificateur>T1</identificateur>
+                    <titre>Mode Gestion de Projet</titre>
+                    <disponibilite>2015-05-20</disponibilite>
+                    <echeance>2015-06-10</echeance>
+                    <duree>900</duree>
+                </tache>
+                <tache type="unit">
+                    <preemptive>true</preemptive>
+                    <identificateur>T2</identificateur>
+                    <titre>Mode Gestion Agenda</titre>
+                    <disponibilite>2015-05-20</disponibilite>
+                    <echeance>2015-06-10</echeance>
+                    <duree>600</duree>
+                </tache>
+            </tachescompo>
+        </tache>
+        <tache type="unit">
+            <preemptive>false</preemptive>
+            <identificateur>T5</identificateur>
+            <titre>Etablir les livrables</titre>
+            <disponibilite>2015-06-10</disponibilite>
+            <echeance>2015-06-15</echeance>
             <duree>300</duree>
         </tache>
     </tacheManager>
