@@ -1,7 +1,9 @@
 #ifndef ITERATOR_H
 #define ITERATOR_H
 
-
+/*!
+ *  \brief Classe d'iterateur generique
+ */
 template<class X>
 class iterateur{
 protected:

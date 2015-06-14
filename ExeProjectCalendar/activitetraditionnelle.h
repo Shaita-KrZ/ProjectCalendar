@@ -5,7 +5,6 @@
 #include "iterator.h"
 
 /*!
- * \class Activite Traditionnelle
  * \brief Represente un evenement quelconque (qui ne fait pas partie d'un projet)
  *      Par exemple un RDV
  */

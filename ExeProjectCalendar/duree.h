@@ -7,7 +7,7 @@
 //Class duree
 /*!
  * \class Duree
- * \brief representer une duree
+ * \brief Represente une duree
  */
 class Duree{
 public:
