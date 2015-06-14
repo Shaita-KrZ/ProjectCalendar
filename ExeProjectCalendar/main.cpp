@@ -33,9 +33,6 @@ int main(int argc, char *argv[]){
     agenda.addProgrammation(prog1);
     agenda.addProgrammation(prog2);
     agenda.addProgrammation(prog3);
-    TacheUnitaire * t = new TacheUnitaire("TacheUnitaire", "id1", QDate(2015,06,02), QDate(2015,06,22),0,true,Duree(2,15));
-    Programmation * tProg = new Programmation(QDate(2015,06,02),QTime(8,0),t);
-    agenda.addProgrammation(tProg);
     /*** FIN INITIALISATIONS DE TESTS ***/
 
     Semaine * semaineCourante = agenda.getSemaines().at(lundiCourant);

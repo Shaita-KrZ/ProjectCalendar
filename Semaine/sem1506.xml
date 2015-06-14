@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<semaine>
+    <dateLundi>2015-06-15</dateLundi>
+    <evenements>
+        <programmation>
+            <date>2015-06-15</date>
+            <horaireDebut>10:00:00</horaireDebut>
+            <titre>Etablir la conception du projet</titre>
+            <duree>600</duree>
+        </programmation>
+        <programmation>
+            <date>2015-06-16</date>
+            <horaireDebut>00:00:00</horaireDebut>
+            <titre>Etablir les livrables</titre>
+            <duree>300</duree>
+        </programmation>
+    </evenements>
+</semaine>

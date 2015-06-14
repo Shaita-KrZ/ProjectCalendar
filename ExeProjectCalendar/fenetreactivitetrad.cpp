@@ -18,6 +18,15 @@ void FenetreActiviteTrad::on_bOKcancel_accepted()
 {
     QString t = this->ui->inTitre->text();
     QTime timAct = this->ui->inDuree->time();
+    QTime duree0(0,0);
+    if(t==""){
+        QMessageBox::critical(this,"Ajout Activite","Le titre de l'activite traditionnelle ne peut pas être nul");
+        return;
+    }
+    if(timAct==duree0){
+        QMessageBox::critical(this,"Ajout Activite","La duree de l'activite traditionnelle ne peut pas être nulle");
+        return;
+    }
     Duree d(timAct.hour(), timAct.minute());
     ActiviteTraditionnelle * at = new ActiviteTraditionnelle(t, d);
     QDate datProg = this->ui->inDateTimeProg->date();

@@ -271,7 +271,8 @@ QString ProjetManager::load(const QString& f){
     }
     // Removes any device() or data from the reader * and resets its internal state to the initial state.
     xml.clear();
-    //qDebug()<<"fin load\n";
+    qDebug()<<"fin load\n";
+    fin.close();
     return pere->getTitre();
 }
 
@@ -289,14 +290,14 @@ void ProjetManager::save(const QString& f,const QString &titreProjet){
     file=f;
     QFile newfile(file);
     qDebug()<<"debut save";
-    if (!newfile.open(QIODevice::WriteOnly | QIODevice::Text)){
+    if (!newfile.open(QIODevice::WriteOnly | QFile::Text)){
         throw CalendarException(QString("erreur sauvegarde tâches : ouverture fichier xml"));
     }
     QXmlStreamWriter stream(&newfile);
     stream.setAutoFormatting(true);
     stream.writeStartDocument();
     stream.writeStartElement("projet");
-    Projet P=getProjet(titreProjet);
+    Projet &P=getProjet(titreProjet);
     stream.writeTextElement("titre",P.getTitre());
     stream.writeTextElement("echeance",P.getEcheance().toString(Qt::ISODate));
     stream.writeStartElement("tacheManager");
@@ -304,6 +305,7 @@ void ProjetManager::save(const QString& f,const QString &titreProjet){
     PrecedenceManager pManager=P.getPrecedences();
     map<QString, Tache*>lTaches=tManager.getTaches();
     map<QString, Tache*>::const_iterator it;
+
     for(it=lTaches.begin();it!=lTaches.end();++it){
         if(it->second->estComposite()){
             TacheComposite *tComposite=dynamic_cast<TacheComposite*>(it->second);
@@ -361,6 +363,7 @@ void ProjetManager::save(const QString& f,const QString &titreProjet){
     stream.writeEndElement();
     stream.writeEndDocument();
     newfile.close();
-    qDebug()<<"test25";
+    qDebug()<<"fin save";
     return;
 }
+

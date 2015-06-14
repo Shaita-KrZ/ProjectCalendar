@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<semaine>
+	<dateLundi>2015-05-25</dateLundi>
+	<evenements>
+		<programmation>
+			<date>2015-06-09</date>
+			<horaireDebut>18:15</horaireDebut>
+			<titre>RDV dermato</titre>
+			<duree>90</duree>
+		</programmation>
+		<programmation>
+			<date>2015-06-09</date>
+			<horaireDebut>10:00</horaireDebut>
+			<titre>Meeting Client</titre>
+			<duree>120</duree>
+		</programmation>
+	</evenements>
+</semaine>

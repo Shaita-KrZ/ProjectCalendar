@@ -33,6 +33,8 @@ private slots:
 
     void on_bExport_clicked();
 
+    void on_bImport_clicked();
+
 private:
     Ui::FenAgenda *ui;
 public slots:

@@ -52,7 +52,7 @@ public:
      * \brief getTaches
      * \return la liste des taches de tacheManager
      */
-    map<QString, Tache*> getTaches() const{
+    map<QString, Tache*>& getTaches(){
         return taches;
     }
 };

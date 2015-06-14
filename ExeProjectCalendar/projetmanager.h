@@ -2,6 +2,8 @@
 #define PROJETMANAGER_H
 #include <projet.h>
 
+
+
 /*!
  * \brief The ProjetManager class
  *      La classe implemente le design pattern Singleton
@@ -14,6 +16,7 @@ private:
     QString file;
     ProjetManager();
     ~ProjetManager();
+    Projet *newProj;
 public:
 
     /*!

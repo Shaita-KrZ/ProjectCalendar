@@ -20,9 +20,6 @@ private:
     // Renvoie true si la programmation ne se chevauche pas, false sinon
     bool testChevauche(Programmation *p) const;
 
-    // Teste si la programmation respecte les conditions de précéédences
-    // Renvoie true si elle les respecte, false sinon
-    bool testPrecedences(Programmation *p) const;
 public:
     /*!
      * \brief Constructeur de la classe
@@ -78,7 +75,7 @@ public:
      * \brief Accede aux evenements de la semaine
      * \return map des programmations de la semaine
      */
-    multimap<const QDate,Programmation*> getEvenements()const{ return evenements;}
+    multimap<const QDate,Programmation*>& getEvenements(){ return evenements;}
 };
 
 #endif // SEMAINE_H
