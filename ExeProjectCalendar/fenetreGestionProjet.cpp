@@ -71,6 +71,7 @@ void Gestionprojets::supprimeProjet(){
         supprimerBouton(titreProjetSupp);
         //On supprime le projet
         PM.supprimerProjet(titreProjetSupp);
+                QMessageBox::information(this,"Supprimer un projet","Le projet a bien été supprimé");
     }
     else {
         QMessageBox::critical(this, "Supprimer un projet", "Vous n'avez pas entré de projet");
@@ -148,6 +149,8 @@ void Gestionprojets::ouvrirProjet(){
      // On récupère le projet correspondant
      Projet *P=iter->second;
      TacheManager T=P->getTaches();
+     QPushButton *supprimerTache=new QPushButton("Supprimer une tache");
+     QObject::connect(supprimerTache,SIGNAL(clicked()),this,SLOT(supprimerTache()));
      QPushButton *ajoutPrecedence=new QPushButton("Ajouter une precedence");
      QPushButton *sauvegarderProjet=new QPushButton("Sauvegarder le projet");
      QObject::connect(sauvegarderProjet,SIGNAL(clicked()),this,SLOT(sauvegarderProjet()));
@@ -179,8 +182,9 @@ void Gestionprojets::ouvrirProjet(){
      grid->addWidget(modifierProjet,2,0,1,1);
      grid->addWidget(ajouterTache,3,0,1,1);
      grid->addWidget(sauvegarderProjet,4,0,1,1);
-     grid->addWidget(ajoutPrecedence,5,0,1,1);
-     grid->addWidget(listePrecedence,6,0,1,1);
+     grid->addWidget(supprimerTache,5,0,1,1);
+     grid->addWidget(ajoutPrecedence,6,0,1,1);
+     grid->addWidget(listePrecedence,7,0,1,1);
      QLabel **identificateurTache=new QLabel*[T.getTaches().size()];
      QLabel **caracteristiqueTache=new QLabel*[T.getTaches().size()];
      QLabel **caracteristiqueTacheUnitaireComposee;
@@ -194,8 +198,8 @@ void Gestionprojets::ouvrirProjet(){
          identificateurTache[k]=new QLabel("Identificateur Tache "+QString::number(k+1)+" : "+it->first);
          m_boutonModifTache[it->first]=B;
          QObject::connect(m_boutonModifTache[it->first],SIGNAL(clicked()),this,SLOT(modifierTache()));
-         grid->addWidget(identificateurTache[k],6+10*j,1,1,1);
-         grid->addWidget(B,6+10*j,2,1,1);
+         grid->addWidget(identificateurTache[k],7+10*j,1,1,1);
+         grid->addWidget(B,7+10*j,2,1,1);
          //On récupère la tache
          Tache *t=it->second;
          if(t->estComposite()){
@@ -623,7 +627,7 @@ void Gestionprojets::annulerajoutTache(){
 
 void Gestionprojets::ajouterTacheCompo(){
     ProjetManager &PM=ProjetManager::getInstance();
-    map<QString,Projet*> projets=PM.getProjets();
+    map<QString,Projet*> &projets=PM.getProjets();
     m_projetModif=projets[m_titreProj];
     m_fenetreModifTacheCompo=new QWidget();
     QVBoxLayout *coucheAjoutTache=new QVBoxLayout(m_fenetreModifTacheCompo);
@@ -692,8 +696,7 @@ void Gestionprojets::validerajoutTacheCompo(){
     }
     TacheUnitaire *Tu=new TacheUnitaire(m_titreTacheLine->text(),m_idTacheLine->text(),m_dateDispoTacheLine->date(),
                                         m_dateEcheTacheLine->date(),m_projetModif,preemp,dureeTache);
-    TacheComposite *Tc=dynamic_cast<TacheComposite*>(m_tacheModif);
-    map<QString,Tache*>&taches=Tc->getTaches();
+    map<QString,Tache*>&taches=m_tacheModif->getTaches();
     taches[m_idTacheLine->text()]=Tu;
     m_fenetreModifTacheCompo->close();
     QMessageBox::information(this,"Creation projet","La tache composite a bien été ajouté");
@@ -759,4 +762,24 @@ void Gestionprojets::sauvegarderProjet(){
         PM.save(chemin,m_titreProj);
     }catch(CalendarException &e){QMessageBox::critical(this,"Sauvegarder un projet",e.getInfo());return;}
     QMessageBox::information(this,"Sauvegarder un projet","Le projet a bien été sauvegardé");
+}
+
+void Gestionprojets::supprimerTache(){
+    m_fenetreProjet->close();
+    ProjetManager &PM=ProjetManager::getInstance();
+    map<QString,Projet*> &projets=PM.getProjets();
+    m_projetModif=projets[m_titreProj];
+    bool ok;
+    QString idTacheSupp=QInputDialog::getText(this,"Supprimer une tache","Entrez l'identifiant de la tache a supprimer : ",QLineEdit::Normal, QString(),&ok);
+    if(ok && !idTacheSupp.isEmpty()){
+        //On test si le est présent, si il ne l'est pas getProj envoi un throw ("Le projet n'existe pas")
+        try{
+            TacheManager &TM=m_projetModif->getTaches();
+            TM.delTache(idTacheSupp);
+        }catch(CalendarException& e){QMessageBox::critical(this, "Supprimer une tache", e.getInfo());return;}
+        QMessageBox::information(this,"Supprimer une tache","La tache a bien été supprimé");
+    }
+    else {
+        QMessageBox::critical(this, "Supprimer une tache", "Vous n'avez pas entré de tache");
+    }
 }

@@ -60,7 +60,7 @@ public:
      * \brief getTaches
      * \return la liste de taches sous forme de TacheManager
      */
-    TacheManager getTaches(){return taches;}
+    TacheManager& getTaches(){return taches;}
 
     /*!
      * \brief getPrecedences

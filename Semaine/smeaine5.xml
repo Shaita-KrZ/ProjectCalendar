@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<semaine>
+    <dateLundi>2015-06-01</dateLundi>
+    <evenements>
+        <programmation>
+            <date>2015-06-05</date>
+            <horaireDebut>08:00</horaireDebut>
+            <titre>fefzefee</titre>
+            <duree>60</duree>
+        </programmation>
+    </evenements>
+</semaine>

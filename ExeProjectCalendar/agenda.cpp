@@ -69,7 +69,7 @@ void Agenda::save(const QString& f,const QDate lundi){
             Programmation *P=it->second;
             stream.writeStartElement("programmation");
             stream.writeTextElement("date",P->getDate().toString(Qt::ISODate));
-            stream.writeTextElement("horaireDebut",P->getHoraireDebut().toString());
+            stream.writeTextElement("horaireDebut",P->getHoraireDebut().toString("hh:mm"));
             Evenement *E=P->getEvent();
             stream.writeTextElement("titre",E->getTitre());
             QString str;

@@ -111,7 +111,7 @@ public:
      * \return map des taches composantes
      * \throw CalendarException si la tache n'est pas composite
      */
-    virtual map<QString, Tache*> getTaches() const = 0;
+    virtual map<QString, Tache*>& getTaches() = 0;
 
     /*!
      * \brief place l'attribut scheduled à true, aucun effet si il l'est déjà
@@ -175,7 +175,7 @@ public:
      * \brief getTaches
      * \return liste des taches composées
      */
-    virtual map<QString, Tache*> getTaches() const{return tachesCompo;}
+    virtual map<QString, Tache*>&getTaches(){return tachesCompo;}
 
     /*!
      * \brief Verifie si la tache a ete programmee
@@ -296,7 +296,7 @@ public:
      * \return map des taches composantes
      * \throw CalendarException si la tache n'est pas composite
      */
-    virtual map<QString, Tache*> getTaches() const{throw CalendarException("Erreur : La tache n'est pas composite");}
+    virtual map<QString, Tache*>&getTaches(){throw CalendarException("Erreur : La tache n'est pas composite");}
 
 };
 

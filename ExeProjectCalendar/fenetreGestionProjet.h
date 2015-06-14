@@ -102,6 +102,7 @@ public slots:
     void validerajoutTacheCompo();
     void annulerajoutTacheCompo();
     void sauvegarderProjet();
+    void supprimerTache();
 };
 
 

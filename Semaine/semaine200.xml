@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<semaine>
+    <dateLundi>2015-06-08</dateLundi>
+    <evenements>
+        <programmation>
+            <date>2015-06-08</date>
+            <horaireDebut>15:30:00</horaireDebut>
+            <titre>RDV Médecin</titre>
+            <duree>92</duree>
+        </programmation>
+        <programmation>
+            <date>2015-06-08</date>
+            <horaireDebut>08:00:00</horaireDebut>
+            <titre>Courses a faire</titre>
+            <duree>360</duree>
+        </programmation>
+        <programmation>
+            <date>2015-06-08</date>
+            <horaireDebut>18:30:00</horaireDebut>
+            <titre>Chercher les enfants à l'escalade</titre>
+            <duree>20</duree>
+        </programmation>
+        <programmation>
+            <date>2015-06-09</date>
+            <horaireDebut>18:15:00</horaireDebut>
+            <titre>RDV dermato</titre>
+            <duree>90</duree>
+        </programmation>
+        <programmation>
+            <date>2015-06-09</date>
+            <horaireDebut>10:00:00</horaireDebut>
+            <titre>Meeting Client</titre>
+            <duree>120</duree>
+        </programmation>
+        <programmation>
+            <date>2015-06-10</date>
+            <horaireDebut>14:00:00</horaireDebut>
+            <titre>gregrgr</titre>
+            <duree>60</duree>
+        </programmation>
+        <programmation>
+            <date>2015-06-12</date>
+            <horaireDebut>10:00:00</horaireDebut>
+            <titre>geffefe</titre>
+            <duree>60</duree>
+        </programmation>
+    </evenements>
+</semaine>
