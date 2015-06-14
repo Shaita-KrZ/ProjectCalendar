@@ -93,7 +93,6 @@ void Gestionprojets::chargerProjet(){
             //load va lire le projet et l'ajouter dans le ProjetManager
             titre=PM.load(chemin);
         }catch(CalendarException &e){ QMessageBox::critical(this,"Projet",e.getInfo());return;}
-        qDebug()<<chemin;
         //On crée un nouveau bouton pour le nouveau projet
         QPushButton *boutonProj=new QPushButton();
         map<QString,Projet *> projets=PM.getProjets();
@@ -106,6 +105,7 @@ void Gestionprojets::chargerProjet(){
         ajouterBouton(P->getTitre());
         //On connecte le bouton à l'ouverture du projet
         QMessageBox::information(this,"Projet","Vous avez bien ajouté le projet : "+P->getTitre());
+
     }
     else{
         QMessageBox::information(this,"Projet","Le projet n'a pas été chargé");
@@ -149,7 +149,7 @@ void Gestionprojets::ouvrirProjet(){
      Projet *P=iter->second;
      TacheManager T=P->getTaches();
      QPushButton *ajoutPrecedence=new QPushButton("Ajouter une precedence");
-     QPushButton *sauvegarderProjet=new QPushButton("Sauevgarder le projet");
+     QPushButton *sauvegarderProjet=new QPushButton("Sauvegarder le projet");
      QObject::connect(sauvegarderProjet,SIGNAL(clicked()),this,SLOT(sauvegarderProjet()));
      QLabel *listePrecedence=new QLabel("Liste des precedences :");
      QObject::connect(ajoutPrecedence,SIGNAL(clicked()),this,SLOT(ajouterPrecedence()));
@@ -754,11 +754,9 @@ void Gestionprojets::annulerajouterPrec(){
 
 void Gestionprojets::sauvegarderProjet(){
     ProjetManager& PM=ProjetManager::getInstance();
-    QString chemin = QFileDialog::getOpenFileName(m_fenetreProjet, "Sauvegarder un projet", QString(), "Fichiers (*.xml)");
+    QString chemin = QFileDialog::getSaveFileName(m_fenetreProjet, "Sauvegarder un projet", QString(), "Fichiers (*.xml)");
     try{
-        qDebug()<<m_titreProj;
         PM.save(chemin,m_titreProj);
-        qDebug()<<"test";
-    }catch(CalendarException &e){QMessageBox::critical(this,"Ajouter une precedence",e.getInfo());return;}
-    QMessageBox::information(this,"Sauevgarder un projet","Le projet a bien été ajouté");
+    }catch(CalendarException &e){QMessageBox::critical(this,"Sauvegarder un projet",e.getInfo());return;}
+    QMessageBox::information(this,"Sauvegarder un projet","Le projet a bien été sauvegardé");
 }

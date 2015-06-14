@@ -1,5 +1,7 @@
 QT+= widgets
-
+QT+= xml
+QT+= core
+QT+= gui
 HEADERS += \
     tache.h \
     projet.h \

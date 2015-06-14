@@ -78,3 +78,30 @@ void FenAgenda::on_bProgrammer_clicked()
 {
     programmerEvenement();
 }
+
+void FenAgenda::on_bExport_clicked()
+{
+    QString chemin = QFileDialog::getSaveFileName(this, "Exporter une semaine", QString(), "Fichiers (*.xml)");
+    Agenda & a = Agenda::getInstance();
+    if(!chemin.isEmpty()){
+        //On sauvegarde la semaine
+        try{
+            a.save(chemin,sem->getLundi());
+        }
+        catch(CalendarException &e){ QMessageBox::critical(this,"Export semaine",e.getInfo());return;}
+
+    }
+}
+
+void FenAgenda::on_bImport_clicked()
+{
+        QString chemin = QFileDialog::getOpenFileName(this, "Importer une semaine", QString(), "Fichiers (*.xml)");
+        Agenda & a = Agenda::getInstance();
+        if(!chemin.isEmpty()){
+            //On sauvegarde la semaine
+            try{
+                a.load(chemin);
+            }
+            catch(CalendarException &e){ QMessageBox::critical(this,"Import semaine",e.getInfo());return;}
+        }
+}

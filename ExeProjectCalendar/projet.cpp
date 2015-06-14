@@ -3,7 +3,8 @@
 
 Projet::~Projet()
 {
-
+    taches.~TacheManager();
+    precedences.~PrecedenceManager();
 }
 
 Projet::Projet(const QString &t):titre(t){

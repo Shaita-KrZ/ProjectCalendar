@@ -3,10 +3,12 @@
 #include "tachemanager.h"
 #include "precedencemanager.h"
 #include <QXmlStreamReader>
+#include <QXmlStreamWriter>
 #include <QFile>
 #include <QTextCodec>
 #include <QDebug>
 #include <QMessageBox>
+
 
 /*!
  * \brief The Projet class
@@ -58,7 +60,7 @@ public:
      * \brief getTaches
      * \return la liste de taches sous forme de TacheManager
      */
-    TacheManager& getTaches(){return taches;}
+    TacheManager getTaches(){return taches;}
 
     /*!
      * \brief getPrecedences

@@ -2,6 +2,11 @@
 #define AGENDA_H
 
 #include "semaine.h"
+#include "activitetraditionnelle.h"
+#include <QXmlStreamReader>
+#include <QXmlStreamWriter>
+#include <QFile>
+
 
 /*!
  * \brief Agenda - implemente singleton
@@ -51,6 +56,11 @@ public:
      * \param f : chemin du fichier dans lequel sauvegarder
      */
     void save(const QString& f,const QDate lundi);
+    /*!
+     * \brief Importe la semaine dans un fichier XML
+     * \param f : chemin du fichier dans lequel sauvegazrder
+     */
+    void load(const QString& f);
 };
 
 #endif // AGENDA_H

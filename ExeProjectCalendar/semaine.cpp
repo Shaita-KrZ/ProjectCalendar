@@ -43,21 +43,6 @@ bool Semaine::testChevauche(Programmation *p) const
     return true;
 }
 
-// Teste si la programmation respecte les conditions de précédences
-// il faut que les taches predecesseurs aient deja ete programmees
-// Renvoie true si elle les respecte, false sinon
-bool Semaine::testPrecedences(Programmation *p) const{
-    /*QString idProg = p->getEvent()->getID();
-    Projet * proj = p->getEvent()->getPere();
-    PrecedenceManager pm = proj->getPrecedences();
-    Tache * tProg = proj->getTaches().getTache(idProg); // CHOPER LA TACHE
-    PrecedenceManager precProg = pm.getTachesPred(tProg);
-    for (PrecedenceManager::pmIterator it = precProg.begin(); it!= precProg.end(); ++it){
-        if (!it.getCurrent()->getPredecesseur()->isScheduled())
-            return false;
-    }*/
-    return true;
-}
 
 /*
  * \brief Ajoute une programmation dans la semaine
@@ -79,8 +64,8 @@ void Semaine::addProgrammation(Programmation * p){
     if (!testChevauche(p))
         throw CalendarException("Erreur : la programmation rentre en conflit avec un autre evenement deja programme");
     // On vérifie les compatibilités de precedences
-    if (p->getEvent()->estTache() && !testPrecedences(p))
-        throw CalendarException("Erreur : les contraintes de precedences rendent impossible la programmation");
+//    if (p->getEvent()->estTache() && !testPrecedences(p))
+//        throw CalendarException("Erreur : les contraintes de precedences rendent impossible la programmation");
     // Si aucune de ces exceptions n'est declenchee, on peut alors inserer la programmation dans la semaine.
     const QDate d = p->getDate();
     this->evenements.insert(pair<const QDate, Programmation*>(d,p));

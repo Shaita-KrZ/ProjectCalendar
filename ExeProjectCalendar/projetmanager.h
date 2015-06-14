@@ -2,6 +2,8 @@
 #define PROJETMANAGER_H
 #include <projet.h>
 
+
+
 /*!
  * \brief The ProjetManager class
  *      La classe implemente le design pattern Singleton
@@ -13,8 +15,10 @@ private:
     map<QString, Projet*> projets;
     QString file;
     ProjetManager();
-public:
     ~ProjetManager();
+    Projet *newProj;
+public:
+
     /*!
      * \brief Recupere une reference vers le ProjetManager,
      *      Le cree s'il n'existe pas
@@ -87,7 +91,7 @@ public:
 
     /*!
      * \brief Indique si le projet existe déjà
-     * \return retourne une exception si le projet existe déjà
+     * \throw retourne une exception si le projet existe déjà
      * \param t : titre du projet
      */
     void projetExistdeja(const QString& t) const;
