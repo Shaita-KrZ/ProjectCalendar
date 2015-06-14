@@ -1,6 +1,8 @@
 #ifndef EXCEPTION_H
 #define EXCEPTION_H
 
+#include <QString>
+
 /*!
  * \brief Classe des Exceptions declanchees dans l'application
  */

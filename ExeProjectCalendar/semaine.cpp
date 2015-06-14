@@ -45,7 +45,7 @@ bool Semaine::testChevauche(Programmation *p) const
 
 
 /*
- * \brief Ajoute une programmation dans la semaine
+ * \brief Ajoute une programmation dans la semaine, aucun effet si la programmation existe déjà
  * \param p : programmation a ajouter dans la semaine
  * \throw CalendarException si la programmation se chevauche avec une autre deja existante
  *      si la tache est deja programme,
@@ -63,11 +63,14 @@ void Semaine::addProgrammation(Programmation * p){
     // On essaie de rentrer une programmation qui se chevauche avec une autre deja existante
     if (!testChevauche(p))
         throw CalendarException("Erreur : la programmation rentre en conflit avec un autre evenement deja programme");
-    // On vérifie les compatibilités de precedences
-//    if (p->getEvent()->estTache() && !testPrecedences(p))
-//        throw CalendarException("Erreur : les contraintes de precedences rendent impossible la programmation");
-    // Si aucune de ces exceptions n'est declenchee, on peut alors inserer la programmation dans la semaine.
+
+    // Si aucune de ces exceptions n'est declenchee, et que la programmation n'est pas deja dans la semaine, on peut alors l'inserer.
     const QDate d = p->getDate();
+    multimap<const QDate,Programmation*>::const_iterator itFind;
+    for(itFind=evenements.begin();itFind!=evenements.end();++itFind){
+        if (itFind->first== d && itFind->second->getEvent()->getTitre() == p->getEvent()->getTitre())
+            return;
+    }
     this->evenements.insert(pair<const QDate, Programmation*>(d,p));
     if (p->getEvent()->estTache()){
         p->getEvent()->setScheduled();

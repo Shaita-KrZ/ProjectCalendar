@@ -28,8 +28,10 @@ bool PrecedenceManager::isPrecedence(Tache *prec, Tache *succ) const{
 
 
 void PrecedenceManager::ajouterPrecedence(Tache * p,Tache * s){
-
     if(p->getEcheance()>s->getEcheance()){
+        throw CalendarException("La tache qui précède se termine après la tache qui succède");
+    }
+    if(s->getEcheance()<p->getDisponibilite()){
         throw CalendarException("La tache qui précède se termine après la tache qui succède");
     }
     Precedence *P=new Precedence(p,s);

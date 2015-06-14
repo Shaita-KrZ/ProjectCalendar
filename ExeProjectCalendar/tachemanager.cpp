@@ -7,6 +7,7 @@ TacheManager::~TacheManager(){}
 //Ajout d'une tache unitaire
 void TacheManager::addTache(const QString id, const QString t, const QDate disp, const QDate ech, Projet *pp,const Duree d, const bool p){
     TacheUnitaire *tu=new TacheUnitaire(t,id,disp,ech,pp,p,d);
+
     if(id==""){
         throw CalendarException("Vous n'avez pas entré d'identifiant");
     }

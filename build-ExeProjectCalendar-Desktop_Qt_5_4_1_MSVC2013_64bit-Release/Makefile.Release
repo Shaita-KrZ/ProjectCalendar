@@ -848,11 +848,11 @@ release\moc_fenetreactivitetrad.cpp: C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWid
 		..\ExeProjectCalendar\duree.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QTextStream \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QString \
 		..\ExeProjectCalendar\programmation.h \
 		..\ExeProjectCalendar\tache.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QDate \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qdatetime.h \
-		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QString \
 		..\ExeProjectCalendar\evenement.h \
 		..\ExeProjectCalendar\activitetraditionnelle.h \
 		..\ExeProjectCalendar\iterator.h \
@@ -1301,6 +1301,7 @@ release\main.obj: ..\ExeProjectCalendar\main.cpp C:\Qt\Qt5.4.1\5.4\msvc2013_64\i
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qguiapplication.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtGui\qinputmethod.h \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QString \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\QPushButton \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qpushbutton.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtWidgets\qabstractbutton.h \
@@ -1311,7 +1312,6 @@ release\main.obj: ..\ExeProjectCalendar\main.cpp C:\Qt\Qt5.4.1\5.4\msvc2013_64\i
 		..\ExeProjectCalendar\tache.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QDate \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qdatetime.h \
-		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QString \
 		..\ExeProjectCalendar\evenement.h \
 		..\ExeProjectCalendar\duree.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QTextStream \
@@ -1564,7 +1564,8 @@ release\duree.obj: ..\ExeProjectCalendar\duree.cpp ..\ExeProjectCalendar\duree.h
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregexp.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qstringmatcher.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qshareddata.h \
-		..\ExeProjectCalendar\exception.h
+		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QString
 
 release\tachemanager.obj: ..\ExeProjectCalendar\tachemanager.cpp ..\ExeProjectCalendar\tachemanager.h \
 		..\ExeProjectCalendar\tache.h \
@@ -1993,7 +1994,8 @@ release\evenement.obj: ..\ExeProjectCalendar\evenement.cpp ..\ExeProjectCalendar
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qregexp.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qstringmatcher.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qshareddata.h \
-		..\ExeProjectCalendar\exception.h
+		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QString
 
 release\activitetraditionnelle.obj: ..\ExeProjectCalendar\activitetraditionnelle.cpp ..\ExeProjectCalendar\activitetraditionnelle.h \
 		..\ExeProjectCalendar\evenement.h \
@@ -2066,6 +2068,7 @@ release\activitetraditionnelle.obj: ..\ExeProjectCalendar\activitetraditionnelle
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qstringmatcher.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qshareddata.h \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QString \
 		..\ExeProjectCalendar\iterator.h
 
 release\programmation.obj: ..\ExeProjectCalendar\programmation.cpp ..\ExeProjectCalendar\programmation.h \
@@ -3021,11 +3024,11 @@ release\fenetreactivitetrad.obj: ..\ExeProjectCalendar\fenetreactivitetrad.cpp .
 		..\ExeProjectCalendar\duree.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QTextStream \
 		..\ExeProjectCalendar\exception.h \
+		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QString \
 		..\ExeProjectCalendar\programmation.h \
 		..\ExeProjectCalendar\tache.h \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QDate \
 		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\qdatetime.h \
-		C:\Qt\Qt5.4.1\5.4\msvc2013_64\include\QtCore\QString \
 		..\ExeProjectCalendar\evenement.h \
 		..\ExeProjectCalendar\activitetraditionnelle.h \
 		..\ExeProjectCalendar\iterator.h \

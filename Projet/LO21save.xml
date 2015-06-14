@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projet>
-    <titre>Projet LO21</titre>
+    <titre>Projet Test</titre>
     <echeance>2015-06-15</echeance>
     <tacheManager>
         <tache type="unit">
             <preemptive>true</preemptive>
             <identificateur>T1</identificateur>
-            <titre>Etablir la conception du projet</titre>
+            <titre>Etablir l'architecture du projet</titre>
             <disponibilite>2015-04-15</disponibilite>
             <echeance>2015-05-15</echeance>
             <duree>600</duree>
@@ -50,6 +50,14 @@
             <disponibilite>2015-06-10</disponibilite>
             <echeance>2015-06-15</echeance>
             <duree>300</duree>
+        </tache>
+        <tache type="unit">
+            <preemptive>false</preemptive>
+            <identificateur>T6</identificateur>
+            <titre>Test</titre>
+            <disponibilite>2015-06-13</disponibilite>
+            <echeance>2015-06-14</echeance>
+            <duree>90</duree>
         </tache>
     </tacheManager>
     <precedenceManager/>

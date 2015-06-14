@@ -54,11 +54,13 @@ public:
     /*!
      * \brief Exporte la semaine dans un fichier XML
      * \param f : chemin du fichier dans lequel sauvegarder
+     * \param lundi : date du lundi de la semaine a exporter
      */
     void save(const QString& f,const QDate lundi);
+
     /*!
      * \brief Importe la semaine dans un fichier XML
-     * \param f : chemin du fichier dans lequel sauvegazrder
+     * \param f : chemin du fichier dans lequel sauvegarder
      */
     void load(const QString& f);
 };

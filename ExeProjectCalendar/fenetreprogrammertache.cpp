@@ -84,6 +84,7 @@ void FenetreProgrammerTache::on_bOK_accepted()
     catch(CalendarException &e){
         QMessageBox::critical(this,"Programmation tache",e.getInfo());
         this->close();
+        return;
     }
     QMessageBox::information(this, "Programmation tache", "Ajout de la tache : \n " + p->toString() + "\n le " + p->getDate().toString("dd/MM/yyyy"));
     fenAg->actualiserItems();

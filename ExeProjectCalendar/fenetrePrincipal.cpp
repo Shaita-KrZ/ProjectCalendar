@@ -103,5 +103,10 @@ void FenAgenda::on_bImport_clicked()
                 a.load(chemin);
             }
             catch(CalendarException &e){ QMessageBox::critical(this,"Import semaine",e.getInfo());return;}
+        QMessageBox::information(this,"Importer une semaine","La semaine a bien été importée");
         }
+        else{
+            QMessageBox::critical(this,"Importer une semaine","Vous n'avez pas importé de semaine");
+        }
+        actualiserItems();
 }

@@ -21,20 +21,6 @@ int main(int argc, char *argv[]){
     Agenda & agenda = Agenda::getInstance();
     QDate lundiCourant = QDate::currentDate().addDays(-QDate::currentDate().dayOfWeek()+1);
     agenda.creerSemaine(lundiCourant);
-
-    /*** DEBUT INITIALISATIONS DE TESTS ***/
-    ActiviteTraditionnelle * act1 = new ActiviteTraditionnelle("RDV Médecin", Duree(1,32));
-    ActiviteTraditionnelle * act2 = new ActiviteTraditionnelle("Courses a faire", Duree(6,0));
-    ActiviteTraditionnelle * act3 = new ActiviteTraditionnelle("Chercher les enfants à l'escalade", Duree(0,20));
-
-    Programmation * prog1 = new Programmation(lundiCourant,QTime(15,30),act1);
-    Programmation * prog2 = new Programmation(lundiCourant,QTime(8,00),act2);
-    Programmation * prog3 = new Programmation(lundiCourant,QTime(18,30),act3);
-    agenda.addProgrammation(prog1);
-    agenda.addProgrammation(prog2);
-    agenda.addProgrammation(prog3);
-    /*** FIN INITIALISATIONS DE TESTS ***/
-
     Semaine * semaineCourante = agenda.getSemaines().at(lundiCourant);
     FenAgenda f(semaineCourante);
     f.show();

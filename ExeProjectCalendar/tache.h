@@ -127,6 +127,9 @@ public:
 };
 
 
+/*!
+ * \brief Tache composee de plusieurs sous-taches
+ */
 class TacheComposite : public Tache
 {
 private:
@@ -215,6 +218,9 @@ public:
 };
 
 
+/*!
+ * \brief Tache elementaire d'un projet
+ */
 class TacheUnitaire : public Tache
 {
 private:

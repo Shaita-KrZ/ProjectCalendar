@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<semaine>
+	<dateLundi>2015-06-08</dateLundi>
+	<evenements>
+		<programmation>
+			<date>2015-06-08</date>
+			<horaireDebut>08:00</horaireDebut>
+			<titre>RDV dermato</titre>
+			<duree>90</duree>
+		</programmation>
+		<programmation>
+			<date>2015-06-08</date>
+			<horaireDebut>14:00</horaireDebut>
+			<titre>Meeting Client</titre>
+			<duree>120</duree>
+		</programmation>
+				<programmation>
+			<date>2015-06-09</date>
+			<horaireDebut>08:00</horaireDebut>
+			<titre>Parc Asterix</titre>
+			<duree>400</duree>
+		</programmation>
+				<programmation>
+			<date>2015-06-10</date>
+			<horaireDebut>12:00</horaireDebut>
+			<titre>Amphi de présentation GI02</titre>
+			<duree>120</duree>
+		</programmation>
+		<programmation>
+			<date>2015-06-10</date>
+			<horaireDebut>16:00</horaireDebut>
+			<titre>Rdv coiffeur</titre>
+			<duree>900</duree>
+		</programmation>
+		<programmation>
+			<date>2015-06-11</date>
+			<horaireDebut>10:00</horaireDebut>
+			<titre>Faire les courses</titre>
+			<duree>120</duree>
+		</programmation>
+		<programmation>
+			<date>2015-06-14</date>
+			<horaireDebut>10:00</horaireDebut>
+			<titre>Aller à la messe</titre>
+			<duree>120</duree>
+		</programmation>
+		<programmation>
+			<date>2015-06-14</date>
+			<horaireDebut>14:00</horaireDebut>
+			<titre>Partie de golf</titre>
+			<duree>120</duree>
+		</programmation>
+	</evenements>
+</semaine>

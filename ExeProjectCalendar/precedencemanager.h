@@ -38,6 +38,9 @@ public:
      */
     void ajouterPrecedence(Tache * p,Tache * s);
 
+    /*!
+     * \brief Derivation generique d'iterateur en iterateur de precedences
+     */
     class pmIterator:public iterateur<Precedence>
     {
     private:

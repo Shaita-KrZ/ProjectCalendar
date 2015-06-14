@@ -207,7 +207,7 @@ void Gestionprojets::ouvrirProjet(){
              map<QString,Tache*>taches=tCompo->getTaches();
              map<QString,Tache*>::const_iterator it;
              caracteristiqueTache[k]=new QLabel("     Titre : "+t->getTitre()+"\n     "+"Disponibilite : "+t->getDisponibilite().toString()+"\n     "+
-                                                "Echenace : "+t->getEcheance().toString()+"     Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
+                                                "Echeance : "+t->getEcheance().toString()+"     Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
              grid->addWidget(caracteristiqueTache[k],8+10*j,2,4,1);
              caracteristiqueTacheUnitaireComposee=new QLabel*[taches.size()];
              //On affiche les taches de la tache composite
@@ -215,7 +215,7 @@ void Gestionprojets::ouvrirProjet(){
                 QString preemptive=(it->second->isPreemptive() == true? "true" : "false");
                 caracteristiqueTacheUnitaireComposee[nbTu]=new QLabel("     Identificateur : "+it->first+"\n     "+"Preemptive : "+preemptive+"\n     "+"Titre : "+it->second->getTitre()+
                                                                 "\n     "+"Disponibilite : "+it->second->getDisponibilite().toString()+"\n     "+
-                                                                 "Echenace : "+it->second->getEcheance().toString()+"     Duree :"+QString::number(it->second->getDuree().getDureeEnMinutes())+" minutes");
+                                                                 "Echeance : "+it->second->getEcheance().toString()+"     Duree :"+QString::number(it->second->getDuree().getDureeEnMinutes())+" minutes");
                 j++;
                 grid->addWidget(caracteristiqueTacheUnitaireComposee[nbTu],2+10*j,2,4,1);
                 nbTu++;
@@ -225,7 +225,7 @@ void Gestionprojets::ouvrirProjet(){
             QString preemptive=(t->isPreemptive() == true? "true" : "false");
 
             caracteristiqueTache[k]=new QLabel("     Preemptive : "+ preemptive +"\n     "+"Titre : "+t->getTitre()+"\n     "+"Disponibilite : "+t->getDisponibilite().toString()+"\n     "+
-                                            "Echenace : "+t->getEcheance().toString()+"     Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
+                                            "Echeance : "+t->getEcheance().toString()+"     Duree :"+QString::number(t->getDuree().getDureeEnMinutes())+" minutes");
 
             grid->addWidget(caracteristiqueTache[k],8+10*j,2,4,1);
 
@@ -476,6 +476,10 @@ void Gestionprojets::validermodifTache(){
     ProjetManager &PM=ProjetManager::getInstance();
     map<QString,Projet*>projets=PM.getProjets();
     Projet *P=projets[m_titreProj];
+    if(m_dateEcheTacheLine->date()>P->getEcheance()){
+        QMessageBox::critical(this,"Ajouter une tache","La tache ne peut pas avoir une echeance supérieur à celle de son projet");
+        return;
+    }
     TacheManager TM=P->getTaches();
     //On récupère la liste des taches du projet pour ajouter latache modifié
     map<QString,Tache*>taches=TM.getTaches();
@@ -608,9 +612,17 @@ void Gestionprojets::validerajoutTache(){
     bool preemp=m_preempTache->isChecked();
     try{
         if(m_bool==true){
+            if(m_dateEcheTacheLine->date()>m_projetModif->getEcheance()){
+                QMessageBox::critical(this,"Ajouter une tache","La tache ne peut pas avoir une echeance supérieur à celle de son projet");
+                return;
+            }
             TM.addTache(m_idTacheLine->text(),m_titreTacheLine->text(),m_dateDispoTacheLine->date(),m_dateEcheTacheLine->date(),m_projetModif);
         }
         else{
+            if(m_dateEcheTacheLine->date()>m_projetModif->getEcheance()){
+                QMessageBox::critical(this,"Ajouter une tache","La tache ne peut pas avoir une echeance supérieur à celle de son projet");
+                return;
+            }
             TM.addTache(m_idTacheLine->text(),m_titreTacheLine->text(),m_dateDispoTacheLine->date(),m_dateEcheTacheLine->date(),m_projetModif,
             dureeTache,preemp);
         }
@@ -697,9 +709,17 @@ void Gestionprojets::validerajoutTacheCompo(){
     TacheUnitaire *Tu=new TacheUnitaire(m_titreTacheLine->text(),m_idTacheLine->text(),m_dateDispoTacheLine->date(),
                                         m_dateEcheTacheLine->date(),m_projetModif,preemp,dureeTache);
     map<QString,Tache*>&taches=m_tacheModif->getTaches();
+    if(Tu->getEcheance()>m_tacheModif->getEcheance()){
+        QMessageBox::critical(this, "Modifier une tache", "La tache ne peut pas avoir une echeance supérieur à sa tache compo");
+        return;
+    }
+    if(Tu->getDisponibilite()<m_tacheModif->getDisponibilite()){
+        QMessageBox::critical(this, "Modifier une tache", "La tache ne peut pas avoir une disponibilite inférieur à sa tache compo");
+        return;
+    }
     taches[m_idTacheLine->text()]=Tu;
     m_fenetreModifTacheCompo->close();
-    QMessageBox::information(this,"Creation projet","La tache composite a bien été ajouté");
+    QMessageBox::information(this,"Modifier une tache","La tache composite a bien été ajouté");
 }
 
 void Gestionprojets::annulerajoutTacheCompo(){

@@ -101,7 +101,8 @@ QString ProjetManager::load(const QString& f){
         if(token == QXmlStreamReader::StartDocument) continue;
         // If token is StartElement, we'll see if we can read it.
         if(token == QXmlStreamReader::StartElement){
-            if(xml.name() == "projet"){
+            if(xml.name()=="semaine")throw CalendarException("Veuillez importer un projet !");
+            if(xml.name()=="projet"){
                 while(!(xml.tokenType()==QXmlStreamReader::StartElement && xml.name()=="tacheManager")){
                     if(xml.tokenType() == QXmlStreamReader::StartElement){
                         if(xml.name() == "titre"){

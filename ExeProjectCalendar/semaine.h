@@ -20,9 +20,6 @@ private:
     // Renvoie true si la programmation ne se chevauche pas, false sinon
     bool testChevauche(Programmation *p) const;
 
-    // Teste si la programmation respecte les conditions de précéédences
-    // Renvoie true si elle les respecte, false sinon
-    bool testPrecedences(Programmation *p) const;
 public:
     /*!
      * \brief Constructeur de la classe

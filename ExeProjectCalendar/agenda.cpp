@@ -109,6 +109,7 @@ void Agenda::load(const QString& f){
         if(token == QXmlStreamReader::StartDocument) continue;
         // If token is StartElement, we'll see if we can read it.
         if(token == QXmlStreamReader::StartElement){
+            if(xml.name()=="projet")throw CalendarException("Veuillez importer une semaine !");
             if(xml.name() == "semaine"){
                 while(!(xml.tokenType()==QXmlStreamReader::StartElement && xml.name()=="evenements")){
                     if(xml.tokenType() == QXmlStreamReader::StartElement){
